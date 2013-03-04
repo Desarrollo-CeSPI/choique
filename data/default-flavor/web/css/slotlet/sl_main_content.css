@@ -1,0 +1,419 @@
+.slotlet_main_content
+{
+  text-align: justify;
+  padding-left:50px;
+  padding-right:50px;
+  margin-top:10px;
+  float:left;
+}
+
+#full-html .title,
+.slotlet_main_content .title
+{
+  font-size: 150%;
+  text-align: left;
+  font-weight: bold;
+  color:#555;
+}
+
+#full-html .upper-description,
+.slotlet_main_content .upper-description
+{
+  font-size: 80%;
+  color: #555;
+}
+
+#full-html .heading,
+.slotlet_main_content .heading
+{
+  font-size: 100%;
+  color: #555;
+  font-weight: bold;
+}
+
+#article-image
+{
+  display:none;
+}
+
+#full-html .body,
+.slotlet_main_content .body
+{
+  margin-top: 2em;
+  color:#555;
+  margin-right:30px;
+}
+
+.slotlet_main_content a
+{
+  color: #009ee0;
+}
+
+.slotlet_main_content .body a:hover
+{
+  color: #ccc;
+}
+
+.slotlet_main_content .updated-at
+{
+  font-size: 75%;
+  text-align: right;
+  color: #555;
+}
+
+.slotlet_main_content .article-actions
+{
+  text-align: right;
+  float: right;
+  width:530px;
+}
+
+.slotlet_main_content .article-actions .separator
+{
+  display: none;
+}
+
+.slotlet_main_content .article-actions .cq-article-actions
+{
+  padding: .25em;
+  display: inline-block;
+}
+
+.slotlet_main_content .article-actions .cq-article-actions a
+{
+  padding: 0;
+  margin: 0 0 0 .25em;
+}
+
+.slotlet_main_content .article-actions .cq-article-actions img
+{
+  vertical-align: middle;
+}
+
+
+
+/* estilos del editor */
+
+
+.slotlet_main_content .body .subtitle
+{
+	font-size: 110%;
+	font-weight: bold;
+	color: #666;
+	font-style: normal;
+}
+
+.slotlet_main_content .body .paragraph
+{
+}
+
+.slotlet_main_content .body .epigraph
+{
+	font-size: 100%;
+	font-weight: normal;
+	text-align: left;
+	color: #000;
+	font-style: normal;
+}
+
+
+
+/*resultado de busqueda agenda*/
+
+
+.events_search_item .title
+{
+	display:list-item;
+  list-style:square none !important;
+	font-family:arial,sans-serif;
+	font-size:11px;
+	margin:0;
+	padding:0;
+	text-align:left;
+	text-transform:uppercase;
+	margin-top:10px;
+}
+
+.events_search_item_count
+{
+	color:#333333;
+	font-size:11px;
+	padding:10px 0 10px 120px;
+	font-weight:bold;
+}
+
+.obfuscated
+{
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+
+
+/* Todas las noticias */
+
+
+.slotlet_main_content .show-more
+{
+  text-align: right;
+  margin-top: 2em;
+}
+
+.slotlet_main_content .show-more a
+{
+  color: #eee;
+  background: #444;
+  padding: 3px;
+  margin: -3px;
+  text-shadow: -1px -1px #111;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  box-shadow: 0 0 5px #444;
+}
+
+
+
+
+/* Formulario de contacto */
+
+
+
+#contact_form
+{
+  margin:20px 0px;
+}
+
+#contact_form .slotlet_main_content
+{
+  border:none !important;
+}
+
+#contact_form_container
+{
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+#contact_form_container h1
+{
+  font-size:14px;
+  font-weight: bold;
+}
+
+#contact_form_container h2
+{
+  font-size: 90%;
+  margin: 0;
+  font-weight: normal;
+  color: #555;
+}
+
+#contact_form_container form.contact-form
+{
+  margin:0;
+}
+
+#contact_form_container form.contact-form .form-row
+{
+  font-size: 90%;
+}
+
+#contact_form_container form.contact-form .form-row .form-error-msg
+{
+  margin-left: 7em;
+  padding: .25em;
+  color: #8b1a00;
+}
+
+#contact_form_container form.contact-form .form-row label
+{
+  float: left;
+  width: 7em;
+  margin-top: .5em;
+}
+
+#contact_form_container form.contact-form .form-row input,
+#contact_form_container form.contact-form .form-row textarea
+{
+    border: 1px solid #CCCCCC;
+    color: #999;
+    font-family: inherit;
+    font-size: 100%;
+    padding: 4px;
+    width: 40em;
+}
+
+#contact_form_container form.contact-form .form-row input:focus,
+#contact_form_container form.contact-form .form-row textarea:focus
+{
+  color: #000;
+}
+
+#contact_form_container form.contact-form .form-row textarea
+{
+  height: 10em;
+}
+
+#contact_form_container form.contact-form .form-actions
+{
+  text-align: right;
+  padding:4px 0px;
+  width:471px;
+}
+
+#contact_form_container form.contact-form .form-actions input 
+{
+    background: none repeat scroll 0 0 #CCCCCC;
+    border: 1px solid #CCCCCC;
+    color: #009ee0;
+    font-family: arial,helvetica;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+
+
+
+/* portada home museo */
+
+
+.slotlet_main_content_home
+{
+  /*border-right:1px solid #ccc;*/
+}
+
+
+.slotlet_main_content_home .text-only .text-only-container
+{
+  margin-right:20px;
+}
+
+.slotlet_main_content_home .line
+{
+  border-bottom:1px groove #ccc;
+  margin-right:50px;
+}
+
+
+.slotlet_main_content_home .line:last-child
+{
+  border:none!important;
+}
+
+.slotlet_main_content_home .text-only .text-only-container .front-title
+{
+  font-size:14px;
+  font-weight:bold;
+  color:#555 !important;
+  margin:0;
+  padding:5px 0px;
+  text-shadow: 1px 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.slotlet_main_content_home .text-only .text-only-container .body
+{
+  color:#555;
+}
+
+.slotlet_main_content_home .text-only .text-only-container .more-information
+{
+  display:block;
+  padding:5px 0;
+  font-size:10px;
+  font-weight:bold;
+  color:#999 !important;
+  text-align:left;
+  margin:0 !important;
+}
+
+.slotlet_main_content_home .show-more
+{
+  text-align:right;
+  text-transform:uppercase;
+  margin:5px 50px;
+}
+
+.link_contact_form img
+{
+  display:none;
+}
+  
+/*Todas las noticias*/
+
+.search-results-bottom .show-all-item 
+{
+  margin-top:5px;
+}
+
+.search-results-bottom .show-all-item .title
+{
+  font-size:11px;
+  color:#555;
+  font-weight:bold;
+}
+
+.search-results-bottom .show-all-item .heading
+{
+  font-size:11px;
+  color:#555;
+  font-weight:normal;
+}
+
+.search-results-bottom .show-all-item .updated_at
+{
+  font-size:10px;
+  color:#ccc;
+  font-weight:normal;
+}
+
+.search-results-top #show_all_search_form h1
+{
+  font-size:14px;
+  color:#555;
+  font-weight:bold;
+}
+
+.search-results-top #show_all_search_form h2
+{
+  font-size:11px;
+  color:#555;
+  font-weight:bold;
+}
+
+.search-results-top .form-content .form-row
+{
+  padding:5px 0px;
+}
+
+.search-results-top .form-content .form-row .show_all_text
+{
+  border:1px solid #ccc;
+}
+
+.search-results-top .form-content .form-row .section_autocomplete_query
+{
+  border:1px solid #ccc;
+}
+
+.search-results-top .form-actions .form-actions-child input 
+{
+    background: none repeat scroll 0 0 #CCCCCC;
+    border: 1px solid #CCCCCC;
+    color: #009EE0;
+    font-family: arial,helvetica;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    float:left;
+    margin-right:5px;
+}
+
+.show-all-item
+{
+  width:100%;
+  float:left;
+}

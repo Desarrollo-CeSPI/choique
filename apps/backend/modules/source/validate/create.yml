@@ -1,0 +1,7 @@
+fillin:
+  enabled:                    true
+
+fields:
+  source{name}:
+    required:
+      msg:                    Es necesario ingresar un nombre para la fuente periodística

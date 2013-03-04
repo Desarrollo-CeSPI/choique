@@ -1,0 +1,75 @@
+all:
+  choique:
+    version: <?php echo file_get_contents(sfConfig::get('sf_root_dir').'/VERSION');?>
+    instance_name: Choique CMS
+    url:
+      frontend: #choique_frontend_url#
+      backend:  #choique_backend_url#
+    default_flavor_dir: %SF_ROOT_DIR%/data/default-flavor
+    #La siguiente solapa muestra u oculta un cartel indicando que esta es una version de prueba
+    testing: false
+    testing_text: Version de PRUEBA
+    
+
+
+  lucene:
+    index:        CMSIndex
+    advanced:     false
+    categories:   false
+    per_page:     20
+    pager_radius: 10
+    result_size:  200
+    result_highlighter: |
+      <strong class="highlight">%s</strong>
+    extractors:
+      doc:  /usr/bin/catdoc %s
+      pdf:  /usr/bin/pdftotext %s -
+      ppt:  /usr/bin/catppt %s
+      xls:  /usr/bin/xls2csv %s
+      odt:  /usr/bin/odt2txt %s
+      ods:  /usr/bin/ods2txt %s
+      odp:  /usr/bin/odp2txt %s
+
+  valid_mime_types:
+    text:
+      txt:  text/plain
+    editor:
+      css:
+        css: [text/plain, text/x-c charset=us-ascii, text/plain charset=us-ascii]
+      images:
+        jpg:  image/jpeg 
+        jpeg: image/jpeg 
+        png:  image/png 
+        gif:  image/gif 
+        ico:  [image/png, image/gif, image/x-ico]
+    link:
+      swf:  application/x-shockwave-flash
+      jpg:  image/jpeg
+      jpeg: image/jpeg
+      png:  image/png
+      gif:  image/gif
+    document:
+      doc: [application/msword, application/vnd.ms-office]
+      docx: application/zip 
+      xls: application/vnd.ms-excel
+      ppt: application/vnd.ms-office
+      pps: application/vnd.ms-office
+      pdf: application/pdf
+      rar: application/x-rar
+      zip: application/zip
+      rtf: text/rtf
+    multimedia:
+      images:
+        jpg:  [image/jpeg ]
+        jpeg: [image/jpeg ]
+        png:  [image/png ]
+        gif:  [image/gif ]
+      videos:
+        mpg:  [video/mpeg ]
+        mpeg: [video/mpeg ]
+        flv:  [video/x-flv ]
+        swf:  [application/x-shockwave-flash ]
+      audio:
+        mp3:  [application/octet-stream, audio/mpeg ]
+        mp2:  [ audio/mpeg ]
+        wav:  [ audio/x-wav ]

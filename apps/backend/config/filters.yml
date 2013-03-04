@@ -1,0 +1,20 @@
+rendering: ~
+web_debug: ~
+security:
+  class: sfGuardBasicSecurityFilter
+
+# generally, you will want to insert your own filters here
+choique_settings:
+  class: choiqueSettingsFilter
+
+csrf:
+  class: sfCSRFFilter
+  param:
+    secret: $3cr3t0_ch01qu3_b4ck3nd_<?php echo choiqueFlavors::getInstance()->current()."\n" ?>
+
+cache:     ~
+common:    ~
+flash:     ~
+execution: ~
+UJS:
+  class:   sfUJSFilter

@@ -1,0 +1,18 @@
+images:
+  # General images
+  logo:               logo.png
+  # Action toolbar images
+  article_contact:    contact.png
+  navigation_back:    navigation-back.png
+  navigation_forward: navigation-forward.png
+  print:              print.png
+  send_by_mail:       mail.png
+  zoom_plus:          zoom-plus.png
+  zoom_minus:         zoom-minus.png
+  # Search slotlet images
+  search_arrow:       search-button.png
+  # Navigation slotlet images
+  home:               home.png
+  envelope:           mail-big.png
+  sitemap:            sitemap.png
+  rss:                feed.png

@@ -1,0 +1,59 @@
+generator:
+  class:                  sfAdvancedAdminGenerator
+  param:               
+    model_class:          Source
+    theme:                default_mod
+    css:                  backend/admin_theme_black
+                       
+    fields:            
+      id:              
+        name:             ID
+      name:            
+        name:             Nombre
+      description:     
+        name:             Descripción
+      comment:         
+        name:             Comentario
+        help:             Para uso interno
+                       
+    list:              
+      sort:               [id, desc]
+      title:              Listado de fuentes periodísticas
+      display:            [name, description, comment]
+      filters:            false
+      object_actions:
+        _show:
+        _edit:
+          credentials:    [ reporter_admin ]
+        _delete:
+          credentials:    [ reporter_admin ]
+      actions:
+        _create:
+          credentials:    [ reporter_admin ]
+
+    create:
+      title:              Crear nueva fuente periodística
+      display:
+        Información general:  [name, description, comment]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+
+    edit:
+      title:              Editar fuente periodística "%%name%%"
+      display:
+        Información general:  [name, description, comment]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+
+    show:
+      title:              Previsualización de la fuente "%%name%%"
+      display:
+        Información general:  [name, description, comment]
+      actions:
+        _list:

@@ -1,0 +1,29 @@
+.sl_search_mini
+{
+  text-align: left; 
+}
+
+.sl_search_form
+{
+  padding:0;
+  margin:0;
+}
+
+.sl_search_form .sl_search_query
+{
+  font-family: inherit;
+  color: #ccc;
+  margin:0;
+  float: left;
+  border:none;
+  padding:4px;
+  background:#fff;
+  border:1px solid #ccc;
+}
+
+.sl_search_submit
+{
+  margin: .25em;
+  display: inline-block;
+  display:none;
+}

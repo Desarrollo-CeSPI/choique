@@ -1,0 +1,63 @@
+#art_section{
+	background-color:#B3D4EF;
+  	border:thin solid;
+}
+
+#art_section_list{
+	float: left;
+	width: 40%;
+}
+
+#articles{
+	background-color:#B3D4EF;
+  	border:thin solid;
+  	height: 300px;
+  	overflow: auto;
+}
+
+#article_list{
+	float: right;
+	width: 40%;
+}
+
+active{
+	background-color:#eee;
+}
+
+#art_section ul{
+	list-style-type: none;
+	padding: 0px 10px 0px 0px;
+
+}
+
+#art_section ul li{
+	background-image: url(../../images/backend/bullet_blue.png);
+	background-repeat: no-repeat;
+	background-position: 0px 100%;
+	padding: 0px 0px 0px 15px;
+	
+}
+
+div.trash-active {
+  width:135px;
+  background-color:#ccc;
+}
+
+div.article {
+  margin: 4px;
+  padding: 3px;
+  border-color:black;
+  border-style:solid;
+  cursor:move;
+}
+
+.sortable {
+	cursor:move;
+}
+
+#ajax_container{
+	margin: 10px 50px 0px 50px;
+}
+
+.article_section{
+}

@@ -1,0 +1,120 @@
+/* noticias en la home */
+
+.news_home .tns_tabular .title
+{
+	display:none !important;
+}
+
+.news_home
+{
+  background:#707173;
+  height:235px;
+}
+
+.home_news .tns_tabular
+{
+  text-align: left;
+  width: auto;
+}
+
+.news_home .tns_tabular .content .tns_container .tns_row .tns_cell
+{
+  vertical-align: top;
+  padding: 6px;
+  height:auto !important;
+  width:170px;
+  background:url(../../../images/frontend/bg_headernews.png) bottom repeat-x;
+}
+
+.home_news .tns_tabular .title img
+{
+	vertical-align: middle;
+}
+
+.home_news .tns_tabular .content .tns_container
+{
+	margin: 0;
+	border-spacing:2px;
+	background:#4d4d4d;
+	width: 100%;
+}
+
+.home_news .tns_tabular .content .tns_container .tns_row .tns_cell
+{
+  vertical-align: top;
+  height:0px !important;
+  background: #ccc url(../../../images/frontend/bg_headernews.jpg) top repeat-x;
+}
+
+.home_news .tns_tabular .content .tns_container .tns_row .tns_cell .tns_title
+{
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+}
+
+.home_news .tns_tabular .content .tns_container .tns_row .tns_cell a
+{
+  text-decoration: none;
+  color:#fff;
+}
+
+.home_news .tns_tabular .content .tns_container .tns_row .tns_cell .tns_heading
+{
+  margin: 5px 0;
+}
+
+
+.tns_tabular
+{
+
+  text-align: left;
+  width: auto;
+}
+
+.tns_tabular .title
+{
+  font-weight: bold;
+  margin: 4px;
+}
+
+.tns_tabular .title img
+{
+  vertical-align: middle;
+}
+
+.tns_tabular .content .tns_container
+{
+  margin: 0;
+  border-spacing: 4px;
+  width: 100%;
+}
+
+.tns_tabular .content .tns_container .tns_row .tns_cell
+{
+  vertical-align: top;
+  padding: 4px;
+  height:65px;
+  width:170px;
+  background:url(../../../images/frontend/bg_headernews.png) top repeat-x;
+}
+
+.tns_tabular .content .tns_container .tns_row .tns_cell .tns_title
+{
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+}
+
+.tns_tabular .content .tns_container .tns_row .tns_cell a
+{
+  text-decoration: none;
+  color:#555;
+}
+
+.tns_tabular .content .tns_container .tns_row .tns_cell .tns_heading
+{
+  margin: 5px 0;
+}
+
+

@@ -1,0 +1,87 @@
+generator:
+  class:                sfAdvancedAdminGenerator
+  param:
+    model_class:        sfGuardUser
+    theme:              default_mod
+    css:                backend/admin_theme_black
+
+    fields:
+      name:
+        name:           Nombre real
+        required: true
+      username:
+        name:           Usuario
+      email:
+        name:           Correo electrónico
+      created_at:
+        name:           Fecha de creación
+      is_active:
+        name:           Activo
+      password:
+        name:           Contraseña
+      password_bis:
+        name:           Confirmación contraseña
+        required: true
+      is_super_admin:
+        name: Superusuario
+        help: Un superusuario podrá realizar cualquier accion en el sistema
+      last_login:
+        name:           Último ingreso
+        type:           plain
+      permissions:
+        name:           Permisos
+      permissions_list:
+        name: Permisos
+      section_id:
+        name: Limitar a la Sección
+      change_password_at:
+        name:           Ultimo cambio de contraseña el
+        type:           plain
+      must_change_password:
+        name:           Debe cambiar su contraseña 
+
+    filters:
+      fields:
+        username:
+          help: Utilice * como wildcard
+        name:
+          help: Utilice * como wildcard
+
+    list:
+      title:            Listado de usuarios
+      display:          [username, name, is_super_admin, is_active, last_login, _permissions_list ]
+      filters:          [username, name]
+      object_actions:
+        _edit:
+        _delete:
+      actions:
+        _create:
+
+    create:
+      title:            Crear un nuevo usuario
+      display:
+        NONE:           [name, username, email, _password, _password_bis]
+        Permisos:       [is_active, is_super_admin, must_change_password, _permissions, _section_id]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+
+    edit:
+      fields:
+        groups:
+        permissions:
+        _password:
+        _password_bis:
+      title:            Editar el usuario "%%username%%"
+      display:
+        NONE:           [name, email, username]
+        Contraseña:     [ _password, _password_bis ]
+        Permisos:       [is_active, is_super_admin, must_change_password, _permissions, _section_id]
+        Información:    [last_login, change_password_at]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:

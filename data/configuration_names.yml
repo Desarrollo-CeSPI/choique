@@ -1,0 +1,90 @@
+##
+##  Names for CmsConfiguration keys
+##
+names:
+  Global:
+    footer:                                        Pie de página
+    site_metas:                                    Información para buscadores
+    check_show_show_all:                           Mostrar vínculo todas las noticias en el inicio
+    check_show_contact_email_address:              Mostrar dirección de destino en el formulario de contacto
+    max_news:                                      Número de novedades a mostrar
+    check_obfuscate_mail_addresses:                Ofuscar direcciones de correo electrónico
+    check_include_home_in_sitemap:                 Incluir sección 'Inicio' en mapa del sitio
+    check_sort_news_by_priority:                   Ordenar novedades por prioridad
+    check_use_horizontal_as_base_sitemap_section:  Utilizar sección Horizontal como base en sitemap
+    check_include_home_section_in_section_slotlet: Incluir siempre sección Inicio en el menu contextual
+    custom_section_home:                           Sección 'Inicio' (HOME del sitio)
+    check_use_layout_per_section:                  Utilizar distribuciones por sección
+    check_use_sources:                             Utilizar fuentes periodísticas
+    check_use_tags:                                Utilizar categorías
+    check_use_forms:                               Utilizar formularios
+    max_name_list_length:                          Número maximo de caracteres a mostrar en los nombres en los listados
+  
+  Multimedia:
+    medium_image_default_width:                    Tamaño medio por defecto de las imágenes (ancho en px)
+    small_image_default_width:                     Tamaño miniatura por defecto de las imágenes (ancho en px)
+    check_use_title_when_description_is_empty:     Usar título de multimedias en lugar de descripción ante falta de descripción
+    check_use_multimedia_metadata:                 Utilizar campos extra de información en multimedia
+  
+  Secciones:
+    check_include_children_sections:               Incluir secciones descendientes al generar Slotlet Novedades
+    check_include_ancestor_sections:               Incluir secciones ancestras al generar Slotlet Novedades
+    check_use_navigation_in_sections:              Mostrar botones de navegacion en secciones
+    check_show_action_toolbar_in_sections:         Mostrar la barra de acciones en las secciones
+    section_default_color:                         Color por defecto para secciones virtuales
+    section_default_rgbacolor:                     Formato RGBA (css) por defecto para secciones virtuales
+
+  Artículos:
+    contact_mail:                                  Mail de contacto
+    text_contact_mail:                             Texto a mostrar en el link del mail de cada articulo
+    check_show_article_mail:                       Mostrar mail de contacto en los articulos
+    check_use_navigation_in_articles:              Mostrar botones de navegacion en articulos                 
+    check_allow_article_popup:                     Permitir utilizar artículos como pop up
+    popup_default_width:                           Ancho de la ventana de Popup para los articulos
+    popup_default_height:                          Alto de la ventana de Popup para los articulos
+    check_use_social_share_toolbar:                Agregar íconos para compartir artículos en redes sociales (articulos)
+    custom_social_sharing_tool:                    Servicio para compartir en redes sociales (articulos)
+    check_use_social_share_toolbar_in_section:     Agregar íconos para compartir artículos en redes sociales en las secciones
+    custom_social_sharing_tool_in_section:         Servicio para compartir en redes sociales en las secciones
+    check_show_last_article_update_date:           Mostrar fecha de última actualización en artículos
+    check_show_last_article_update_time:           Mostrar hora de última actualización en artículos
+    check_show_last_news_update_date:              Mostrar fecha de última actualización en novedades
+    check_show_last_news_update_time:              Mostrar hora de última actualización en novedades
+    check_show_last_institutional_update_date:     Mostrar fecha de última actualización en noticias
+    check_show_last_institutional_update_time:     Mostrar hora de última actualización en noticias
+    check_use_description_in_article_multimedia:   Utilizar descripción como pie de imagen en los artículos
+    article_updated_at_caption:                    Texto para fecha de actualización de artículos ("%f%" se reemplazará por la fecha)
+    full_text_article:                             Texto para ir al artículo completo
+    max_gallery_articles:                          Número máximo de artículos a mostrar en cada galeria de artículos
+
+  RSS:
+    feeds_contact_email:                           Mail de contacto para el RSS
+    feeds_contact_name:                            Nombre de contacto para el RSS
+    check_use_published_at_for_rss_feeds:          Utilizar fecha de publicación en los RSS
+  
+  SMTP:
+    text_mail_hostname:                            Host que envía mail      
+    text_mail_host_username:                       Usuario para la autenticación del servidor de mail
+    text_mail_host_password:                       Contarseña para la autenticación del servidor de mail
+
+  Calendario:
+    check_collapse_calendar:                       Permitir ocultar calendario
+    check_open_calendar_today:                     Mostrar calendario desplegado en el día actual
+    max_events:                                    Número de eventos a mostrar inicialmente en el Slotlet Calendario
+    check_show_events_calendar_in_slotlet:         Mostrar calendario en los slotlet de Eventos
+
+  Formularios:
+    check_send_form_by_mail:                      Enviar formularios por mail
+    form_mail:                                    Dirección de mail utilizada para el envio de formularios completados por mail en caso de no especificarse
+    form_mail_from:                               Direccion de mail utilizada como remitente en el envio de formularios por mail
+    form_mail_from_text:                          Nombre asociado a la direccion de mail utilizado para el envio de formularios por mail 
+
+  Galerías multimedia:
+    max_gallery_images:                            Número máximo de imágenes a mostrar en cada galeria
+
+  Desuso:
+    separator_default_height:                      Altura de cada Slotlet Separador
+    check_show_search:                             Mostrar mini buscador
+    check_allow_frontend_users_registration:       Permitir registro de usuarios del Portal
+
+

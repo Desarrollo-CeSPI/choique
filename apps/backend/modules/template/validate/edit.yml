@@ -1,0 +1,11 @@
+fillin:
+  enabled:          yes
+
+fields:
+  template{name}:
+    required:
+      msg:          Es necesario que ingrese el nombre de la portada
+    sfPropelUniqueValidator:
+      class:        Template
+      column:       name
+      unique_error: El nombre ingresado ya está en uso por otra portada

@@ -1,0 +1,133 @@
+/*main_image section CSS*/
+
+.main_image {
+    width: 350px;
+    height: 204px;
+    float: left;
+	margin-top:6px;
+    background:#333;
+    position: relative;
+    overflow: hidden; /*--Overflow hidden allows the description to toggle/tuck away as it slides down--*/
+    color: #fff;
+	/*border-left:3px solid #fff;*/
+}
+.main_image h2 {
+    font-size:11px;
+    font-weight: normal;
+    margin: 0 0 5px;
+    padding: 10px;
+}
+.main_image p {
+    font-size: 11px;
+    line-height: 1.6em;
+    padding: 10px;
+    margin: 0;
+}
+.block small { /*--We'll be using this same style on our thumbnail list--*/
+    font-size: 1em;
+    padding: 0 0 0 20px;
+    background: url(icon_calendar.gif) no-repeat 0 center;
+}
+.main_image .block small {margin-left: 10px;}
+.main_image .desc{
+    position: absolute;
+    bottom: 0;
+    left: 0; /*--Stick the desc class to the bottom of our main image container--*/
+    width: 100%;
+}
+.main_image .block{
+    width: 100%;
+    background: #111;
+    border-top: 1px solid #000;
+}
+.main_image a.collapse { /*--This is our hide/show tab--*/
+    height: 27px;
+    width: 93px;
+    text-indent: -99999px;
+    position: absolute;
+    top: -27px;
+    right: 20px;
+}
+.main_image a.show {background-position: left bottom;}
+
+.rm_feed_view_more a
+{
+	padding:5px;
+}
+
+
+/*image_thumb section CSS*/
+
+
+.image_thumb {
+    float: left;
+    width: 176px;
+	margin-top:6px;
+	height:205px;
+	/*background:url("../../../images/frontend/bg_rss.png") right repeat-y;*/
+}
+.image_thumb img {
+    border: 1px solid #ccc;
+    padding: 5px;
+    float: left;
+}
+.image_thumb ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.image_thumb ul li{
+    margin: 0;
+    padding:0;
+    padding-right: 7px;
+    float: left;
+    width: 100%;
+	
+}
+.image_thumb ul li.hover { /*--Hover State--*/
+    cursor: pointer;
+
+}
+.image_thumb ul li.active h2
+ { 
+    cursor: default;
+	font-family:arial, sans-serif !important;
+	color:#fff !important;
+	font-size:12px !important;
+	font-weight:bold !important;
+	display:block;
+}
+html .image_thumb ul li h2 {
+    font-size: 13px;
+    margin: 0;
+    padding:8px;
+	text-align:left;
+	font-weight:normal;
+	color:#fff;
+	font-family:arial, sans-serif;
+}
+.image_thumb ul li .block {
+    float: left;
+    margin:0;
+    padding: 0;
+	height:68px;
+	width:180px;
+	display:block;
+	
+}
+
+.image_thumb ul li p {display: none;}/*--Hide the description on the list items--*/
+
+.main_image div.desc div.block p {
+  background:url("../../../images/frontend/multimedia_rss_description_back.png") repeat scroll 0 0 transparent;
+  color:#FFFFFF;
+  width: 95%;
+  display: block !important;
+  text-align:left;
+  font-size: 10px;
+}
+
+.main_image div.desc div.block a {
+  display: none !important;
+}
+

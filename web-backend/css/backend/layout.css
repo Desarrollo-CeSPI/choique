@@ -1,0 +1,450 @@
+a img
+{
+  border: 0;
+}
+
+.section
+{
+  border: 1px solid #ccc;
+  background: #eee;
+  margin: 3px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 6px;
+}
+
+.section h2
+{
+  margin: 0;
+}
+
+#available_slotlets_section > ul
+{
+  padding: 0;
+}
+
+#available_slotlets_section > ul > li
+{
+  margin-bottom: 2px;
+  padding: 3px;
+  list-style: none;
+}
+
+#available_slotlets_section > ul > li:hover
+{
+  background-color: #ddd;
+}
+
+.section .available_slotlet .name
+{
+  font-weight: bold;
+}
+
+.section .available_slotlet a.toggle_description
+{
+  float: right;
+  color: #fff;
+  background-color: #999;
+  display: inline-block;
+  padding-left: 12px;
+  padding-right: 12px;
+  border: 1px solid #777;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.section .available_slotlet a.add_slotlet
+{
+  float: right;
+  color: #fff;
+  background-color: #85c800;
+  display: inline-block;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-right: 4px;
+  border: 1px solid #689d00;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.section .available_slotlet .description
+{
+  color: #999;
+}
+
+#layout_container_section
+{
+}
+
+#layout_container
+{
+  background-color: #fff;
+  border: 1px solid #ccc;
+  margin-top: 12px;
+  padding: 3px;
+  width: 100%;
+}
+
+#layout_container tr,
+#layout_container tr td
+{
+  vertical-align: top;
+}
+
+.layout_actions img,
+#layout_container .row_controls img,
+#layout_container .column_controls img,
+#layout_container .slotlet_controls img
+{
+  vertical-align: middle;
+}
+
+#layout_container .layout_actions
+{
+  text-align: center;
+  background-color: #ccc;
+}
+
+#layout_container .row_controls > td
+{
+  text-align: center;
+  border: 1px solid #aaa;
+}
+
+.layout_actions
+{
+}
+
+.layout_actions > a,
+.layout_actions .preview,
+#sf_admin_container #layout_container_section .layout_actions input[type="submit"].submit
+{
+  display: inline-block;
+  text-decoration: none;
+  color: #555;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 3px 6px 3px 22px;
+  margin: 0 3px 0 0;
+}
+
+.layout_actions a.prepend_row
+{
+  background: url('../../images/backend/prepend_row.png') no-repeat 3px center #fff;
+}
+
+.layout_actions a.append_row
+{
+  background: url('../../images/backend/append_row.png') no-repeat 3px center #fff;
+}
+
+.layout_actions .preview_action
+{
+  text-align: center;
+  margin: 3px auto;
+}
+
+.layout_actions .preview_action a
+{
+  text-decoration: none;
+  color: #555;
+}
+
+
+.layout_actions .preview
+{
+  background: url('../../images/backend/magnifier.png') no-repeat 3px center #fff;
+}
+
+.layout_actions a.list
+{
+  background: url('../../sf/sf_admin/images/list.png') no-repeat 3px center #fff;
+  float: right;
+}
+
+.layout_actions input.submit
+{
+  background: url('../../sf/sf_admin/images/save.png') no-repeat 3px center #fff;
+  float: right;
+}
+
+#sf_admin_container #layout_container_section .layout_actions input[type="submit"].submit:hover
+{
+  cursor: pointer;
+  cursor: hand;
+  text-decoration: underline;
+}
+
+#layout_container .row_controls a,
+#layout_container .column_controls a
+{
+  display: inline-block;
+  text-decoration: none;
+  color: #555;
+  opacity: 0.5;
+}
+
+#layout_container .row_controls a:hover,
+#layout_container .column_controls a:hover
+{
+  opacity: 1;
+}
+
+#layout_container tr.row
+{
+  padding: 3px;
+}
+
+#layout_container tr td.column
+{
+  border: 1px solid #aaa;
+  background: #f2f2f2;
+}
+
+#layout_container tr td.column.empty
+{
+  background: #fff;
+}
+
+
+#layout_container tr td.column > .content
+{
+  padding: 3px;
+}
+
+#layout_container .column_controls
+{
+  padding: 2px;
+  background-color: #ccc;
+  text-align: center;
+  border: 1px solid #aaa;
+}
+
+.slotlet_controls
+{
+  padding: 2px;
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  background-color: #eee !important;
+  width: 18px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#layout_container .row_controls a,
+.slotlet_controls a
+{
+  display: block;
+  opacity: 0.5;
+}
+
+.slotlet_controls a:hover
+{
+  opacity: 1;
+}
+
+.mock
+{
+  display: none;
+}
+
+.actions_separator
+{
+  display: inline;
+  vertical-align: middle;
+  width: 1px;
+  border-right: 2px groove #ccc;
+  margin: 0 6px 0 6px;
+  padding: 0;
+}
+
+.actions_separator_vertical
+{
+  display: block;
+  vertical-align: middle;
+  height: 1px;
+  background-color: #999;
+  border-top: 1px solid #fff;
+  border-bottom: 2px solid #ddd;
+  margin: 6px 0 6px 0;
+  padding: 0;
+}
+
+.highlighted
+{
+  background-color: #ffe77d;
+}
+
+.row_controls
+{
+  width: 24px;
+  padding: 2px;
+  background-color: #ccc !important;
+  border: 1px solid #bbb;
+  text-align: center;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-radius-topleft: 4px;
+  border-radius-bottomleft: 4px;
+}
+
+.row_controls .form
+{
+  text-align: left;
+  padding: 2px;
+  margin: 1px auto;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  position: absolute;
+  z-index: 10;
+}
+
+.column_controls .form
+{
+  text-align: left;
+  padding: 2px;
+  margin: 1px auto;
+  border: 1px solid #aaa;
+  background-color: #fff;
+}
+
+.column_controls .form .actions
+{
+  text-align: center;
+}
+
+.row_controls .actions_separator_vertical
+{
+  background-color: #999;
+  border-top: 1px solid #eee;
+  border-bottom: 2px solid #ccc;
+  margin: 6px 0 6px 0;
+  padding: 0;
+}
+
+.column_controls .toggleable_set
+{
+  display: inline;
+}
+
+#layout_container .row .column .slotlet
+{
+  border: 1px solid #ccc;
+  border-spacing: 0;
+  margin: 6px auto;
+  width: 95%;
+  background: url('../../images/backend/slotlet_bg.png') repeat-x bottom left #fff;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+#layout_container .row .column .slotlet .content
+{
+  padding: 3px;
+  background-color: transparent;
+}
+
+#layout_container .row .column .slotlet .content .name
+{
+  font-weight: bold;
+}
+
+#layout_container .slotlet .name img
+{
+  vertical-align: middle;
+  float: right;
+}
+
+#layout_container .slotlet .name
+{
+  font-weight: bold;
+  font-size: 120%;
+  color: #0080ed;
+  text-align: center;
+  cursor: move;
+}
+
+#layout_container .slotlet .form
+{
+  margin-top: 3px;
+}
+
+#layout_container .slotlet .form .title
+{
+  font-weight: bold;
+  margin: 0 0 6px 0;
+  border-bottom: 1px dashed #ccc;
+  padding: 3px;
+}
+
+#layout_container .slotlet .form .form_content
+{
+  margin: 6px;
+}
+
+#layout_container .slotlet .form .form_content > div
+{
+  margin-bottom: 4px;
+}
+
+#layout_container .slotlet .form .form_content label
+{
+  padding-top: 3px;
+  color: #777;
+}
+
+#layout_container .slotlet .form select
+{
+  width: 12em;
+  padding: 0;
+  background-color: #fff;
+}
+
+#layout_container .slotlet .form input[type="text"]
+{
+  width: 14em;
+  margin-bottom: 2px;
+}
+
+#layout_container .slotlet .form input[type="checkbox"]
+{
+  margin-top: 3px;
+  margin-bottom: 2px;
+}
+
+
+#layout_container .row > td > table
+{
+  width: 100%;
+}
+
+#sf_admin_container #layout_container input[type="button"]
+{
+  border: 1px solid #39d;
+  text-align: center;
+  text-shadow: #39D 0px -1px 0px;
+  background: #39D url('../../images/backend/bg-btn-blue.png') repeat-x scroll 0px 0px;
+  color: #fff;
+  font-weight: bold;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#curtain
+{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #555;
+  opacity: 0.75;
+  padding: 25%;
+  text-align: center;
+  font-size: 200%;
+  color: #fff;
+  position: fixed;
+}

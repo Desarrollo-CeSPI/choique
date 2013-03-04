@@ -1,0 +1,3 @@
+default:
+  stylesheets: [backend/main, backend/backend, backend/admin_theme_black, backend/tabber ]
+  javascripts: [ -*, tabber ]

@@ -1,0 +1,167 @@
+/**
+ *
+ *  common
+ *
+ */
+
+a img {
+  border: 0 !important;
+}
+
+.rectangle {
+  background-color: #def;
+  border:1px solid #D3D3D3;
+  margin:20px;
+  padding:10px;
+  text-align:center;
+}
+
+/**
+ *
+ *  formbuilder module
+ *
+ */
+
+#all-fields {
+  margin: 20px;
+  margin-bottom: 150px;
+}
+
+.field {
+  display: inline;
+}
+
+.form {
+  position: relative;
+}
+
+.field-block {
+  float: left;
+  width: 50%;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 20px;
+  margin: 20px;
+}
+
+.form-description {
+  font-size: 16px;
+  margin: 20px;
+}
+
+#sortable-form .form-field-actions {
+  float: right;
+}
+
+#sortable-form .instance-field {
+  margin-left: 20px;
+}
+
+#sortable-form li {
+  list-style-image: url('../../images/backend/sort.png');
+  list-style-position: inside;
+  cursor: move;
+  margin: 10px 0 10px 0;
+  border: 1px outset #eee;
+  background: #f9f9f9;
+  width: 40%;
+  padding: 6px;
+}
+
+#sortable-form li input {
+  vertical-align: middle;
+}
+
+#sortable-form li textarea {
+  vertical-align: top;
+}
+
+#field-editor {
+  z-index: 9999999999;
+  position: absolute;
+  right: 10px;
+  border: 1px outset #ccc;
+  background-color: #eee;
+  margin: 20px;
+}
+
+#field-editor h2 {
+  text-align: center;
+  border-bottom: 1px inset #444;
+  margin: 6px;
+}
+
+#field-editor .help {
+  color: #555;
+}
+
+#field-editor label {
+  width: 10em;
+  float: left;
+}
+
+#field-editor .field-editor-row input {
+  border: 1px inset #ccc;
+}
+
+.field-editor-row {
+  margin: 10px;
+}
+
+.field-editor-row-actions {
+  text-align: right;
+  margin: 10px;
+}
+
+.field-editor-row-actions input {
+  border: 1px outset #ccc;
+  background-color: #ccc;
+}
+
+/**
+ *
+ *  form module
+ *
+ */
+
+#results {
+  border: 1px solid #d3d3d3;
+  margin: 20px;
+}
+
+td {
+  padding: 0 20px 0 20px;
+}
+
+#fieldset-mail{
+	margin: 0px 0px 10px 0px;
+}
+
+#fieldset-mail .form-row-email {
+  border:0px solid #CCCCCC;
+  clear:both;
+}
+
+#fieldset-mail .form-row-email input{
+	border:1px solid #999999;
+	float:left;
+	width:180px
+}
+
+#form-actions-email input {
+  	margin: 10px;
+  	background:#EDEDE3 none repeat scroll 0%;
+	border:1px solid #999999;
+	color:#000000;
+	width:114px;
+}
+
+#fieldset-mail .form-row-email label{
+	color:#555555;
+	display:block;
+	font-weight:normal !important;
+	padding:0pt 1em 3px 0pt;
+	width:8em;
+}

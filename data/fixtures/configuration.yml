@@ -1,0 +1,206 @@
+CmsConfiguration: 
+  CmsConfiguration_98: 
+    name: >
+      Texto para fecha de actualización de
+      artículos ("%f%" se reemplazará por la
+      fecha)
+    configuration_key: article_updated_at_caption
+    configuration_value: Actualizado el %f%
+  CmsConfiguration_99: 
+    name: Permitir ocultar calendario
+    configuration_key: check_collapse_calendar
+    configuration_value: 0
+  CmsConfiguration_100: 
+    name: >
+      Incluir secciones ancestras al generar
+      Slotlet Novedades
+    configuration_key: check_include_ancestor_sections
+    configuration_value: 0
+  CmsConfiguration_101: 
+    name: >
+      Incluir secciones descendientes al
+      generar Slotlet Novedades
+    configuration_key: check_include_children_sections
+    configuration_value: 1
+  CmsConfiguration_102: 
+    name: >
+      Incluir sección 'Inicio' en mapa del
+      sitio
+    configuration_key: check_include_home_in_sitemap
+    configuration_value: 0
+  CmsConfiguration_103: 
+    name: >
+      Incluir siempre sección Inicio en el
+      menu contextual
+    configuration_key: >
+      check_include_home_section_in_section_slotlet
+    configuration_value: 0
+  CmsConfiguration_104: 
+    name: >
+      Ofuscar direcciones de correo
+      electrónico
+    configuration_key: check_obfuscate_mail_addresses
+    configuration_value: 1
+  CmsConfiguration_105: 
+    name: >
+      Mostrar calendario desplegado en el día
+      actual
+    configuration_key: check_open_calendar_today
+    configuration_value: 0
+  CmsConfiguration_106: 
+    name: >
+      Mostrar mail de contacto en los
+      articulos
+    configuration_key: check_show_article_mail
+    configuration_value: 1
+  CmsConfiguration_107: 
+    name: >
+      Texto a mostrar en el link del mail de
+      cada articulo
+    configuration_key: text_contact_mail
+    configuration_value: webmaster@choique.domain
+  CmsConfiguration_107_1: 
+    name: Mail de contacto
+    configuration_key: contact_mail
+    configuration_value: webmaster@choique.domain
+  CmsConfiguration_107_2: 
+    name: Mail server
+    configuration_key: text_mail_hostname
+    configuration_value: localhost
+  CmsConfiguration_107_3: 
+    name: Mail server username
+    configuration_key: text_mail_host_username
+    configuration_value: 
+  CmsConfiguration_107_4: 
+    name: Mail server password
+    configuration_key: text_mail_host_password
+    configuration_value: 
+  CmsConfiguration_108: 
+    name: >
+      Mostrar calendario en los slotlet de
+      Eventos
+    configuration_key: check_show_events_calendar_in_slotlet
+    configuration_value: 1
+  CmsConfiguration_109: 
+    name: Ordenar novedades por prioridad
+    configuration_key: check_sort_news_by_priority
+    configuration_value: 1
+  CmsConfiguration_110: 
+    name: >
+      Utilizar descripción como pie de imagen
+      en los artículos
+    configuration_key: >
+      check_use_description_in_article_multimedia
+    configuration_value: 0
+  CmsConfiguration_111: 
+    name: >
+      Utilizar sección Horizontal como base
+      en sitemap
+    configuration_key: >
+      check_use_horizontal_as_base_sitemap_section
+    configuration_value: 1
+  CmsConfiguration_112: 
+    name: Utilizar distribuciones por sección
+    configuration_key: check_use_layout_per_section
+    configuration_value: 1
+  CmsConfiguration_113: 
+    name: >
+      Mostrar botones de navegacion en
+      articulos
+    configuration_key: check_use_navigation_in_articles
+    configuration_value: 1
+  CmsConfiguration_114: 
+    name: >
+      Utilizar fecha de publicación en los
+      RSS
+    configuration_key: check_use_published_at_for_rss_feeds
+    configuration_value: 1
+  CmsConfiguration_115: 
+    name: >
+      Agregar íconos para compartir
+      artículos en redes sociales
+    configuration_key: check_use_social_share_toolbar
+    configuration_value: 0
+  CmsConfiguration_116: 
+    name: >
+      Usar título de multimedias en lugar de
+      descripción ante falta de descripción
+    configuration_key: >
+      check_use_title_when_description_is_empty
+    configuration_value: 1
+  CmsConfiguration_118: 
+    name: Sección  'Inicio' (HOME del sitio)
+    configuration_key: custom_section_home
+  CmsConfiguration_119: 
+    name: >
+      Servicio para compartir en redes
+      sociales
+    configuration_key: custom_social_sharing_tool
+  CmsConfiguration_120: 
+    name: Mail de contacto para el RSS
+    configuration_key: feeds_contact_email
+    configuration_value: webmaster@choique.domain
+  CmsConfiguration_121: 
+    name: Nombre de contacto para el RSS
+    configuration_key: feeds_contact_name
+    configuration_value: Choique CMS
+  CmsConfiguration_122: 
+    name: Pie de página
+    configuration_key: footer
+    configuration_value: &copy; 2008 - <?php echo date('Y')?> | Choique CMS
+  CmsConfiguration_123: 
+    name: Texto para ir al artículo completo
+    configuration_key: full_text_article
+    configuration_value: >
+      Para leer el artículo completo, haga
+      click en el título del mismo.
+  CmsConfiguration_124: 
+    name: >
+      Número de eventos a mostrar
+      inicialmente en el Slotlet Calendario
+    configuration_key: max_events
+    configuration_value: 0
+  CmsConfiguration_125: 
+    name: >
+      Número máximo de artículos a mostrar
+      en cada galeria de artículos
+    configuration_key: max_gallery_articles
+    configuration_value: 15
+  CmsConfiguration_126: 
+    name: >
+      Número máximo de imágenes a mostrar
+      en cada galeria
+    configuration_key: max_gallery_images
+    configuration_value: 5
+  CmsConfiguration_127: 
+    name: Número de novedades a mostrar
+    configuration_key: max_news
+    configuration_value: 5
+  CmsConfiguration_128: 
+    name: >
+      Tamaño medio por defecto de las
+      imágenes (ancho en px)
+    configuration_key: medium_image_default_width
+    configuration_value: 200
+  CmsConfiguration_129: 
+    name: >
+      Tamaño miniatura por defecto de las
+      imágenes (ancho en px)
+    configuration_key: small_image_default_width
+    configuration_value: 75
+  CmsConfiguration_130: 
+    name: Altura de cada Slotlet Separador
+    configuration_key: separator_default_height
+    configuration_value: 5
+  CmsConfiguration_131: 
+    name: Utilizar formularios
+    configuration_key: check_use_forms
+    configuration_value: 1
+  CmsConfiguration_132: 
+    name: Utilizar fuentes periodísticas
+    configuration_key: check_use_sources
+    configuration_value: 1
+  CmsConfiguration_133: 
+    name: Utilizar categorías
+    configuration_key: check_use_tags
+    configuration_value: 1

@@ -1,0 +1,17 @@
+.addthis_toolbox
+{
+  float: left;
+  margin-right: 12px;
+}
+
+.addthis_toolbox.addthis_pill_combo a
+{
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.addthis_button_compact .at15t_compact
+{
+  float: left;
+}

@@ -1,0 +1,12 @@
+methods:         [get]
+fields:
+  mailto:
+    required: yes
+      msg:         Debe ingresar un email
+    sfEmailValidator:
+      email_error:  El email ingresado es incorrecto
+
+
+  from:
+    required: yes
+      msg:         Debe indicar su nombre

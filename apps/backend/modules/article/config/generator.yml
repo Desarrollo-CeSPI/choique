@@ -1,0 +1,232 @@
+generator:
+  class:                            sfAdvancedAdminGenerator
+  param:
+    model_class:                    Article
+    theme:                          default_mod
+    css:                            backend/admin_theme_black
+
+    fields:
+      id:
+        name:                       Id
+      type:
+        name:                       Tipo
+      name:
+        name:                       Nombre
+      title:
+        name:                       Título
+      heading:
+        name:                       Copete
+      comment:
+        name:                       Comentario
+        help:                       Para uso interno
+      description:
+        name:                       Descripción
+      upper_description:
+        name:                       Volanta
+      body:
+        name:                       Cuerpo
+      updated_at:
+        name:                       Última actualización
+        params:                     date_format="dd/MM/yyyy H:mm"
+      created_at:
+        name:                       Fecha de creación
+        params:                     date_format="dd/MM/yyyy H:mm"
+      created_by:
+        name:                       Creado por
+      updated_by:
+        name:                       Actualizado por
+      is_published:
+        name:                       Publicado
+      is_deleted:
+        name:                       Borrado
+      is_archived:
+        name:                       Archivado
+      published_at:
+        name:                       Fecha de publicación
+      archived_at:
+        name:                       Fecha de archivado
+      signature:
+        name:                       Firma
+      contact:
+        name:                       Email de contacto
+      link_id:
+        name:                       Vínculo relacionado
+      link:
+        name:                       Vínculo relacionado
+      multimedia_id:
+        name:                       Imagen destacada
+      multimedia:
+        name:                       Imagen destacada
+      main_gallery_id:
+        name:                       Galería destacada
+      gallery:
+        name:                       Galería destacada
+      zoomable_multimedia:
+        name:                       Ampliar imagen destacada
+      source_id:
+        name:                       Fuente
+      source:
+        name:                       Fuente
+      section_id:
+        name:                       Sección
+        required:  true
+      section:
+        name:                       Sección
+      times_read:
+        name:                       Veces leído
+      rating:
+        name:                       Puntuación
+      user_name:
+        name:                       Autor
+      editor:
+        name:                       Cuerpo
+      current_status:
+        name:                       Estado
+      article_tag:
+        name:                       Categorías
+      full_html_representation:
+        name:                       Vista previa
+      reference:
+        name:                       Enlace
+        help:                       Reemplazará el vínculo al artículo en cada referencia al mismo
+      reference_type:
+        name:                       Tipo de enlace
+      type_text:
+        name:                       Tipo
+      type_field:
+        name:                       Tipo
+      article_section:
+        name:                       Secciones relacionadas
+        type:                       admin_double_list
+        params:                     through_class=ArticleSection style="width:350px;"
+      references:
+        name:                       Referenciado en
+      open_as_popup:
+        name:                       Abrir como PopUp
+        help:                       Abre el Articulo como una ventana nueva al entrar al Home
+      author_updated:
+        name:                       Actualizado por
+
+    filters:
+      fields:
+        title:
+          help: Utilice * como wildcard
+        name:
+          help: Utilice * como wildcard
+
+    list:
+      fields:
+        created_by:
+          name:                     Autor
+        author:
+          name:                     Autor
+          join_fields:              [ArticlePeer::CREATED_BY, sfGuardUserPeer::ID, Criteria::LEFT_JOIN ]
+          sort_column:              [sfGuardUserPeer::NAME]
+        type_text:
+          name:                     Tipo
+          sort_column:              [ArticlePeer::TYPE]
+
+      sort:                         [created_at, desc]
+      title:                        Listado de artículos
+      display:                      [=_name, title, author, type_text, section, multimedia, current_status, updated_at, created_at]
+      filters:                      [title, name, _type, is_published, is_deleted, is_archived, _section_id, created_by, updated_at]
+      max_per_page:                 25
+      object_actions:
+        _show:                      
+        _edit:                      
+          condition:                canEdit
+        unpublish:
+          action:                   unpublish
+          name:                     Despublicar
+          credentials:              [ [ reporter_admin, designer_admin ]]
+          condition:                canUnpublish
+        publish:
+          action:                   publish
+          name:                     Publicar
+          icon:                     backend/publish_icon.png
+          credentials:              [ [ reporter_admin, designer_admin ]]
+          condition:                canPublish
+        archive:
+          action:                   archive
+          name:                     Archivar
+          icon:                     backend/archive_icon.png
+          credentials:              [ [ reporter_admin, designer_admin ]]
+          condition:                canArchive
+        preview:
+          action:                   preview
+          name:                     Previsualizar articulo
+          icon:                     backend/magnifier.png
+          params:                   popup=true
+        _delete:
+          condition:                canDelete
+        copy:
+          action:                   copy
+          name:                     Copia un articulo
+          icon:                     backend/copy.png
+      actions:
+        _create:
+          
+    create: 
+      title:                        Crear un nuevo artículo
+      fields:
+        heading:
+          type:                     textarea_tag
+          params:                   size=77x10
+        article_tag:
+          type:                     admin_double_list
+          params:                   through_class=ArticleTag style="width:350px;"
+        is_published:
+          credentials:              [ [ reporter_admin, designer_admin ]]
+      display:
+
+        Información y estado:       [name, <?php (CmsConfiguration::get('check_use_sources', true)) and print 'source_id, ' ?>_type_field, comment, is_published<?php (CmsConfiguration::get('check_allow_article_popup', true)) and print ', open_as_popup' ?>]
+<?php if (CmsConfiguration::get('check_use_tags', true)): ?>
+        Categorías:                 [article_tag]
+<?php endif; ?>
+        Secciones relacionadas:     [_section_id, _article_section]
+        # @ncuesta: De 'Contenido' eliminé 'link_id', porque no encontré para qué se usaba.
+        Contenido:                  [upper_description, title, heading, _editor, contact, _multimedia_id, zoomable_multimedia, main_gallery_id, _reference_type, _reference]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+          
+    edit:
+      title:                        Editar artículo "%%name%%"
+      display:
+        Información y estado:       [name, <?php (CmsConfiguration::get('check_use_sources', true)) and print 'source_id, ' ?>_type_field, comment<?php (CmsConfiguration::get('check_allow_article_popup', true)) and print ', open_as_popup' ?>]
+<?php if (CmsConfiguration::get('check_use_tags', true)): ?>
+        Categorías:                 [article_tag]
+<?php endif; ?>
+        Secciones relacionadas:     [_section_id, _article_section]
+        # @ncuesta: De 'Contenido' eliminé 'link_id', porque no encontré para qué se usaba.
+        Contenido:                  [upper_description, title, heading, _editor, contact, _multimedia_id, zoomable_multimedia, main_gallery_id, _reference_type, _reference]
+      fields:
+        heading:
+          type:                     textarea_tag
+          params:                   size=77x10
+        article_tag:
+          type:                     admin_double_list
+          params:                   through_class=ArticleTag style="width:350px;"
+        main_gallery_id:
+          params: peer_method=retrievePublished
+        is_published:
+          credentials:              [ [ reporter_admin, designer_admin ]]
+      actions:
+        _list:                      
+        _save_and_list:             
+        _save:
+          name:                     Guardar y seguir editando
+
+    show:
+      fields:
+        comment:
+          help: ""
+      title:                        Detalle del artículo "%%name%%"
+      display:
+        Información y estado:       [<?php (CmsConfiguration::get('check_use_sources', true)) and print 'source, ' ?>type_text, comment, current_status, section, _references<?php (CmsConfiguration::get('check_allow_article_popup', true)) and print ', open_as_popup' ?>]
+        Información de Auditoria:   [ author, created_at, author_updated, updated_at ]
+        Contenido:                  [full_HTML_representation]
+      actions:
+        _list:

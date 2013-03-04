@@ -1,0 +1,487 @@
+#sf_admin_container {
+  margin: 18px 6px;
+  clear: both;
+}
+
+#sf_admin_container * {
+  outline: 0;
+}
+
+#sf_admin_container ul,
+#sf_admin_container ol,
+#sf_admin_container li,
+#sf_admin_container h1,
+#sf_admin_container h2,
+#sf_admin_container h3,
+#sf_admin_container h4,
+#sf_admin_container h5,
+#sf_admin_container h6,
+#sf_admin_container pre,
+#sf_admin_container form,
+#sf_admin_container body,
+#sf_admin_container html,
+#sf_admin_container p,
+#sf_admin_container blockquote,
+#sf_admin_container fieldset,
+#sf_admin_container input {
+  margin: 0;
+  padding: 0;
+}
+
+#sf_admin_container a img,
+:link img,
+:visited img {
+  border: none;
+}
+
+#sf_admin_container a:link,
+#sf_admin_container a:visited {
+  text-decoration: none;
+}
+
+#sf_admin_container a:hover {
+  text-decoration: underline;
+}
+
+#sf_admin_container td {
+  margin: 0;
+/* padding: 20px; */
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  background-color: #fff;
+}
+
+#sf_admin_container p {
+  margin-bottom: 5px;
+}
+
+#sf_admin_container #sf_admin_bar {
+  margin-top: 8px;
+  margin-right: 25%;
+  margin-left: 25%;
+}
+
+#sf_admin_container #sf_admin_content {
+}
+
+#sf_admin_container h1 {
+  margin: 8px 0;
+  padding: 3px;
+  padding-top: 20px;
+  color: #222;
+  font-family: "Trebuchet MS", Arial, Verdana, sans-serif;
+  font-size: 25px;
+  border-bottom: 2px solid #ddd;
+}
+
+#sf_admin_container fieldset h2 {
+  padding: 2px 2px 2px 16px;
+  color: #eee;
+  background: #fcfcfc  repeat-x top left;
+  background-color: #444;
+  margin: 2px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.creation #sf_admin_container fieldset h2 {
+  background-color: #293 !important;
+}
+
+#sf_admin_container fieldset h2 a {
+  display: block;
+  color: #eee !important;
+  text-decoration: none;
+}
+
+#sf_admin_container fieldset h2 a:hover {
+  color: #fff !important;
+  text-decoration: none;
+}
+
+#sf_admin_container fieldset h2 a img {
+  vertical-align: middle;
+}
+
+#sf_admin_container input,
+#sf_admin_container textarea,
+#sf_admin_container select {
+  padding: 3px;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  border: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+#sf_admin_container label {
+  font-size: 12px;
+  display: block;
+  padding: 0 1ex 3px 0;
+  float: left;
+  text-align: left;
+  width: 10em;
+  color: #333;
+  font-weight: normal !important;
+}
+
+#sf_admin_container label.required {
+  color: #222 !important;
+  font-weight: bold !important;
+}
+
+#sf_admin_container .sf_admin_filters input[type="checkbox"] + label {
+  display: inline;
+  float: none;
+}
+
+#sf_admin_container .save-ok {
+  margin-bottom: 10px;
+  margin-left: 25%;
+  border: 1px solid #73B65A;
+  background-color: #a5f986;
+  text-align: right;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+#sf_admin_container .save-ok h2 {
+  margin: 0 !important;
+  padding: 5px 20px 5px 25px;
+  font-size: 11px;
+  color: #275d12;
+  background: repeat-x top left;
+}
+
+#sf_admin_container .form-row {
+  clear: both;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+#sf_admin_container .form-row .content {
+  padding-left: 12em;
+}
+
+#sf_admin_container .form-errors {
+  margin-bottom: 10px;
+  border: 1px solid #d33;
+  background-color: #fff;
+}
+
+#sf_admin_container .form-errors h2 {
+  padding: 5px 20px 5px 25px;
+  font-size: 11px;
+  color: #fff;
+  background: #ff5858 repeat-x top left;
+}
+
+#sf_admin_container .form-errors dl {
+  padding: 5px;
+}
+
+#sf_admin_container .form-errors dt {
+  color: #555;
+  min-width: 10ex;
+  font-weight: bold;
+  float: left;
+  padding-right: 5px;
+}
+
+#sf_admin_container .form-errors dd {
+  margin: 0;
+  color: #555;
+}
+
+#sf_admin_container .form-error {
+  color: #f44;
+}
+
+#sf_admin_container .form-error input,
+#sf_admin_container .form-error select,
+#sf_admin_container .form-error textarea {
+  border: 1px solid #f44;
+}
+
+#sf_admin_container fieldset {
+  margin-bottom: 3px;
+  border: 1px solid #bbb;
+  background-color: #fff;
+}
+
+#sf_admin_container fieldset.collapsed * {
+  display: none;
+}
+
+#sf_admin_container fieldset.collapsed h2,
+#sf_admin_container fieldset.collapsed {
+  display: block !important;
+}
+
+#sf_admin_container fieldset.collapsed .collapse-toggle {
+  display: inline !important;
+}
+
+#sf_admin_container fieldset.collapse h2 a.collapse-toggle {
+  color: #ffc;
+}
+
+#sf_admin_container fieldset.collapse h2 a.collapse-toggle:hover {
+  text-decoration: underline;
+}
+
+#sf_admin_container .float-left {
+  float: left;
+}
+
+#sf_admin_container .float-right {
+  float: right;
+}
+
+#sf_admin_container ul.sf_admin_td_actions {
+  list-style-type: none;
+}
+
+#sf_admin_container ul.sf_admin_td_actions li {
+  list-style-type: none;
+  display: inline;
+}
+
+#sf_admin_container ul.sf_admin_actions {
+  margin: 10px 0;
+  list-style-type: none;
+  text-align: right;
+}
+
+#sf_admin_container ul.sf_admin_actions a {
+  color: #444;
+}
+
+#sf_admin_container ul.sf_admin_actions li {
+  list-style-type: none;
+  display: inline;
+}
+
+#sf_admin_container ul.sf_admin_actions input {
+  border: 1px solid #333;
+  padding: 0px 10px 0px 10px;
+  background: #666;
+  color: #eee;
+  font-size: 12px;
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  cursor: hand;
+  cursor: pointer;
+}
+
+#sf_admin_container .sf_admin_action_create {
+  background: #2b8209 !important;
+  border-color: #174805 !important;
+  color: #cfc !important;
+}
+
+#sf_admin_container .sf_admin_action_save {
+  background: #2b8209 !important;
+  border-color: #174805 !important;
+  color: #cfc !important;
+}
+
+#sf_admin_container .sf_admin_action_save_and_add {
+  background: #2b8209 !important;
+  border-color: #174805 !important;
+  color: #cfc !important;
+}
+
+#sf_admin_container .sf_admin_action_save_and_list {
+  background: #2b8209 !important;
+  border-color: #174805 !important;
+  color: #cfc !important;
+}
+
+#sf_admin_container .sf_admin_action_delete {
+  background: #8b1a00 !important;
+  border-color: #571000 !important;
+  color: #fcc !important;
+}
+
+#sf_admin_container .sf_admin_action_cancel {
+}
+
+#sf_admin_container .sf_admin_action_filter {
+  background: #0b4995 !important;
+  border-color: #062b58 !important;
+  color: #ccf !important;
+}
+
+#sf_admin_container .sf_admin_action_reset_filter {
+}
+
+#sf_admin_container .sf_admin_action_list {
+  background: #0b4995 !important;
+  border-color: #062b58 !important;
+  color: #ccf !important;
+}
+
+#sf_admin_container .sf_admin_default_action {
+  font-weight: bold !important;
+}
+
+#sf_admin_container .sf_admin_list {
+  width: 100%;
+  border: 1px solid #444;
+}
+
+.creation #sf_admin_container .sf_admin_list th,
+.creation #sf_admin_container .sf_admin_list tfoot th {
+  background-color: #293 !important;
+}
+
+#sf_admin_container .sf_admin_list th {
+  padding: 2px 2px 2px 6px;
+  font-size: 12px !important;
+  background: #444  repeat-x top left;
+  text-align: left;
+  color: #eee;
+}
+
+#sf_admin_container .sf_admin_list tfoot th {
+  background: #666;
+  color: #eee;
+  font-size: 12px !important;
+}
+
+#sf_admin_container .sf_admin_list th a,
+#sf_admin_container .sf_admin_list tfoot th a {
+  color: #eee !important;
+}
+
+#sf_admin_container .sf_admin_list td {
+  padding: 3px;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+#sf_admin_container .sf_admin_filters li {
+  list-style-type: none;
+}
+
+#sf_admin_container .sf_admin_row_0 td {
+}
+
+#sf_admin_container .sf_admin_row_1 td {
+  background-color: #f9f9f9;
+}
+
+#sf_admin_container .sf_admin_row_0 td a,
+#sf_admin_container .sf_admin_row_1 td a {
+  color: #C35617;
+  font-weight: bold;
+}
+
+
+#sf_admin_container .sf_admin_edit_help {
+  color: #bbb;
+}
+
+#sf_admin_container .mceEditor .mceLayout {
+  border: 1px solid #ddd !important;
+}
+
+#sf_admin_container .mceEditor table,
+#sf_admin_container .mceEditor td {
+  padding: 0 !important;
+  margin: 2px !important;
+  border: none !important;
+}
+
+#sf_admin_container select.sf_admin_multiple,
+#sf_admin_container select.sf_admin_multiple-selected {
+  width: 14em;
+}
+
+#sf_admin_container ul.sf_admin_checklist li {
+  list-style: none;
+  line-height: 1.5em;
+}
+
+#sf_admin_container ul.sf_admin_checklist li label {
+  display: inline;
+  float: none;
+}
+
+#sf_admin_container input[type="password"],
+#sf_admin_container input[type="text"] {
+  min-width: 11em;
+}
+
+#sf_admin_container textarea {
+  min-width: 24em;
+}
+
+#sf_admin_container select {
+  min-width: 12.7em;
+}
+
+#sf_admin_container .form-row input[type="button"],
+#sf_admin_container .form-row input[type="submit"],
+#sf_admin_container .form-row input[type="reset"] {
+  color: #fff;
+  border: 1px outset #666;
+  background-color: #666;
+}
+
+#sf_admin_container .form-row table {
+  border: 1px solid #ccc;
+  padding: 3px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  background-color: #f2f2f2;
+}
+
+#sf_admin_container .form-row .items {
+  border: 1px solid #ccc;
+  padding: 3px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  background-color: #fff;
+  width: 100%;
+}
+#sf_admin_container .form-row table .error-message {
+  color: #f44;
+}
+#sf_admin_container .form-row table .error input,
+#sf_admin_container .form-row table .error select{
+  border: 1px solid #f44;
+}
+
+#sf_admin_container .form-row th {
+  border-bottom: 1px solid #ccc;
+}
+
+#sf_admin_container .form-row td {
+  background-color: transparent;
+  padding: 2px;
+}
+
+#sf_admin_container #sf_admin_content .sf_admin_list   .multimedia-list-preview img {
+  width: 75px;
+}
+
+#filters_status_date {
+  margin-top: 3px;
+}
+
+.flavors_list ul
+{
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.flavors_list li
+{
+  background-position: 0px 5px;
+  padding-left: 14px; 
+}
+
+

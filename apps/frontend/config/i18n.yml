@@ -1,0 +1,7 @@
+all:
+  default_culture:     es_AR
+#  source:              XLIFF
+#  debug:               off
+#  cache:               on
+#  untranslated_prefix: "[T]"
+#  untranslated_suffix: "[/T]"

@@ -1,0 +1,166 @@
+.sitemap_slotlet table.content
+{
+  height:auto;
+  width:100%;
+}
+
+.sitemap_slotlet th.header
+{
+  width:100%;
+}
+
+.sitemap_slotlet td.row
+{
+  text-align: left;
+  vertical-align: top;
+}
+
+.sitemap_slotlet a
+{
+  color: #000;
+  text-decoration: none;
+  text-transform:capitalice;
+  font-size:10px;
+}
+
+.sitemap_slotlet .sitemap-link
+{
+  padding:2px 5px;
+  color:#009ee0;
+  font-weight:bold;
+  display:block;
+  font-size:12px;
+  font-family:Arial, sans-serif;
+  text-decoration:none;
+  text-transform:capitalice;
+  background:none;
+  margin-bottom:10px;
+}
+
+.sitemap_slotlet .level-group-2
+{
+  color:#000;
+  display:block;
+  padding:2px 5px;
+}
+
+.sitemap_slotlet .level-group-3
+{
+  padding:3px 20px;
+  color:#555;
+  font-family:Arial, sans-serif;
+  font-size:11px;
+  display:block;
+  background:none;
+}
+
+.sitemap_slotlet .level-group-4
+{
+  padding:3px 10px 3px 20px;
+  color:#fff;
+  font-family:Arial, sans-serif;
+  font-size:11px;
+  display:block;
+  background-color:#58585A;
+}
+
+.sitemap_slotlet td.footer
+{
+  width:100%;
+}
+
+.sitemap_slotlet .color
+{
+  padding:0;
+  margin:0;
+  display:none;
+  height:2px;
+  width:auto;
+  border-top:1px solid #ccc;
+}
+
+.backmap {
+background-color:#58585A;
+}
+
+.backsitemap table.content
+{
+  height:auto;
+  width:100%;
+  padding:5px 5px 50px 5px;
+}
+
+.backsitemap th.header
+{
+  width:100%;
+}
+
+.backsitemap td.row
+{
+  text-align: left;
+  width:auto;
+  vertical-align: top;
+  width:140px;
+  padding:0 5px;
+}
+
+.backsitemap 
+{
+  text-decoration: none;
+}
+
+.backsitemap .sitemap-link 
+{
+  padding:3px;
+  color:#fff;
+  font-weight:bold;
+  display:block;
+  font-size:14px;
+  text-decoration:none;
+}
+
+.backsitemap .level-group-2 a
+{
+	display:block;
+	font-size:12px;
+	color:#fff;
+	text-decoration:none;
+}
+
+.backsitemap .level-group-3 a
+{
+	display:block;
+	font-size:11px;
+	color:#ccc !important;
+	text-decoration:none;
+}
+
+.backsitemap .level-group-4 a
+{
+	display:block;
+	font-size:10px;
+	color:#999 !important;
+	text-decoration:none;
+}
+
+.backsitemap .level-group-5 a
+{
+	display:block;
+	font-size:9px;
+	color:#666 !important;
+	text-decoration:none;
+}
+
+.backsitemap td.footer
+{
+	width:100%;
+}
+
+.backsitemap .color
+{
+	padding:0;
+	margin:0;
+	display:block;
+	height:2px;
+	width:auto;
+}

@@ -1,0 +1,15 @@
+fillin:
+  enabled:                    true
+
+fields:
+  form{title}:
+    required:
+      msg:                    Form title is required
+    sfPropelUniqueValidator:
+      class:                  Form
+      column:                 title
+      unique_error:           Form title already exists
+
+  form{email}:
+    sfEmailValidator:
+      email_error:            Invalid e-mail address

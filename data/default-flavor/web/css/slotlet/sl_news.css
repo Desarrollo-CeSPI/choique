@@ -1,0 +1,40 @@
+#news {
+background-color: #edede3;
+}
+
+.news_slotlet .title 
+{
+padding: 4.5px 0 4.5px 7px;
+font-weight: bold;
+text-align: left;
+color: #494F22;
+background-color: #D4D5C5;
+vertical-align: middle;
+text-transform:uppercase;
+}
+
+.news_slotlet  .content 
+{
+text-align:left;
+padding:5%;
+}
+
+.content-child 
+{
+margin:1% 0;
+}
+
+
+.news_slotlet a 
+{
+color: #000;
+text-decoration:none;
+}
+
+
+.news_slotlet .rss_icon 
+{
+float: left;
+}
+
+

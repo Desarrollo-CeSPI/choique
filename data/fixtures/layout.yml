@@ -1,0 +1,6 @@
+Layout:
+  general:
+    name: General
+    is_default: true
+    article_layout: |
+      {"options":[],"rows":[{"options":{"class":"header"},"columns":[{"options":{"width":"60%","class":""},"slotlets":[]},{"options":{"width":"20%","class":"header-logo"},"slotlets":[{"name":"NavigationSlotlet","options":{"class":"slotlet_navigation","show_home":true,"show_contact":true,"show_sitemap":true,"show_rss":true}}]},{"options":{"width":"20%","class":"right-side"},"slotlets":[{"name":"SearchSlotlet","options":{"title":"Buscador","query":"Buscar","class":"sl_search","mini":true}}]}]},{"options":{"class":""},"columns":[{"options":{"width":"100%","class":""},"slotlets":[{"name":"PathSlotlet","options":{"class":"path","force_home":false}},{"name":"MainContentSlotlet","options":{"class":"slotlet_main_content"}}]}]},{"options":{"class":""},"columns":[{"options":{"width":"100%","class":""},"slotlets":[{"name":"FooterSlotlet","options":{"class":"slotlet_footer"}}]}]}]}

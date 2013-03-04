@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file orginal="global" source-language="en_US" datatype="plaintext">
+    <body>
+      <trans-unit id="1">
+        <source>Results %first% of %total%</source>
+        <target>Mostrando resultados %first% de %total%</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Results %first% to %last%</source>
+        <target>Mostrando resultados %first% a %last%</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Results %first% to %last% of %total%</source>
+        <target>Mostrando resultados %first% a %last% de %total%</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>No results found</source>
+        <target>No se encontraron resultados</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>[0] no result|[1] 1 result|(1,+Inf] %1% results</source>
+        <target>[0] Su búsqueda no devolvió resultados|[1] Su búsqueda devolvió 1 resultado|(1,+Inf] Su búsqueda devolvió %1% resultados</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

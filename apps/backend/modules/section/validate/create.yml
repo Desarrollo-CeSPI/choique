@@ -1,0 +1,27 @@
+methods:                    [post]
+fillin:
+  enabled:                  true
+fields:
+  section{name}:
+    required:
+      msg:                  Es necesario ingresar un nombre para la sección
+    sfStringValidator:
+      min: 3
+      min_error:            El nombre debe tener al menos tres letras
+      max: 255
+      max_error:            El nombre tiene como máximo 255 letras
+    sfPropelUniqueValidator:
+      class:                Section
+      column:               name
+      unique_error:         "El nombre de sección especificado ya está en uso, por favor ingrese otro"
+  section{banner}:
+    file: True
+    sfFileValidator:
+      mime_types:
+        - 'image/jpeg'
+        - 'image/png'
+      mime_types_error:     El archivo que intenta subir no está permitido
+      max_size:             102400
+      max_size_error:       El tamaño máximo de archivo multimedia es 100KB
+  section{section_id}:
+    cmsSectionValidator:

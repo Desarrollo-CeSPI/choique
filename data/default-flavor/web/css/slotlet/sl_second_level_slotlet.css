@@ -1,0 +1,174 @@
+.second_level_slotlet
+{
+  margin: 0;
+  padding: 0;
+  background:#555;
+}
+
+.second_level_slotlet .cq_menu,
+.second_level_slotlet .cq_menu *
+{
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  list-style: none;
+}
+
+.second_level_slotlet .cq_menu a
+{
+  text-decoration: none;
+  z-index: 10000 !important;
+  color:#fff;
+  text-shadow: 1px 0 3px rgba(0, 0, 0, 0.2);
+}
+
+
+.second_level_slotlet .cq_menu .cq_item
+{
+  float: left;
+  margin:0;
+  padding:0;
+}
+
+.second_level_slotlet .cq_menu .cq_item > a,
+.second_level_slotlet .cq_menu .cq_submenu_item > a,
+.second_level_slotlet .cq_menu .cq_sub_submenu_item > a
+{
+  display: block;
+  padding: 10px;
+  text-transform:uppercase;
+  font-size:11px;
+  
+}
+
+.second_level_slotlet .cq_menu .cq_submenu .cq_sub_submenu
+{
+  width: 17em !important;
+}
+
+.second_level_slotlet .cq_menu .cq_submenu_item.cq_parent > a
+{
+  background-image: url('../../../images/frontend/menu-arrow.gif');
+  background-position: 99% center;
+  background-repeat: no-repeat;
+}
+
+
+.second_level_slotlet .cq_menu .cq_submenu_item.cq_parent > a.selected,
+.second_level_slotlet .cq_menu .cq_submenu_item.cq_parent:hover > a
+{
+  background-image: url('../../../images/frontend/menu-arrow-selected.gif');
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+
+
+
+.second_level_slotlet .cq_menu .cq_submenu
+{
+  position: absolute;
+  margin-top:4px;
+}
+
+.second_level_slotlet .cq_menu .cq_submenu_item
+{
+}
+
+.second_level_slotlet .cq_menu .cq_sub_submenu
+{
+  display: none;
+  position: absolute;
+}
+
+.second_level_slotlet .cq_menu .cq_sub_submenu_item
+{
+ 
+}
+
+
+/**select second level**/
+
+.second_level_slotlet .cq_menu .cq_item a.selected, .second_level_slotlet .cq_menu .cq_item:hover > a, 
+.second_level_slotlet .cq_menu .cq_item .cq_submenu .cq_submenu_item:hover, 
+.second_level_slotlet .cq_menu .cq_item .cq_submenu .cq_submenu_item .cq_sub_submenu .cq_sub_submenu_item:hover 
+{
+   background:#009ee0;
+}
+
+/**select**/
+
+.second_level_slotlet .cq_menu > .cq_item:hover > a, 
+.second_level_slotlet .cq_menu .cq_item > a.selected 
+{
+   background:#009ee0;
+}
+
+/** Superfish - needed for menu to work! **/
+.second_level_slotlet .cq_menu .cq_item:hover
+{
+	visibility: inherit; /* fixes IE7 'sticky bug' */
+}
+
+.sf-menu ul
+{
+	position: absolute;
+	top: -999em;
+	width: 10em;
+}
+
+.sf-menu li
+{
+	float: left;
+	position: relative;
+}
+
+.sf-menu a
+{
+	display: block;
+	position: relative;
+}
+
+.sf-menu li:hover ul,
+.sf-menu li.sfHover ul
+{
+	left: 0;
+	top: 2.5em;
+	z-index: 99;
+}
+
+ul.sf-menu li:hover li ul,
+ul.sf-menu li.sfHover li ul
+{
+	top: -999em;
+}
+
+ul.sf-menu li li:hover ul,
+ul.sf-menu li li.sfHover ul
+{
+	left: 10em;
+	top: 0;
+}
+
+ul.sf-menu li li:hover li ul,
+ul.sf-menu li li.sfHover li ul
+{
+	top: -999em;
+}
+
+ul.sf-menu li li li:hover ul,
+ul.sf-menu li li li.sfHover ul
+{
+	left: 10em;
+	top: 0;
+}
+
+/** End superfish **/
+
+.second_level_slotlet .cq_end
+{
+  float: none;
+  clear: both;
+  height: 0.1px;
+  font-size: 0.1px;
+}
+

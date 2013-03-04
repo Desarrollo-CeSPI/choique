@@ -1,0 +1,21 @@
+methods:                        [post]
+fields:
+  f:
+    file:                       true
+    required:
+      msg:                      Es necesario seleccionar un archivo a subir.
+    sfFileValidator:
+#      mime_types:
+#        - 'application/vnd.ms-word'
+#        - 'application/msword'
+#        - 'application/pdf'
+#        - 'application/rtf'
+#        - 'application/vnd.ms-excel'
+#        - 'application/x-excel'
+#        - 'application/vnd.ms-powerpoint'
+#        - 'application/zip'
+#      mime_types_error:         El archivo que intenta subir no está permitido
+      max_size:                 10240000
+      max_size_error:           El tamaño máximo de archivo multimedia es 10Mb
+fillin:
+  enabled:                      true

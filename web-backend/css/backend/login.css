@@ -1,0 +1,139 @@
+body {
+ font-family:trebuchet ms,arial,sans-serif;
+ font-size:11px;
+ color:#444;
+ margin:0;
+ padding:0;
+ /*background:#009ee0 url(../images/login_choique.png) top center no-repeat;*/
+}
+
+#login {
+ position: absolute;
+ width: auto; /* ancho de la capa a centrar */
+ height: auto; /* alto de la capa a centrar */
+ top:10%;
+ left: 55%;
+ margin-left: -200px; /* mitad del ancho de la capa a centrar */
+ margin-top: -10px; /* mitad del alto de la capa a centrar */
+}
+
+
+
+#login .right {
+ border-left:none;
+ padding:0px;
+ float:left;
+ width:250px; 
+}
+
+#login .logo {
+ font-size:14.5px;
+ width: 250px; 
+ margin:0px 0px 0px 0px;
+}
+
+#login .logo_subtitle{
+ font-family:trebuchet ms,arial,serif;
+ font-size:12px;
+ margin:0;
+ padding-bottom:5px;
+ color:#555;
+ text-transform: uppercase;
+ font-weight:bold;
+}
+
+#login .title_login {
+ font-size:18px;
+ font-weight:bold;
+ margin:0;
+ color: #555;
+}
+
+#login .form-row {
+ border:0;
+ margin-top:10px;
+}
+
+#login .form-row label {
+  font-weight: bold;
+}
+
+#login .form-row .form_error {
+  color: #ff0000;
+}
+
+#login .name {
+ font-size:11px;
+ width:100%;
+ float:left;
+ color:#555;
+}
+
+#login .password {
+ font-size:11px;
+ width:100%;
+ float:left;
+ color:#555;
+}
+
+#login .remember { 
+ font-size:11px;
+ float:left;
+ color:#555;
+}
+
+#password, #username {
+ border:1px solid #999;
+ margin:0px;
+ padding:2px;
+ height:25px;
+ width:250px;
+ font-family:trebuchet ms,arial,sans-serif;
+ font-size:12px;
+ background:#f2f2f2;
+}
+
+#captcha {
+ border:1px solid #999;
+ margin:0px;
+ padding:2px;
+ height:25px;
+ width:80px;
+ font-family:trebuchet ms,arial,sans-serif;
+ font-size:11px;
+ background:#f2f2f2;
+}
+
+label.captcha_txt {
+ margin:0px;
+ width:250px;
+ font-family:trebuchet ms,arial,sans-serif;
+ font-size:12px;
+ float:left;
+}
+
+
+#login .link_login {
+ font-size:12px;
+ font-weight:bold;
+ color:#000;
+}
+
+#login .button {
+background: #4D4D4D;
+border: medium none;
+color: #FFFFFF;
+float: right;
+font-family: trebuchet ms,arial,sans-serif;
+font-size: 14px;
+font-weight: bold;
+margin-top: 10px;
+padding: 5px 20px;
+text-decoration: none;
+text-transform:uppercase;
+}
+
+
+
+
+

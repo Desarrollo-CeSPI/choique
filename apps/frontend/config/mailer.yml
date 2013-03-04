@@ -1,0 +1,7 @@
+all:
+  #mailer:     smtp
+  #hostname:   dios
+  #username:        
+  #password:   
+  deliver:    on  ##Debe estar en on (default) para que pueda enviar mails
+

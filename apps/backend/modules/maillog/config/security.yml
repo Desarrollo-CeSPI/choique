@@ -1,0 +1,20 @@
+#Create and Edit actions are ommited as they redirect to maillog/list.
+
+list:
+  is_secure:    on
+  credentials:  [showMailLog]
+
+show:
+  is_secure:    on
+  credentials:  [showMailLog]
+
+delete:
+  is_secure:    on
+  credentials:  [deleteMailLog]
+
+export:
+  is_secure:    on
+  credentials:  [exportMailLog]
+
+all:
+  is_secure:    on

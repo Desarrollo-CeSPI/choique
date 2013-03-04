@@ -1,0 +1,152 @@
+generator:
+  class:                            sfAdvancedAdminGenerator
+  param:
+    model_class:                    Shortcut
+    theme:                          default_mod
+    css:                            backend/admin_theme_black
+    
+    fields:
+      title:
+        name:                       Título
+        help:                       Texto a mostrar si no se carga una imagen.
+      reference:
+        name:                       Destino del enlace
+        help:                       A dónde se dirigirá el vínculo del atajo.
+      reference_type:
+        name:                       Tipo de enlace
+      open_in_new_window:
+        name:                       Abrir en nueva ventana
+        help:                       "Si se tilda esta opción, el vínculo del atajo se abrirá en una nueva ventana (popup)."
+      priority:
+        name:                       Prioridad
+        help:                       "Orden dentro del Slotlet en el cual se mostrará el atajo. A menor valor, menor prioridad."
+      multimedia_id:
+        name:                       Multimedia
+        help:                       "Contenido multimedial asociado al atajo. Si se selecciona uno, se mostrará como el atajo. En caso contrario, se mostrará el título del mismo. El tamaño considerado será el medio."
+      multimedia:
+        name:                       Multimedia
+        help:                       "Contenido multimedial asociado al atajo. Si se selecciona uno, se mostrará como el atajo. En caso contrario, se mostrará el título del mismo. El tamaño considerado será el medio."
+      comment:
+        name:                       Comentario
+        help:                       "Uso interno exclusivamente."
+        params:                     size=80x8
+      is_published:
+        name:                       Publicado
+      container_slotlet_id:
+        name:                       Slotlet
+        help:                       "Slotlet en el cual se mostrará el atajo. Si no selecciona ninguno, el atajo no se mostrará."
+      container_slotlet:            
+        name:                       Slotlet
+        help:                       "Slotlet en el cual se mostrará el atajo. Si no selecciona ninguno, el atajo no se mostrará."
+      layout_per_section:            
+        name:                       Distribución
+      represented_multimedia:
+        name:                       Imagen
+      body:
+        name:                       Cuerpo
+      created_by_user:
+        name:                       Creado por
+      updated_by_user:
+        name:                       Actualizado por
+      created_at:
+        name:                       Creado el
+      updated_at:
+        name:                       Actualizado el
+
+    filters:
+      fields:
+        title:
+          help: Utilice * como wildcard
+
+    list:
+      fields:
+        container_slotlet:
+          join_fields:              [ShortcutPeer::CONTAINER_SLOTLET_ID, ContainerSlotletPeer::ID]
+          sort_column:              [ContainerSlotletPeer::NAME]
+      sort:                         [id, desc]
+      title:                        Listado de Atajos
+      max_per_page:                 25
+      filters:                      [title, is_published<?php if (!CmsConfiguration::get('check_use_layout_per_section', false)): ?>, container_slotlet_id<?php endif; ?>]
+      display:                      [title, is_published, represented_multimedia, <?php if (!CmsConfiguration::get('check_use_layout_per_section', false)): ?>container_slotlet, <?php endif; ?> priority, created_by_name ]
+      object_actions:
+        _show:
+        _edit:
+          condition:                canEdit
+        unpublish:
+          action:                   unpublish
+          name:                     Despublicar
+          credentials:              [ [ reporter_admin, designer_admin ]]
+          condition:                canUnpublish
+        publish:
+          action:                   publish
+          name:                     Publicar
+          icon:                     backend/publish_icon.png
+          credentials:              [ [ reporter_admin, designer_admin ]]
+          condition:                canPublish
+        increase_priority:
+          name:                     Subir Prioridad
+          action:                   increasePriority
+          icon:                     backend/priority_up.png
+          condition:                canEdit
+        decrease_priority:
+          name:                     Bajar Prioridad
+          action:                   decreasePriority
+          icon:                     backend/priority_down.png
+          condition:                canEdit
+        _delete:
+          condition:                canDelete
+          credentials:              [ [ reporter_admin, designer_admin ]]
+      actions:
+        _create:
+
+    create:
+      fields:
+        is_published:
+          credentials:              [ [ reporter_admin, designer_admin ]]
+      title:                        Crear Atajo
+      display:
+        "Presentación":             [title, body, _multimedia_id, comment, is_published]
+        "Vínculo":                  [open_in_new_window, _reference_type, _reference]
+<?php if (!CmsConfiguration::get('check_use_layout_per_section', false)): ?>
+        "Organización":             [_container_slotlet_id, priority]
+<?php else: ?>
+        "Organización":             [_layout_per_section]
+<?php endif; ?>
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+
+    edit:
+      fields:
+        is_published:
+          credentials:              [ [ reporter_admin, designer_admin ]]
+      title:                        Editar Atajo "%%title%%"
+      display:
+        "Presentación":             [title, body, _multimedia_id, comment, is_published]
+        "Vínculo":                  [open_in_new_window, _reference_type, _reference]
+<?php if (!CmsConfiguration::get('check_use_layout_per_section', false)): ?>
+        "Organización":             [_container_slotlet_id, priority]
+<?php else: ?>
+        "Organización":             [_layout_per_section]
+<?php endif; ?>
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+
+    show:
+      title:                        Detalle del Atajo "%%title%%"
+      display:
+        "Información General":             [title, body, multimedia, comment, is_published]
+        "Información de Auditoria":        [ created_at, created_by_user, updated_at, updated_by_user ]
+        "Previsualización":         [HTML_representation]
+<?php if (!CmsConfiguration::get('check_use_layout_per_section', false)): ?>
+        "Organización":             [container_slotlet, priority]
+<?php else: ?>
+        "Organización":             [_layout_per_section]
+<?php endif; ?>
+      actions:
+        _list:

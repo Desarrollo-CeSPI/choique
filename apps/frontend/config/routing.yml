@@ -1,0 +1,78 @@
+homepage:
+  url:   /
+  param: { module: default, action: index }
+
+events_search:
+  url:   /Eventos/*
+  param: { module: event, action: index }
+
+section_css:
+  url:   /section_css/:name
+  param: { module: section, action: stylesheet, sf_format: css }
+  
+article_preview:
+  url:    /ARTICLE_PREVIEW
+  param:  { module: article, action: printPreviewBackend }
+
+template_preview:
+  url:    /PREVIEW
+  param:  { module: template, action: preview }
+
+article_shortcut:
+  url:	  /articulo/:year/:month/:day/:name
+  param:  { module: article, action: getArticleByName }
+
+article_by_id:
+  url:    /articulo/:id
+  param:  { module: article, action: getArticleById }
+
+article_popup:
+  url:   /articulo/popup/:id
+  param: {  module: article, action: getArticleForPop }
+
+contact:
+  url:    /Contacto
+  param:  { module: contact, action: contactForm }
+
+show_all:
+  url:    /TodasLasNoticias/:page/*
+  param:  { module: article, action: showAll, page: 1 }
+
+show_gallery:
+  url:    /Galeria/:gallery_id/:article_id
+  param:  {module: article, action: showGallery }
+
+search:
+  url:    /Buscar
+  param:  { module: sfLucene, action: search }
+
+search_xml:
+  url:    /search-xml
+  param:  { module: search, action: index }
+
+sitemap:
+  url:    /MapaDelSitio
+  param:  { module: sitemap, action: index }
+
+feed:
+  url:    /rss/:section
+  param:  { module: feed, action: index, section: "NONE" }
+
+template_feed:
+  url:    /rss/list/:template
+  param:  { module: feed, action: template }
+
+template_by_article:
+  url:    /article/:articleId
+  param:  { module: article, action: templateByArticle }
+
+template_by_name:
+  url:    /:name
+  param:  { module: section, action: templateByName }
+
+rss_view_more:
+  url:    /RssVerMas/:nombre/:id/:section
+  param:  { module: rsslist, action: showAll, section: "NONE" }
+
+default:
+  url:   /:module/:action/*

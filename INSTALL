@@ -1,0 +1,194 @@
+Requerimientos
+==============
+* PHP >= 5.2 
+* pecl Imagick
+* pecl fileinfo (Ya está instalada en versiones actuales de PHP)
+
+Instalación:
+============
+Descomprimir el paquete
+Copiar en un directorio todo el proyecto. 
+Los únicos directorios visible por el web server deberán ser: 
+  - web-frontend
+  - web-backend
+Se recomienda que web-frontend sea público mientras que web-backend sea un VirtualHost 
+aparte con más restricciones de seguridad. Ver el apartado seguridad al final de
+este archivo.
+
+Configurar la Base de datos
+===========================
+MySQL
+-----
+  Configurar config/databases.yml segun corresponda
+  Configurar config/propel.ini segun corresponda
+  ################### NOTA ###########################
+  Puede usar lib/vendor/eztools/bin/ezconfigure.sh ejecutando
+
+  ./lib/vendor/eztools/bin/ezconfigure.sh
+
+  Siga los pasos indicados en pantalla
+  ####################################################
+
+POSTGRES
+--------
+Los archivos a configurar, asi como el comando de configuracion antes 
+mencionados solo funcionan con MySQL. Si se desea configurar choique con el 
+motor de base de datos Postgres entonces debe editar los archivos manualmente 
+como se indica a continuacion:
+
+config/databases.yml:
+  all:
+    propel:
+      class:      sfPropelDatabase
+      param:
+        phptype:  pgsql
+        hostspec: #HOTS#
+        database: #DB_NAME#
+        username: #DB_USER#
+        password: #DB_PASS#
+        port:     #DB_PORT#
+
+config/propel.ini
+  propel.database             =  pgsql
+  propel.database.createUrl  =   pgsql://#DB_USER#:#DB_PASS#@#DB_HOST#:#DB_PORT#/
+  propel.database.url        =   pgsql://DB_USER#:#DB_PASS#@#DB_HOST#:#DB_PORT#/#DB_NAME#
+
+
+Inicializar de la aplicación
+============================
+Configurar Choique
+------------------
+* Modificar config/app.yml: para una explicación más detallada leer README
+
+* Editar el nombre de la sesion de backend en apps/backend/config/factories.yml
+
+all:
+  storage:
+    class: sfSessionStorage
+    param:
+      session_name: UN_NOMBRE       <<< cambiar este valor
+
+
+
+Correr los siguientes comandos
+------------------------------
+
+* Antes de iniciar la instalación asegurese que los siguientes valores de
+    /etc/php5/cli/php.ini
+    /etc/php5/apache2/php.ini
+  tienen valores adecuados, por ejemplo 256MBytes
+    memory_limit = 256M
+
+* Si es la primera vez que se instala correr antes de otro comando:
+    php symfony choique-flavors-initialize
+
+*******************************************************************************
+IMPORTANTE
+*******************************************************************************
+* Si desea inicializar la base de datos, cree una base de datos vacía Correr el 
+  script php symfony propel-build-all-load backend
+  Importante:
+    * Debe estar correctamente configurado el archivo databases.yml 
+      antes descriptos.
+    * En en caso de existir ya una base de datos, la misma sera destruida. Hacer
+      un dump (volcado) de los datos en caso de querer conservarlos.
+
+* Si no desea inicializar la base de datos, unicamente correr
+    php symfony propel-build-model
+*******************************************************************************
+NOTA si al correr el comando php symfony propel-build-all-load backend da el 
+error
+ [Zend_Search_Lucene_Exception]                    
+  Index doesn't exists in the specified directory.  
+Corra el siguiente comando
+  php symfony lucene-rebuild backend
+*******************************************************************************
+
+* Acomodar los permisos sobre los directorios, ejecute el siguiente script:
+    php symfony choique-fix-perms
+
+  Importante:
+    * Es requerido disponer de al menos un estilo visual instalado para que 
+      funcione
+    * Para listar los estilos visuales utilizar 
+        php symfony choique-flavors-list
+
+* Inicializar el indice de busqueda    
+    php symfony choique-reindex
+
+Configurar Apache
+=================
+Choique es un proyecto que consta de dos aplicaciones:
+  * Frontend: el portal que ven los usuarios finales
+  * Backend: el administrador de contenidos. Esta aplicación debe ASEGURARSE
+
+Las aplicaciones symfony requieren que esté habilitado el modulo de apache:
+  mod-rewrite
+
+Para configurar las reescrituras del mod-rewrite, puede utilizarse un .htaccess, 
+ya provisto en este proyecto dentro de los directorios
+  web
+  web-backend
+sin embargo se aconseja utilizar una configuracion que no admita redefinir la 
+configuracion de apache con .htaccess, por ejemplo con el directorio web. 
+
+Un ejemplo de virtual host aconsejable sería como sigue
+
+  <VirtualHost *:80>
+    ServerName www.xxx.com
+
+    DocumentRoot /xxx/choique/web
+
+    <IfModule mod_php5.c>
+      php_admin_value open_basedir /xxx/choique/:/tmp/
+    </ifModule>
+
+    <Directory /xxx/choique>
+      AllowOverride None
+    </Directory>
+
+
+    <Directory /xxx/choique/web >
+      Options FollowSymLinks
+      AllowOverride None
+      Order allow,deny
+      allow from all
+
+      RewriteEngine On
+      RewriteRule ^$ index.html [QSA]
+      RewriteRule ^([^.]+)$ $1.html [QSA]
+      RewriteCond %{REQUEST_FILENAME} !-f
+      RewriteRule ^(.*)$ index.php [QSA,L]
+      <Files ~ "_dev\.php">
+            deny from all
+      </Files>
+    </Directory>
+
+    <LocationMatch /uploads/\.*>
+             php_admin_flag engine off
+    </LocationMatch>
+
+    ErrorLog ${APACHE_LOG_DIR}/xxx-error.log
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/xxx-access.log combined
+</VirtualHost>
+
+Lo mismo con el directorio web-backend
+
+Algunos consejos de seguridad
+-----------------------------
+* Asegurar la configuracion provista por /etc/apache2/con.d/security
+* Utilizar SSL para el backend
+* Utilizar un VirtualHost separado para web-backend
+* No permitir el uso de .htaccess ni en frontend ni en backend
+* Restringir de ser posible el acceso al backend a un conjunto de IPs/Redes
+* De ser posible cambiar el puerto en el que atiende el backend por uno no 
+  estandar
+* Deshabilitar en todo momento la ejecución de scripts bajo el directorio 
+  uploads:
+
+Acceso por primera vez
+----------------------
+El acceso al backend luego de una instalación nueva sera:
+usuario: admin
+password: admin

@@ -1,0 +1,93 @@
+.slotlet_feed 
+{
+	background:#eceded;
+
+}
+
+.slotlet_feed .title 
+{
+	display:none;
+}
+
+.slotlet_feed .content 
+{
+	margin:0px 10px;
+	padding:7px 0;
+}
+
+.slotlet_feed .content-child
+{
+	text-align:left;
+	padding:5px 0;
+    color:#555;
+	border-top:1px solid #ccc;
+}
+
+.content-child.first
+{
+	border-top:none !important;
+}
+
+
+.slotlet_feed a {
+	color: #555;
+	text-decoration:none;
+	text-transform:none;
+}
+
+.slotlet_feed a:hover {
+	color: #ccc;
+}
+
+.slotlet_feed .feed_view_more  
+{
+	background:url(../../../images/frontend/bg_bottom_home.jpg) top repeat-x;
+	display:block;
+	font-weight:bold;
+	padding: 5px 10px;
+	color:#333;
+	border-top:1px solid #ccc;
+}
+
+
+
+/* lector de noticias de CyT */
+
+.cyt_slotlet_feed .content 
+{
+	margin:0;
+	padding:0;
+}
+
+.cyt_slotlet_feed .title 
+{
+	display:none;
+}
+
+.cyt_slotlet_feed .content-child a
+{
+	text-decoration:none;
+	text-transform:none;
+	color:#555;
+	display:list-item;
+    list-style:square inside none !important;
+    padding:5px 10px;
+    text-align:left;
+
+}
+
+.cyt_slotlet_feed .content-child a:hover
+{
+	background:#eceded;
+}
+
+.cyt_slotlet_feed .feed_view_more
+{
+    display:none;
+	text-align:left;
+	text-decoration:none;
+	text-transform:none;
+	color:#555;
+}
+
+

@@ -1,0 +1,12 @@
+Section: 
+  horizontal:
+    name: horizontal
+    title: Horizontal
+    is_published: false
+    priority: 0
+  home:
+    name: home
+    title: Inicio
+    description: Página de inicio
+    is_published: true
+    priority: 0

@@ -1,0 +1,20 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Choique CMS
+    robots:       index, follow
+    description:  Choique CMS | Un manejador de contenidos a medida
+    keywords:     <?php echo CmsConfiguration::get('site_metas', 'CMS') . ", " . Section::getAllMetas() . "\n" ?>
+    language:     es_AR
+
+  stylesheets:
+    - frontend/main
+
+  javascripts:    [ common, jquery-1.4.2.min.js, jquery-ui.min.js, no-conflict.js,  /sfPrototypePlugin/js/prototype , common]
+  has_layout:     on
+  layout:         layout
+  
+  # Show a back button in the navigation toolbar of the articles
+  with_navigation: true

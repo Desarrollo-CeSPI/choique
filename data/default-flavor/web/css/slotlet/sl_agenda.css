@@ -1,0 +1,278 @@
+.sl_agenda {
+  width: 100%;
+}
+
+.sl_agenda .title {
+  padding:2px 6px;
+  font-weight: bold;
+  text-align: left;
+  color:#555;
+  vertical-align: middle;
+  margin-bottom:5px;
+  background:#eee;
+}
+
+.sl_agenda .title a {
+  color: #555;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.sl_agenda .content {
+  padding:0;
+}
+
+.sl_agenda .title .arrows {
+  margin-right: 3px;
+  float: right;
+}
+
+.sl_agenda .content .calendar-table {
+  width: 100%;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.sl_agenda .content .calendar-table a {
+  color: #000;
+  text-decoration:none;
+}
+
+.sl_agenda .content .calendar-table a:visited {
+  color: #000;
+  text-decoration:none;
+}
+
+.sl_agenda .content .calendar-table th {
+  font-weight: bold;
+  padding:2px 6px;
+  vertical-align: baseline;
+  text-transform: uppercase;
+  color:#555;
+}
+
+.sl_agenda .content .calendar-table td {
+  background-color:#eee;
+  padding:2px;
+}
+
+.sl_agenda .content .calendar-table td.event-highlighted {
+  background-color: #eee;
+}
+
+.sl_agenda .content .calendar-table td.today {
+  font-weight: bold;
+}
+
+.sl_agenda .event {
+  color:#555;
+  padding:8px 0px;
+  margin:0px 5px;
+  text-align:left;
+  text-transform:uppercase;
+}
+
+.sl_agenda .datetype {
+  color: #555;
+  font-weight: bold;
+}
+
+.sl_agenda .event .name {
+  font-weight: bold;
+}
+
+.sl_agenda .event a.more {
+  color: #000;
+}
+
+.visible {
+  display: block;
+}
+
+.calendar_title_arrow{
+  background: url("../../../images/frontend/arrow_black.png") right center no-repeat;
+  padding-right: 15px;
+}
+
+.calendar_title_arrow_up{
+  background: url("../../../images/frontend/arrow_white.png") right center no-repeat;
+  padding-right: 15px;
+}
+.sl_agenda .day-title {
+  padding:8px 5px;
+  text-align:left;
+}
+
+.more-information a{
+  color: #555;
+  font-weight: bold;
+}
+
+.more-information{
+  text-align: right;
+  margin-top: 14px;
+}
+
+.sl_agenda .rss_icon 
+{
+  float: left;
+  padding:6px;
+}
+
+.sl_agenda .hidden 
+{
+  display: none;
+}
+
+.sl_agenda .hour 
+{
+  color:#555;
+}
+
+.sl_agenda .address 
+{
+  color:#555;
+}
+
+.sl_agenda .rss_icon
+{
+  display:none;
+}
+
+.sl_agenda .calendar_year
+{
+    color:#555;
+}
+
+/* agenda home*/
+
+.sl_agenda_home {
+  width: 100%;
+}
+
+.sl_agenda_home .title a {
+  color: #555;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.sl_agenda_home .content {
+  padding:0;
+}
+
+.sl_agenda_home .title .arrows {
+  margin-right: 3px;
+  float: right;
+  margin-top:0px;
+}
+
+.sl_agenda_home .content .calendar-table {
+  width: 100%;
+  vertical-align: middle;
+  text-align: center;
+  border-bottom:3px solid #fff;
+}
+
+.sl_agenda_home .content .calendar-table a {
+  color: #000;
+  text-decoration:none;
+}
+
+.sl_agenda_home .content .calendar-table a:visited {
+  color: #000;
+  text-decoration:none;
+}
+
+.sl_agenda_home .content .calendar-table th {
+  font-weight: bold;
+  padding:2px 6px;
+  vertical-align: baseline;
+  text-transform: uppercase;
+  color:#555;
+  background:#0066A6;
+}
+
+.sl_agenda_home .content .calendar-table td {
+  background-color:#fff;
+  padding:2px;
+}
+
+.sl_agenda_home .content .calendar-table td.event-highlighted {
+  background-color: #ccc;
+}
+
+.sl_agenda_home .content .calendar-table td.today {
+  background:#0066A6;
+  font-weight: bold;
+}
+
+.sl_agenda_home .event {
+  color:#555;
+  padding:8px 0px;
+  margin:0px 5px;
+  text-align:left;
+  text-transform:uppercase;
+  border-top:1px solid #0066A6;
+}
+
+.sl_agenda_home .datetype {
+  color: #555;
+  font-weight: bold;
+}
+
+.sl_agenda_home .event .name {
+  font-weight: bold;
+}
+
+.sl_agenda_home .event a.more {
+  color: #000;
+}
+
+.sl_agenda_home .visible {
+  display: block;
+}
+
+.sl_agenda_home .calendar_title_arrow{
+  background: url("../../../images/frontend/arrow_black.png") right center no-repeat;
+  padding-right: 15px;
+}
+
+.sl_agenda_home .calendar_title_arrow_up{
+  background: url("../../../images/frontend/arrow_white.png") right center no-repeat;
+  padding-right: 15px;
+}
+.sl_agenda_home .day-title {
+  padding:8px 5px;
+  text-align:left;
+}
+
+.sl_agenda_home .more-information a{
+  color: #555;
+  font-weight: bold;
+}
+
+.sl_agenda_home .more-information{
+  text-align: right;
+  margin-top: 14px;
+}
+
+.sl_agenda_home .rss_icon 
+{
+  display:none;
+}
+
+.sl_agenda_home .hidden 
+{
+  display: none;
+}
+
+.sl_agenda_home .hour 
+{
+  color:#555;
+}
+
+.sl_agenda_home.address 
+{
+  color:#555;
+}
+

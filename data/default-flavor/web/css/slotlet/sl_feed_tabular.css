@@ -1,0 +1,66 @@
+/* lector rss la home */
+
+
+.rss_home
+{
+	margin:0; 
+}
+
+
+.rss_home .title
+{
+	color:#fff;
+	text-transform:uppercase;
+	text-align:left;
+	font-size:11px;
+	font-weight:bold;
+	padding:0;
+	margin:10px 5px;
+}
+
+
+.rss_home .feed_view_more 
+{
+	color:#fff;
+	float:right;
+	text-decoration:none;
+	text-transform:none;
+}
+
+
+
+.rss_home .rt_content_table
+{
+	background:#707173;
+	border-spacing:5px;
+	height:180px;
+}
+
+.rss_home .rt_row .rt_cell 
+{
+	vertical-align: top;
+	background:url(../../../images/frontend/bg_headernews.png) bottom repeat-x;
+	width:170px;
+	text-align:left;
+	padding:5px 10px;
+	height:72px;
+}
+
+.rss_home .rt_title
+{
+	font-size:12px;
+	font-weight:bold;
+}
+
+.rss_home .rt_heading  a
+{
+	color:#fff;
+	text-decoration:none;
+	text-transform:none;
+	
+}
+
+
+
+
+

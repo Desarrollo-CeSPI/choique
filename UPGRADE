@@ -1,0 +1,54 @@
+Para hacer un upgrade de una version anterior de choique se deben seguir los 
+siguientes pasos:
+
+* Hacer un dump de la base de datos actual por si algo sale mal
+
+* Crear una copia de los directorios:
+    web-frontend/uploads/
+    data/index/
+    flavors/
+
+* Descomprimir la nueva version de choique
+
+* Copiar los directorios copiados de la version anterior
+
+* Editar la configuracion de la base de datos del nuevo choique como se explia 
+  en INSTALL: 
+    config/database.yml
+    config/propel.ini
+
+* Correr los siguientes comandos:
+    php symfony propel-build-model
+
+* El siguiente paso es el que tratara de detectar los cambios que deben 
+  aplicarse en la base de datos. 
+  
+    1. Correr 
+          php symfony propel-build-sql-diff backend
+
+        Este comando dejará un archivo data/sql/diff.sql
+
+    2. Analizar el contenido del contenido del archivo y aplicar los cambios:
+
+        mysql -f -u<DB_USER> -p<DB_PASS> <DB_CHOIQUE> < data/sql/diff.sql
+
+    3. Volver a correr el comando (1) y verificar que el diff.sql no genere 
+       cambios. En caso de generar cambios, repetir el proceso completo
+
+* Una vez con la base de datos actualizada, restan los pasos habituales:
+    - php symfony choique-flavors-list 
+        ofrece un listado con los estilos anteriores
+
+    - php symfony choique-flavor-select <flavor>
+        selecciona el estilo indicado
+
+    - php symfony choique-fix-perms
+
+* Analizar la configuracion en config/app.yml y verificarla respecto de la version anterior
+
+* El proceso finaliza ejecutando:
+
+    php symfony cc
+    
+
+              

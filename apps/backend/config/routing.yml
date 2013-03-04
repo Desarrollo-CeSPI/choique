@@ -1,0 +1,27 @@
+homepage:
+  url:   /
+  param: { module: article, action: index }
+
+
+default_symfony:
+  url:   /symfony/:action/*
+  param: { module: default }
+
+ajax_article:
+  url:   /ajax/article/:type/:id
+  param: { module: ajax, action: getArticleById }
+
+article_shortcut:
+  url: /article/:year/:month/:day/:name
+  param: { module: ajax, action: getArticleByName }
+
+show_all:
+  url:    /todasLasNoticias
+  param:  { module: article, action: showAll }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

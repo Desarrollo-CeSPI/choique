@@ -1,0 +1,11 @@
+fillin:
+  enabled:                    true
+
+fields:
+  event_type{title}:
+    required:
+      msg:                    Es necesario ingresar un título para el tipo de evento
+    sfPropelUniqueValidator:
+      class:                  EventType
+      column:                 title
+      unique_error:           El título ingresado ya existe

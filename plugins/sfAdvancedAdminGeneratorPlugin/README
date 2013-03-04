@@ -1,0 +1,129 @@
+= sfAdvancedAdminGenerator plug-in =
+
+The `sfAdvancedAdminGenerator` provide advanced functionalities for admin generator.
+
+- Distinct configurations between create and edit action
+
+- Add a 'show' action that provide a view for the object (no edit)
+
+- Change the action for the hyperlink on the list
+
+== Installation ==
+
+  * Install the plug-in
+
+    {{{
+      symfony plugin-install http://plugins.symfony-project.com/sfAdvancedAdminGeneratorPlugin
+    }}}
+
+  * change the generator in your `generator.yml`
+
+    {{{
+generator:
+  class:              sfAdvancedAdminGenerator
+  param:
+    model_class:      Book
+    theme:            default
+    
+    list:
+      click_action: show ## Change the default hyperlink
+      multisort: true ## Enabling the multisort
+      sort:  [[authorname, desc], [title, asc], [authorlastname, asc]] #Default sort
+      object_actions:
+        _edit:
+        _show: ## Show the object (no edit)
+      fields:
+        authorname:               
+          name:                  'Author Name'
+          join_fields:           [BookPeer::AUTHOR_ID, AuthorPeer::ID]
+          sort_column:           [AuthorPeer::NAME]
+
+        authorlastname:               
+          name:                  'Author Last Name'
+          sort_column:           [AuthorPeer::LAST_NAME]
+
+    edit:
+      title: Edit a book
+      display: [author_id, title]
+      fields:
+        author_id: {params: disabled=true} ## Can't edit the author of an existing book
+      actions:
+        _list:
+        _save:
+
+    create:
+      title: Create a new book
+      actions:
+        _list:
+        _save:
+        _save_and_add: ## allow to add an other book after a creatio
+    
+    show:
+      title: View a book
+      display: [author_id, title]
+    }}}
+
+  * Clear the cache
+
+    {{{
+      symfony cc
+    }}}
+
+  * You're done.
+
+== Compatibility with default symfony generator ==
+
+If no 'create' section is present in your configuration, the generator act exactly like the default generator (create action use edit configuration)
+
+If no 'click_action' option is present in 'list' section, the hyperlink link to edit action 
+
+== Configuration ==
+
+The configuration for the 'create' and 'show' sections are the same that the symfony default admin generator.
+
+[http://www.symfony-project.com/book/1_0/14-Generators Click for more information] 
+
+== Bugs or features requests ==
+
+Please, submit any bugs or features requests on the [http://www.symfony-project.com/forum/index.php/t/9280/ forum]
+
+== Changelog ==
+
+=== 2007-10-16 | 0.1.0 ===
+
+ * romain: plug-in added to symfony
+
+=== 2007-10-23 | 0.1.1 ===
+
+ * romain: add 'show' action
+ * romain: add 'click_action' in the 'list' section
+
+=== 2007-10-29 | 0.1.2 ===
+
+ * romain: BugFix : Missing !ShowSuccess.php file in the package
+
+=== 2007-11-16 | 0.1.3 ===
+
+ * romain: BugFix  : Handle failed form validation with create
+ * romain: Feature : Add flash notice on list action
+
+ === 2008-03-03 | 0.1.4  ===
+
+ * shouze: BugFix : minor typo correction in _list_td_tabular.php
+ * shouze: Feature : object_input_auto_complete_tag() added, input auto completion for objects
+ * shouze: Feature : object_select_map_tag() added, sort of mapping of enum type fields 
+
+ === 2008-03-06 | 0.1.5  ===
+
+ * Dannyrulez: Feature : multi-sort list added, http://trac.symfony-project.com/ticket/2092 (Credits to Leon.van.der.Ree)
+
+ === 2008-05-03 | 0.1.6  ===
+
+ * h0nIg: BugFix : <?php if ($actionName == '_delete') continue ?> not needed in _show_actions.php
+ * h0nIg: BugFix : fixed tgz format (1.5 is not .tgz!)
+ * h0nIg: BugFix : fixed broken package.xml
+
+ === 2008-05-04 | 0.1.7  ===
+
+ * h0nIg: BugFix : removed delete action in create
+ * h0nIg: BugFix : fixed remove multisort column

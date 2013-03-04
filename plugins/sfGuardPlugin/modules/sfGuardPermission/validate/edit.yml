@@ -1,0 +1,16 @@
+methods:
+  post:
+    - "sf_guard_permission{name}"
+
+names:
+  sf_guard_permission{name}:
+    required:     yes
+    required_msg: Por favor ingrese un nombre para el permiso
+    validators:   nameUniqueValidator
+
+nameUniqueValidator: 
+  class:          sfPropelUniqueValidator
+  param:
+    class:        sfGuardPermission
+    column:       name
+    unique_error: El nombre de permiso ya existe

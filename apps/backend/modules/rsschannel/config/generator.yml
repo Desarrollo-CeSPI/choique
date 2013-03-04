@@ -1,0 +1,69 @@
+generator:
+  class:                                        sfAdvancedAdminGenerator
+  param:
+    model_class:                                RssChannel
+    theme:                                      default_mod
+    css:                                        backend/admin_theme_black
+
+    fields:
+      title:
+        name:                                   Titulo
+      link:
+        name:                                   Link
+        help:                                   Debe ingresar una direccion valida, del estilo http://www.my-domain.com/rss.xml
+      is_active:
+        name:                                   Activo
+      feeds:
+        name:                                   Ejemplo
+      created_by_name:
+        name:                                   Creado por
+      created_at:
+        name:                                   Creado el
+      updated_by_name:
+        name:                                   Actualizado por
+      updated_at:
+        name:                                   Actualizado el
+
+    list:
+      title:                                    Listado de canales externos RSS
+      display:                                  [title, link, is_active]
+      max_per_page:                             25
+      object_actions:
+        _show:
+        _edit:
+          condition:                            canEdit
+        _delete:
+          credentials:      [[ reporter_admin, designer_admin ]]
+          condition:                            canDelete
+      actions:
+        _create:
+
+    create:
+      title:                                    Crear un canal externo RSS
+      display:
+        Canal:                                  [title, link, _is_active]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+        _save_and_add:
+
+    edit:
+      title:                                    Editar un canal externo RSS
+      display:
+        Canal:                                  [title, link, is_active]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+
+    show:
+      title:                          Visualizando canal RSS "%%title%%"
+      display:                                  
+        Información General:          [title, link, is_active ]
+        Información de Auditoria:     [ created_at, created_by_name, updated_at, updated_by_name ]
+        Previsualización:             [ _feeds ]
+      actions:
+        _list:

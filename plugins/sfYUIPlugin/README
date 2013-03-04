@@ -1,0 +1,22 @@
+= sfYUIPlugin =
+
+`sfYUIPlugin` contains the Yahoo! UI javascript libraries, plus some basic Symfony helpers. See helper docblocks for usage examples.
+
+Currently, this branch of sfYUIPlugin is using version 2.4.0 of Yahoo! UI; no additional helpers have been created at this point.
+
+== Installation ==
+
+Due to the size of the YUI framework, installation is available via SVN only. Change into your project root and issue the following command:
+
+{{{
+  svn export http://svn.symfony-project.org/plugins/sfYUIPlugin/branches/1.0 ./plugins/sfYUIPlugin
+  ln -s ../plugins/sfYUIPlugin/web/ web/sfYUIPlugin
+}}}
+
+Clear your cache..
+
+{{{
+  symfony cc
+}}}
+
+.. and you're done!

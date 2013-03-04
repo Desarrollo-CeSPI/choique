@@ -1,0 +1,115 @@
+generator:
+  class:                        sfAdvancedAdminGenerator
+  param:
+    model_class:                ArticleGroup
+    theme:                      default_mod
+    css:                        backend/admin_theme_black
+
+    filters:
+      fields:
+        name:
+          help: Utilice * como wildcard
+
+    fields:
+      name:
+        name:                   Nombre
+      description:
+        name:                   Descripción
+      comment:
+        name:                   Comentario
+      visible_items:
+        name:                   Cantidad de elementos visibles
+      is_deleted:
+        name:                   Borrada
+      is_published:
+        name:                   Publicada
+      updated_at:
+        name:                       Última actualización
+        params:                     date_format="dd/MM/yyyy H:mm"
+      created_at:
+        name:                       Creado el
+        params:                     date_format="dd/MM/yyyy H:mm"
+      published_at:
+        name:                   Fecha de publicación
+      article_gallery:
+          name:                 Artículos
+      current_status:
+          name:                 Estado
+      created_by_user:
+        name:           Creado por
+      updated_by_user:
+        name:           Actualizado por
+
+
+    list:
+      fields:
+        description_excerpt:
+          name:                 Descripción
+          help:                 Se muestran solo los primeros 40 caracteres
+      sort:                     [created_at, desc]
+      title:                    Listado de galerías de artículos
+      display:                  [name, description_excerpt, visible_items, created_by_user, updated_at, created_at, current_status]
+      filters:                  [name, is_published]
+      object_actions:
+        _show:
+        _edit:
+          condition:            canEdit
+        unpublish:
+          name:                 Despublicar
+          action:               unpublish
+          credentials:          [[ reporter_admin, designer_admin ]]
+          condition:            canUnpublish
+        publish:
+          name:                 Publicar
+          action:               publish
+          icon:                 backend/publish_icon.png
+          credentials:          [[ reporter_admin, designer_admin ]]
+          condition:            canPublish
+        edit_priorities:
+          name:                 Modificar orden de artículos
+          action:               editPriorities
+          icon:                 backend/section_priorities.png
+          condition:            canEdit
+        _delete:
+          credentials:          [deleteGallery]
+          credentials:          [[ reporter_admin, designer_admin ]]
+          condition:            canDelete
+      actions:
+        _create:
+
+    create:
+      title:                    Crear una nueva galería de artículos
+      fields:
+        is_published:
+          credentials:          [[ reporter_admin, designer_admin ]]
+      display:
+        Información general:      [name, description, comment, visible_items, is_published]
+        Artículos:                [_article_gallery]
+      actions:
+        _list:
+        _save_and_list:
+        _save:
+          name:                 Guardar y seguir editando
+
+    edit:
+      title:                    Editar "%%name%%"
+      fields:
+        is_published:
+          credentials:          [[ reporter_admin, designer_admin ]]
+      display:
+        Información general:    [name, description, comment, visible_items, is_published]
+        Artículos:              [_article_gallery]
+      actions:
+        _list:
+        _save_and_list:
+        _save:
+          name:                 Guardar y seguir editando
+
+    show:
+      title:                    Previsualización de la galería de artículos "%%name%%"
+      display:
+        Información general:      [name, description, comment, visible_items, current_status, is_published]
+        Información de Auditoria: [ created_by_user, created_at, updated_by_user, updated_at]
+        Artículos:                [_article_gallery_show]
+      actions:
+        _list:

@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file orginal="global" source-language="en_US" datatype="plaintext">
+    <body>
+      <trans-unit id="1">
+        <source>Category's descriptive name</source>
+        <target>Nombre descriptivo para la categoría</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Category description</source>
+        <target>Descripción de la categoría</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Category list</source>
+        <target>Listado de categorías</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Create category</source>
+        <target>Crear categoría</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Data</source>
+        <target>Datos</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Internal documentation</source>
+        <target>Documentación interna</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Edit "%%name%%"</source>
+        <target>Editar "%%name%%"</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Show "%%name%%"</source>
+        <target>Ver "%%name%%"</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

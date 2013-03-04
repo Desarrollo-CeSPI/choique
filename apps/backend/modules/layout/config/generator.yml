@@ -1,0 +1,81 @@
+generator:
+  class:              sfAdvancedAdminGenerator
+  param:
+    model_class:      Layout
+    theme:            default_mod
+    css:              backend/admin_theme_black
+
+    fields:
+      name:
+        name: Nombre
+      article_layout:
+        name: Distribución para artículos
+      template_layout:
+        name: Distribución para portadas
+      is_default:
+        name: Distribución por defecto
+      created_at:
+        name: Fecha de creación
+      updated_at:
+        name: Fecha de última actualización
+      used_in:
+        name: En uso en
+      virtual_section_id:
+        name: Utilizar para
+        help: Seleccione un valor en este campo si desea que esta distribución se utilice en alguna sección virtual en particular.
+      virtual_section_name:
+        name: Utilizar para
+      virtual_section:
+        name: Utilizar para
+      section:
+        name: En uso en
+      virtual_section_id_filter:
+        name: Utilizar para
+
+    list:
+      title:   Listado de distribuciones
+      sort:    [id, desc]
+      filters: [ name, _virtual_section_id_filter, _section ]
+      display: [name, virtual_section_name, _used_in, is_default, created_at]
+      object_actions:
+        _edit:
+        editor_article:
+          name: Editar distribución para artículos
+          action: editArticleLayout
+          icon: backend/layout-design-article.png
+#        editor_template:
+#          name: Editar distribución para portadas
+#          action: editTemplateLayout
+#          icon: backend/layout-design-template.png
+        set_default:
+          name: Convertir en distribución por defecto
+          condition: canBeSetAsDefault
+          icon: backend/star.png
+          action: setDefault
+        duplicate:
+          name: Crear copia de esta distribución
+          icon: backend/copy.png
+          action: duplicate
+        _delete:
+          condition: canBeDeleted
+      actions:
+        _create:
+          name: Crear nueva distribución
+
+    create:
+      title: Crear nueva distribución
+      display: [name, _virtual_section_id]
+      actions:
+        _list:
+        _save_and_list:
+        _save:
+          name: Guardar y seguir editando
+
+    edit:
+      title: Editar distribución "%%name%%"
+      display: [name, _virtual_section_id]
+      actions:
+        _list:
+        _save_and_list:
+        _save:
+          name: Guardar y seguir editando

@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file orginal="global" source-language="en_US" datatype="plaintext">
+    <body>
+      <trans-unit id="1">
+        <source>Article</source>
+        <target>Artículo</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>News</source>
+        <target>Novedad</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Institutional</source>
+        <target>Noticia</target>
+      </trans-unit>      
+    </body>
+  </file>
+</xliff>
+

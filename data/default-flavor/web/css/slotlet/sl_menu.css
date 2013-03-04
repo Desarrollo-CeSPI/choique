@@ -1,0 +1,57 @@
+#top_menu table
+{
+  border-collapse: separate;
+  border-spacing: 0 !important;
+  border-style: none !important;
+  border:0 !important;
+  cellpadding:0;
+  cellspacing:0;
+}
+
+#top_menu td
+{
+  border-collapse: separate;
+  border-spacing: 0 !important;
+  border-style: none !important;
+  border:0 !important;
+}
+
+
+#top_menu tr
+{
+  border-collapse: collapse;
+  border-spacing: 0 !important;
+  border-style: none !important;
+}
+
+
+.slotlet.slotlet_horizontal_menu
+{
+  padding: 0;
+  margin:0;
+  background:#D6D5C4;
+}
+
+.slotlet.slotlet_horizontal_menu a
+{
+  float:left;
+  color:#4E5426 !important;
+  font-weight:bold;
+  text-decoration:none;
+  text-transform:uppercase;
+  text-align:center;
+  padding:7px;
+
+}
+
+.slotlet.slotlet_horizontal_menu a:hover
+{
+  color: #ccc;
+}
+
+.slotlet.slotlet_horizontal_menu .selected
+{
+  color:#D6D5C4 !important;
+  background:#999B13;
+}
+

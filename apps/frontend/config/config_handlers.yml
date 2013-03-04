@@ -1,0 +1,8 @@
+config/choique.yml:
+  class: choiqueConfigHandler
+
+flavors/*/config/images.yml:
+  class: choiqueImagesConfigHandler
+
+modules/*/config/view.yml:
+  class: choiqueViewConfigHandler

@@ -1,0 +1,22 @@
+sfGuardPermission:
+  reporter_admin:
+    name: reporter_admin
+    description:   Periodista privilegiado
+  reporter:
+    name: reporter
+    description:   Periodista
+  designer_admin:
+    name: designer_admin
+    description:   Diseñador privilegiado
+  designer:
+    name: designer
+    description:  Diseñador 
+
+sfGuardUser:
+  admin:
+    name: Administrador de portal
+    username: admin
+    password: admin
+    is_active: true
+    is_super_admin: true
+

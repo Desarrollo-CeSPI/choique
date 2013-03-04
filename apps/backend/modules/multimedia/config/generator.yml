@@ -1,0 +1,187 @@
+generator:
+  class:                                        sfAdvancedAdminGenerator
+  param:
+    model_class:                                Multimedia
+    theme:                                      default_mod
+    css:                                        backend/admin_theme_black
+    
+    fields:
+      name:
+        name:                                   Nombre
+        help:                                   Nombre mediante el cual se referenciará el archivo multimedia
+      list_name:
+        name:                                   Nombre
+        help:                                   Nombre mediante el cual se referenciará el archivo multimedia
+      title:
+        name:                                   Título
+      description:
+        name:                                   Descripción
+        params:                                 size=60x10
+        help:                                   Su completado favorece a la accesibilidad de su sitio.
+      comment:
+        name:                                   Comentario
+        help:                                   Para uso interno
+        params:                                 size=60x10
+      small_uri:
+        name:                                   Archivo tamaño pequeño
+        type:                                   admin_input_file_tag
+      medium_uri:
+        name:                                   Archivo tamaño medio
+        type:                                   admin_input_file_tag
+      large_uri:
+        name:                                   Archivo tamaño completo
+        type:                                   admin_input_file_tag
+      author:
+        name:                                   Autor
+      uploaded_by:
+        name:                                   Subido por
+      type:
+        name:                                   Tipo
+      language:
+        name:                                   Idioma
+      duration:
+        name:                                   Duración
+      location:
+        name:                                   Lugar de toma
+      subject:
+        name:                                   Protagonista
+      topics:
+        name:                                   Temas tratados
+      height:
+        name:                                   Alto
+      width:
+        name:                                   Ancho
+      mime_type:
+        name:                                   Tipo MIME del archivo
+      times_seen:
+        name:                                   Veces visto
+      rating:
+        name:                                   Puntuación
+      times_rated:
+        name:                                   Veces puntuado
+      times_downloaded:
+        name:                                   Veces descargado
+      multimedia_tag:
+        name:                                   Categorías
+        type:                                   admin_double_list
+        params:                                 through_class=MultimediaTag style="width:350px;"
+      preview:
+        name:                                   Vista previa
+      references:
+        name:                                   Referenciado en
+      supported_types:
+        name:                                   Tipos permitidos
+      gallery_previsualization:
+        name:                                   Previsualización de galería
+      medium_previsualization:
+        name:                                   Previsualización de tamaño medio
+      flv_params:
+        name:                                   Parámetros del reproductor
+      is_external:
+        name:                                   Es contenido de un sitio externo
+      external_uri:
+        name:                                   Fuente del contenido externo
+        help:                                   Código para insertar el contenido externo, tal cual lo obtuvo del sitio que lo provee
+      uses_a_player:
+        name:                                   Utiliza un reproductor?
+      player_id:
+        name:                                   Reproductor
+      longdesc_uri:
+        name:                                   Descripción completa
+        help:                                   Archivo de texto (.txt) con la descripción completa de las imágenes (ayuda a la accesibilidad del sitio)
+        type:                                   admin_input_file_tag
+      longdesc_download_link:
+        name:                                   Descripción completa del archivo multimedia
+      uploaded_by_user: 
+        name:                                   Subido por
+      updated_by_user: 
+        name:                                   Actualizado por
+      updated_at:
+        name:                       Última actualización
+        params:                     date_format="dd/MM/yyyy H:mm"
+      created_at:
+        name:                       Creado el
+        params:                     date_format="dd/MM/yyyy H:mm"
+
+
+    filters:
+      fields:
+        title:
+          help: Utilice * como wildcard
+        name:
+          help: Utilice * como wildcard
+      
+        
+    list:
+      sort:                                     [created_at , desc]
+      title:                                    Listado de contenidos multimediales
+      display:                                  [title, _list_name, uploaded_by_user, description, comment, _preview, updated_at, created_at]
+      filters:                                  [title, name]
+      max_per_page:                             25
+      object_actions:
+        _show:
+        download:
+          action:                               download
+          icon:                                 backend/disk.png
+          name:                                 Descargar multimedia
+        _edit:
+          condition:                            canEdit
+        _delete:
+          credentials:                          [[ reporter_admin, designer_admin ]]
+          condition:                            canDelete
+      actions:
+        _create:
+
+    create:
+      title:                                    Crear un nuevo contenido multimedial
+      display:
+        Información general:                    [title, name, description, comment, copyright, location, subject, topics, _language, duration]
+<?php if (CmsConfiguration::get('check_use_tags', true)): ?>
+        Categorías:                             [multimedia_tag]
+<?php endif; ?>
+        Archivos:                               [_is_external, _supported_types, large_uri, medium_uri, small_uri, longdesc_uri, external_uri, _uses_a_player, _player_id]
+        Parámetros:                             [flv_params]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+        _save_and_add:
+
+    edit:
+      title:                                    Editar contenido multimedial "%%title%%"
+      display:
+<?php if (CmsConfiguration::get('check_use_multimedia_metadata', true)): ?>
+        Información general:                    [title, _name, description, comment, copyright, location, subject, topics, _language, duration]
+<?php else: ?>
+        Información general:                    [title, _name, description, comment]
+<?php endif; ?>
+<?php if (CmsConfiguration::get('check_use_tags', true)): ?>
+        Categorías:                             [multimedia_tag]
+<?php endif; ?>
+        Archivos:                               [_is_external, _supported_types, large_uri, medium_uri, small_uri, external_uri, longdesc_uri, _uses_a_player, _player_id]
+        Parámetros:                             [flv_params]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+          name:                                 guardar
+        _save_and_add:
+
+    show:
+      fields:
+        flv_params:
+          help: ""
+      title:                                    Previsualización del contenido multimedial "%%title%%"
+      display:
+        Información general:                    [title, description, comment, author, copyright, location, subject, topics, language, duration, _references, longdesc_download_link]
+        Información de Auditoria:               [ uploaded_by_user, created_at, updated_by_user, updated_at ]
+        Parámetros:                             [flv_params]
+        Previsualización del tamaño medio:      [_medium_previsualization]
+        Previsualización galería:               [_gallery_previsualization]
+      actions:
+        _list:
+        _download:
+          action:                               download
+          title:                                Descargar multimedia

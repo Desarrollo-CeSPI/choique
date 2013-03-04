@@ -1,0 +1,14 @@
+.path
+{
+  text-align: left;
+  padding-bottom:8px;
+  font-size:11px;
+  padding: 10px;
+  border-bottom: 1px #ccc solid;
+}
+
+.path a
+{
+  text-decoration: none;
+  color:#555 !importatnt;
+}

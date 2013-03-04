@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file orginal="global" source-language="en_US" datatype="plaintext">
+    <body>
+      <trans-unit id="1">
+        <source>Multimedia list</source>
+        <target>Listado de archivos multimedia</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Previsualization</source>
+        <target>Previsualización</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Upload a multimedia file</source>
+        <target>Subir archivo multimedia</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Place:</source>
+        <target>Lugar de toma:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Subject:</source>
+        <target>Protagonista:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Topics:</source>
+        <target>Temas tratados:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Language:</source>
+        <target>Idioma:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Duration (if it's a video):</source>
+        <target>Duración (si es un video):</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Multimedia file in large size:</source>
+        <target>Archivo multimedia en tamaño completo:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Multimedia file in medium size:</source>
+        <target>Archivo multimedia en tamaño medio:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Multimedia file in small size:</source>
+        <target>Archivo multimedia en tamaño reducido:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Data</source>
+        <target>Datos</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Medium size previsualization</source>
+        <target>Previsualización de tamaño medio</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Medium previsualization:</source>
+        <target>Previsualización de tamaño medio:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Gallery previsualization</source>
+        <target>Previsualización de galería</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Gallery previsualization:</source>
+        <target>Previsualización de galería:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Times rated:</source>
+        <target>Cantidad de veces vistas:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Rating:</source>
+        <target>Puntuación:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Times downloaded:</source>
+        <target>Cantidad de descargas:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Times seen:</source>
+        <target>Cantidad de veces vista:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Reference name for multimedia file</source>
+        <target>Nombre mediante el cual se referenciará el archivo multimedia</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>%%name%% (previsualization)</source>
+        <target>%%name%% (previsualización)</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

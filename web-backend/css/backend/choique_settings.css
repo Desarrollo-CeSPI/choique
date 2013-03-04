@@ -1,0 +1,15 @@
+#choique_settings
+{
+  margin: 0 25% 0 25%;
+  padding: 3px 10px;
+  
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border-color: #EED3D7;
+}
+
+#choique_settings ul
+{
+  padding: 0 15px;
+  margin: 5px;
+}

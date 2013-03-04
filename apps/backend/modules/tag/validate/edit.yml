@@ -1,0 +1,11 @@
+methods:                        [post]
+fields:
+  tag{name}:
+    required:
+      msg:                      Es necesario ingresar el nombre de la Categoría
+    sfPropelUniqueValidator:
+      class:                    Tag
+      column:                   name
+      unique_error:             El nombre que intenta agregar para la Categoría ya existe!
+fillin:
+  enabled:                      true

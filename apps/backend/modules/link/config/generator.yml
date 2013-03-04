@@ -1,0 +1,75 @@
+generator:
+  class:                      sfAdvancedAdminGenerator
+  param:
+    model_class:              Link
+    theme:                    default_mod
+    css:                      backend/admin_theme_black
+
+    fields:
+      created_by_user:
+        name:   Creado por
+      name:
+        name:                 Nombre
+        required: true
+      uri:
+        name:                 Imagen descriptiva
+        type:                 admin_input_file_tag
+        params:               include_remove=true
+      url:
+        name:                 Dirección
+        required: true
+      html_representation:
+        name:                 Previsualización
+      updated_by_user:
+        name:                       Actualizado por
+      created_at:
+        name:                       Creado el
+      updated_at:
+        name:                       Actualizado el
+
+    list:
+      sort:                   [id, desc]
+      title:                  Listado de vínculos
+      display:                [=name, _html_representation, url, created_by_user]
+      filters:                false
+      max_per_page:           25
+      object_actions:
+        _show:
+        _edit:
+          condition: canEdit
+        _delete:
+          credentials:  [ [ reporter_admin, designer_admin ]]
+          condition:          canDelete
+      actions:
+        _create:
+
+    create:
+      title:                  Crear vínculo
+      fields:
+        url:
+          params:             value=http://
+      display:                [name, uri, url]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+
+    edit:
+      title:                  Editar vínculo "%%name%%"
+      display:                [name, uri, url]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+          name:               guardar
+
+    show:
+      title:                  Previsualización del vínculo "%%name%%"
+      display:
+        "Información General:              [name, url]
+        "Información de Auditoria":        [ created_at, created_by_user, updated_at, updated_by_user ]
+        Previsualización:                  [_html_representation]
+      actions:
+        _list:

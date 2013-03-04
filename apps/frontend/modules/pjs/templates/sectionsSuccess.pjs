@@ -1,0 +1,57 @@
+<?php use_helper("Asset", "Javascript") ?>
+
+var currentSection = "";
+var openSection    = "<?php echo $openSection ?>";
+
+Event.observe(window, "load", function() {
+  if (openSection != "" && $(openSection + "-children"))
+    $(openSection + "-children").removeClassName("hidden");
+});
+
+function showOrCollapseSection(sectionName)
+{
+  if (sectionName == openSection)
+    return false;
+
+  if (currentSection == sectionName) {
+    collapseSection(sectionName);
+  } else {
+    if ((currentSection != "") && ($(currentSection + "-children")))
+      collapseSection(currentSection);
+    showSection(sectionName);
+  }
+
+  return false;
+}
+
+function showSection(sectionName) {
+  var section  = $(sectionName);
+  var children = $(sectionName + "-children");
+  var arrow    = $(sectionName + "-arrow");
+  var anchor   = $(sectionName + "-anchor");
+  var path     = "<?php echo image_path('frontend/arrow_black.png', true) ?>";
+
+  section.toggleClassName("selected");
+  anchor.toggleClassName("selected");
+  arrow.src = path;
+  arrow.alt = "-";
+  children.toggleClassName("hidden");
+
+  currentSection = sectionName;
+}
+
+function collapseSection(sectionName) {
+  var section  = $(sectionName);
+  var children = $(sectionName + "-children");
+  var anchor   = $(sectionName + "-anchor");
+  var arrow    = $(sectionName + "-arrow");
+  var path     = "<?php echo image_path('frontend/arrow_white.png', true) ?>";
+
+  section.toggleClassName("selected");
+  anchor.toggleClassName("selected");
+  arrow.src = path;
+  arrow.alt = "+";
+  children.toggleClassName("hidden");
+
+  currentSection = "";
+}

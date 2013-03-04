@@ -1,0 +1,263 @@
+.css-editor-container
+{
+  text-align: center !important;
+}
+
+table.css-editor
+{
+  margin: 0 auto !important;
+  width: 100%;
+  border: 1px solid #ccc;
+  background: #eee;
+  text-align: left;
+}
+
+.css-editor #navigator-container
+{
+  width: 20%;
+  vertical-align: top;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+.css-editor #navigator
+{
+  font-family: Monaco, monospace;
+  font-size: 100%;
+  padding: 1em;
+}
+
+.css-editor #navigator li
+{
+  list-style: none;
+}
+
+.css-editor #navigator li a
+{
+  padding: 3px 3px 3px 20px;
+}
+
+.css-editor #navigator .file
+{
+  background: url('../../images/backend/document-text.png') no-repeat left center transparent;
+}
+
+.css-editor #navigator .dir
+{
+  background: url('../../images/backend/folder-horizontal.png') no-repeat left center transparent;
+}
+
+.css-editor #navigator .file a
+{
+  color: #383;
+}
+
+.css-editor #navigator .dir a
+{
+  color: #00a;
+}
+
+.css-editor #navigator a
+{
+  display: block;
+  color: #000;
+}
+
+.css-editor #navigator li:hover
+{
+  background-color: #eee;
+}
+
+.css-editor #editor-container
+{
+  vertical-align: top;
+  border: 1px solid #ccc;
+  background: #333;
+}
+
+.editor-loader
+{
+  background: url('../../images/common/indicator.gif') no-repeat 1em center #eee;
+  padding: 1em 3em;
+  border: 1px solid #ccc;
+  font-size: 125%;
+  color: #666;
+}
+
+#editor-loader img
+{
+  vertical-align: middle;
+  margin-right: 1em;
+}
+
+.css-editor #editor .editor-actions
+{
+  background: #eee;
+  border: 1px outset #ddd;
+  padding: 1px;
+}
+
+.css-editor #editor .editor-actions .editor-action
+{
+  font-family: Trebuchet MS, Arial, Verdana, sans-serif;
+  font-size: 11px;
+  color: #000;
+  vertical-align: middle;
+  padding: 6px 6px 6px 24px;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-position: 3px center;
+  display: inline-block;
+}
+
+.css-editor #editor .editor-actions .editor-action:hover
+{
+  text-decoration: none;
+  cursor: hand;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.css-editor #editor .editor-actions .editor-action-discard
+{
+  background-image: url('../../images/backend/document-shred.png');
+}
+
+.css-editor #editor .editor-actions .editor-action-delete
+{
+  background-image: url('../../sf/sf_admin/images/delete.png');
+}
+
+.css-editor #editor .editor-actions .editor-action-save
+{
+  background-image: url('../../images/backend/disk.png');
+}
+
+.editor-error
+{
+  font-size: 125%;
+  background: url('../../images/backend/exclamation.png') no-repeat 1em center #f30;
+  border: 1px solid #600;
+  color: #fff;
+  padding: 1em 3em;
+}
+
+.editor-notice
+{
+  font-size: 125%;
+  background: url('../../images/backend/tick.png') no-repeat 1em center #92c703;
+  border: 1px solid #618500;
+  color: #fff;
+  padding: 1em 3em;
+}
+
+.css-editor .base-path
+{
+  font-size: 100%;
+  font-family: Monaco, monospace;
+  color: #aaa;
+}
+
+.css-editor .editor-actions .base-path
+{
+  padding: 6px;
+  float: right;
+}
+
+.css-editor #navigator-container,
+.css-editor #navigator
+{
+  height: 375px !important;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.css-editor .CodeMirror-scroll
+{
+  height: 400px !important;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.css-editor .CodeMirror-scroll
+{
+  background: #fff;
+}
+
+.editor-note
+{
+  margin: 1em;
+  padding: .5em 3em;
+  color: #999;
+  font-size: 100%;
+  background: url('../../images/backend/help.png') no-repeat left center #fff;
+}
+
+#sf_admin_container .css-editor-container .sf_admin_actions li a
+{
+  display: inline-block;
+  padding: 3px 6px;
+  border: 1px solid #174805;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+#sf_admin_container .css-editor-container .sf_admin_actions li a:hover
+{
+  text-decoration: none;
+}
+
+.css-editor .initial-notice
+{
+  padding: 1em 3em;
+  font-size: 100%;
+  color: #fff;
+  border: 1px solid #555;
+  background: url('../../images/backend/help.png') no-repeat 1em center #666;
+}
+
+.css-editor-container a.close-btn
+{
+  float: right;
+  color: #fff;
+  font-size: 90%;
+}
+
+.css-editor-container .upload-container
+{
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.css-editor-container .upload-container label
+{
+  padding: .5em !important;
+  margin-right: 1em;
+  width: auto !important;
+}
+
+.css-editor-container .refresh
+{
+  float: right;
+}
+
+#editor_uploader
+{
+  text-align: center;
+  padding: .25em 1em;
+}
+
+.css-editor-container #upload_form .uploadifyQueueItem
+{
+  width: 80% !important;
+  margin: 1px auto;
+}
+
+#navigator-loader
+{
+  width: 12.75%;
+  margin: 0 auto;
+  position: absolute;
+}

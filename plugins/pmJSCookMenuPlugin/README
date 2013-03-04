@@ -1,0 +1,43 @@
+= pmJSCookMenuPlugin =
+
+pmJSCookMenuPlugin is a wrapper for JSCookMenu: http://jscook.yuanheng.org/JSCookMenu/index.html
+
+== Installation ==
+
+  * Install from repositories:
+    {{{
+      $ svn export http://svn.symfony-project.com/plugins/pmJSCookMenuPlugin
+    }}}
+
+  * Generate the menu (in yml or array):
+    {{{
+      menu1:
+        title: Start here
+        icon: menu.png #this is found in web/images
+        submenu: # a submenu for menu1
+          menu1.1:
+            title: go to google
+            url: http://www.google.com
+          menu1.2:
+            title: go to yahoo
+            description: another search engine
+            url: http://www.yahoo.com
+            target: blank
+      menu2:
+        title: some actions
+        submenu:
+          menu2.1:
+            title: Create an object
+            credentials: [some, credentials]
+            url: module/actions
+          _cmSplit:
+          menu2.2:
+            title: another menu
+            url: module/actions
+    }}}
+
+  * Display the menu (in a template):
+    {{{
+      <?php use_helper('JSCookMenu') ?>
+      <?php echo jscookmenu_from_yml('yml_file.yml', 'menu_name', 'orientation', 'theme') ?>
+    }}}

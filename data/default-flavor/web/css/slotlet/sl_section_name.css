@@ -1,0 +1,9 @@
+.section_name_slotlet
+{
+  padding: 32px 6px 0 6px;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin: 0 0 -4px 0;
+  text-align: left;
+  background:#555 url("../../../images/frontend/back_agenda.jpg") no-repeat;
+}

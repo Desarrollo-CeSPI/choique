@@ -1,0 +1,12 @@
+.svn
+/web/*_dev.php
+/web/uploads
+/web/uploads/*
+/cache/*
+/log/*
+/config/databases.yml*
+/config/propel.ini*
+/apps/frontend/config/mail_config.yml
+/apps/frontend/config/mailer.yml
+/data/index
+/data/index/*

@@ -1,0 +1,29 @@
+fillin:
+  enabled:                    true
+
+fields:
+  article{name}:
+    required:
+      msg:                    Es necesario ingresar un nombre para el nuevo artículo
+    sfPropelUniqueValidator:
+      class:                  Article
+      column:                 name
+      unique_error:           El nombre del artículo ya existe
+
+  article{title}:
+    required:
+      msg:                    Es necesario ingresar un título para el nuevo artículo
+
+  article{section_id}:
+    required:
+      msg:                    Es necesario seleccionar una sección para el nuevo artículo
+
+  body:
+    required:
+      msg:                    Es necesario ingresar un cuerpo para el nuevo artículo
+    cmsArticleRelationsValidator:
+      msg:                    Alguno de los elementos relacionados no existe. Verifique sus relaciones
+
+  article{external_reference_value}:
+    sfUrlValidator:
+      url_error:              La URL ingresada no es válida.

@@ -1,0 +1,8 @@
+fillin:
+  enabled:              true
+
+fields:
+  shortcut{title}:
+    required: 
+      msg:              Es necesario ingresar un titulo para el atajo
+

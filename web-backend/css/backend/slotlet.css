@@ -1,0 +1,151 @@
+body {
+  color:#333;
+}
+
+a:link { color: #333; }
+a:visited { color: #333; }
+
+h1, h2, h3, h4 {
+    margin:0.2em 0pt;
+}
+p {
+    margin:0.5em 0pt;
+}
+a {
+    color:black;
+}
+
+#content {
+  padding:0;
+}
+
+#empty{
+	clear: both;
+}	
+
+form{
+    margin-top: 10px; 
+}
+
+#slotletlayout {
+    min-height: 200px;
+    background: #D1E1FF none repeat scroll 0% 50%;
+    padding: 10px;
+}
+
+#add_container{
+    background: transparent url("../../images/backend/timeline_marker.png") no-repeat scroll 3px 2px ;
+    border: thin solid #9999FF;
+    padding: 0px 0px 3px 20px;
+    border-right:  solid #9999FF !important;
+    vertical-align: top;
+}
+
+#container_name{
+	padding: 3px;
+	border: 1px solid #DDDDDD;
+}
+
+#slotlet_name, #cls{
+    padding: 3px;
+    border: 1px solid #DDDDDD;
+}
+
+.sl_name{
+}
+
+.sl_type{
+	font-style: italic;
+}
+
+#add_slotlet{
+    background: transparent url("../../images/backend/brick_add.png") no-repeat scroll 3px 2px ;
+    border: thin solid #9999FF;
+    padding: 0px 0px 3px 20px;
+    border-right:  solid #9999FF !important;
+    vertical-align: top;
+}
+
+.container_name, .container_sl{
+    float: left;
+    background: right url("../../images/backend/shape_square_edit.png") no-repeat;
+    padding-right: 20px;
+}
+
+.container {
+	float: left;
+	min-height: 150px;
+	width: 200px;
+	border: thin inset aliceBlue;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	padding: 5px;
+}
+
+#slotlet_renderer {
+}
+
+h1 {
+  padding:10px;
+  text-align: center;
+}
+
+div.slotlets {
+  float:left;
+  margin: 8px 0 0 10px;
+  padding: 3px 3px 3px 20px;
+  border: thin outset aliceBlue;
+  cursor: move;
+  background: left url("../../images/backend/brick.png") no-repeat; 
+}
+
+.container div a img{
+    border: none;
+    float: right;
+}
+
+div.layout-active {
+  background-color:#eee;
+}
+
+#layout {
+  clear:left;
+  min-height:132px;
+  /*margin:10px 0;*/
+}
+
+#slotlet_list {
+  height:120px;
+  background-color: #DDEEFF;
+}
+
+#slotlet_list img{
+    border: none;
+}
+.inplaceeditor-form input{
+	border: 1px solid #DDDDDD;
+}
+
+.ul_slotlets {
+    list-style: none;
+    padding: 0px 10px 0px 0px;
+    float: left;
+    margin-top: 5px; 
+}
+
+.sortable{
+    cursor: move;
+}
+
+.ul_slotlets li{
+	border: thin outset aliceBlue;
+	float: left;
+	margin-bottom: 5px;
+	min-width: 150px;
+	padding: 2px;
+}
+
+.ul_slotlets li img{
+    border: none;
+    float: right;
+}

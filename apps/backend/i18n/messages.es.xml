@@ -1,0 +1,277 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file orginal="global" source-language="en_US" datatype="plaintext">
+    <body>
+      <trans-unit id="1">
+        <source>Administration</source>
+        <target>Administración</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Logged as</source>
+        <target>Autentificado como</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>You are not logged in</source>
+        <target>Ud. no se ha autentificado</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>logout</source>
+        <target>salir</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Actions</source>
+        <target>Acciones</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>create</source>
+        <target>Crear</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>list</source>
+        <target>Listado</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>show</source>
+        <target>Ver</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>delete</source>
+        <target>Borrar</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>save</source>
+        <target>Guardar</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>save and list</source>
+        <target>Guardar y listar</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>save and add</source>
+        <target>Guardar y agregar</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>edit</source>
+        <target>Editar</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>filters</source>
+        <target>Filtros</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>reset</source>
+        <target>Limpiar</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>filter</source>
+        <target>Filtrar</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>yes or no</source>
+        <target>Indistinto</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>yes</source>
+        <target>Sí</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>no result</source>
+        <target>Sin resultados para mostrar</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Name</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Title</source>
+        <target>Título</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Name:</source>
+        <target>Nombre:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Title:</source>
+        <target>Título:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Description</source>
+        <target>Descripción</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Comment</source>
+        <target>Comentario</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Author</source>
+        <target>Autor</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Spanish</source>
+        <target>Español</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>English</source>
+        <target>Inglés</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Portugues</source>
+        <target>Portugués</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Unassociated</source>
+        <target>No asociado</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Associated</source>
+        <target>Asociado</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Description:</source>
+        <target>Descripción:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Comment:</source>
+        <target>Comentario:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Author:</source>
+        <target>Autor:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Edit "%%name%%"</source>
+        <target>Editar "%%name%%"</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Categories:</source>
+        <target>Categorías:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Published</source>
+        <target>Publicado</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Published:</source>
+        <target>Publicado:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Internal comment for documentation</source>
+        <target>Comentario interno a modo de documentación</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Categories</source>
+        <target>Categorías</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Categories:</source>
+        <target>Categorías:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Deleted</source>
+        <target>Borrado</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Published</source>
+        <target>Publicado</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Unpublished</source>
+        <target>No publicado</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Archived</source>
+        <target>Archivado</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>[0] no result|[1] 1 result|(1,+Inf] %1% results</source>
+        <target>[0] Sin resultados|[1] 1 resultado|(1,+Inf] %1% resultados</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Your modifications have been saved</source>
+        <target>Las modificaciones fueron guardadas</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Your username is required</source>
+        <target>Su usuario es requerido</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Your password is required</source>
+        <target>Su contraseña es requerida</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Username or password is not valid.</source>
+        <target>El usuario o la contraseña no son validos. Se distingue entre mayusculas y minusculas. Controle que el bloqueo de mayusculas de su teclado no se encuentre activo.</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Created at</source>
+        <target>Creado el</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Created by name</source>
+        <target>Creado por</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Updated by</source>
+        <target>Actualizado el</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Updated by name</source>
+        <target>Actualizado por</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>There are some errors that prevent the form to validate</source>
+        <target>Los datos ingresados no son válidos. Por favor, corrija los errores e intente nuevamente.</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Could not delete the selected element. Make sure it does not have any associated items.</source>
+        <target>No se pudo eliminar el elemento seleccionado. Asegúrese que no tiene elementos asociados.</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Could not delete the selected %name%</source>
+        <target>Imposible eliminar el elemento seleccionado</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>The selected element has been successfully deleted</source>
+        <target>El elemento seleccionado fue eliminado satisfactoriamente</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Invalid e-mail address</source>
+        <target>El valor ingresado no es una dirección de e-mail válida</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>remove file</source>
+        <target>eliminar archivo actual</target>
+      </trans-unit>
+
+      <trans-unit>
+        <source>The password is too weak. It must be at least 8 characters long AND contain at least 2 alphabetical characters AND 2 digital characters AND one symbol among !?@_*-</source>
+        <target>La contraseña ingresada es demasiado débil. Debe tener al menos 8 caracteres de longitud y contener: al menos dos (2) caracteres alfabéticos Y al menos dos (2) caracteres numéricos Y al menos un (1) caracter especial de los siguientes: !?@_*-</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>You have some errors on your choique install. Please take a look:</source>
+        <target>Tenés algunos errores en tu instalación de Choique. Por favor echá un vistazo:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>You must set the frontend url (in app.yml).</source>
+        <target>Tenés que configurar la url de frontend (en app.yml).</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>You must set the backend url (in app.yml).</source>
+        <target>Tenés que configurar la url de backend (en app.yml).</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Backend url is not correctly set (in app.yml).</source>
+        <target>La url de backend no está seteada correctamente (en app.yml) o no es posible acceder al servidor web desde la IP 127.0.0.1</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Section links form:</source>
+        <target>Vinculos asociados:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Target blank ?</source>
+        <target>¿ Abrir vinculo en una nueva página ?</target>
+      </trans-unit>
+
+    </body>
+  </file>
+</xliff>

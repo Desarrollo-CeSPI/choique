@@ -1,0 +1,14 @@
+.form-row {
+  margin: 3px;
+}
+
+label {
+  width: 8em;
+  float: left;
+}
+
+#results {
+  border: 1px solid #ddd;
+  padding: 6px;
+  margin: 6px;
+}

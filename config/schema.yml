@@ -1,0 +1,938 @@
+# choiqueCMS ## Database Schema
+#
+
+propel:
+  article:
+    id:
+    type:
+      type:             tinyint     # Article, News, Novelty, ...
+    name:
+      type:             varchar(256)
+      required:         true
+    title:
+      type:             varchar(256)
+      required:         true
+    heading:
+      type:             varchar(512)
+    comment:
+      type:             longvarchar
+    description:
+      type:             longvarchar
+    upper_description:
+      type:             varchar(256)
+    body:
+      type:             longvarchar
+      required:         true
+    created_at:
+    updated_at:
+    created_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+    updated_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+    is_published:
+      type:             boolean
+    is_archived:
+      type:             boolean
+    published_at:
+      type:             timestamp
+    archived_at:
+      type:             timestamp
+    signature:
+      type:             longvarchar
+    contact:            varchar(256)
+    zoomable_multimedia:
+      type:             boolean
+    multimedia_id:
+      type:             integer
+      foreignTable:     multimedia
+      foreignReference: id
+      onDelete:         setnull
+    main_gallery_id:
+      type:             integer
+      foreignTable:     gallery
+      foreignReference: id
+      onDelete:         setnull
+    link_id:
+      type:             integer
+      foreignTable:     link
+      foreignReference: id
+      onDelete:         setnull
+    source_id:
+      type:             integer
+      foreignTable:     source
+      foreignReference: id
+      onDelete:         setnull
+    section_id:
+      type:             integer
+      foreignTable:     section
+      foreignReference: id
+      onDelete:         setnull
+    reference:
+      type:             varchar(255)
+    reference_type:
+      type:             tinyint
+      default:          0
+    #### Check
+    times_read:
+      type:             bigint
+    rating:
+      type:             decimal
+    open_as_popup:
+      type:             boolean
+      default:          false
+    _indexes:
+      name_publmished_at_index:       [name, published_at]
+
+  article_article:
+    id:
+    article_referer_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         cascade
+    article_referee_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         restrict
+
+  cms_configuration:
+    id:
+    name:
+      type:             varchar(255)
+    configuration_key:
+      type:             varchar(255)
+      required:         true
+    configuration_value:
+      type:             longvarchar
+    _indexes:
+      configuration_key_index:  [configuration_key]
+
+  data:
+    id:
+    row:
+      type:       integer
+    data:
+      type:       longvarchar
+    field_id:
+      type: integer
+      foreignTable: field
+      foreignReference: id
+      onDelete: cascade
+
+  document:
+    id:
+    name:
+      type:             varchar(256)
+      required:         true
+    title:
+      type:             varchar(256)
+      required:         true
+    uri:
+      type:             varchar(256)
+      required:         true
+    uploaded_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         setnull
+    #version 2.4.0
+    created_at:
+    updated_at:
+    updated_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         restrict
+      onUpdate:         cascade
+
+  article_document:
+    article_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         cascade
+    document_id:
+      type:             integer
+      foreignTable:     document
+      foreignReference: id
+      onDelete:         restrict
+
+  event:
+    id:
+    is_published:
+      type:             boolean
+    title:
+      type:             varchar(256)
+      required:         true
+    description:
+      type:             longvarchar
+    location:
+      type:             varchar(256)
+    contact:
+      type:             varchar(256)
+    organizer:
+      type:             varchar(256)
+    author:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+    comment:
+      type:             longvarchar
+    begins_at:
+      type:             timestamp
+    ends_at:
+      type:             timestamp
+    article_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         restrict
+    event_type_id:
+      type:             integer
+      foreignTable:     event_type
+      foreignReference: id
+      onDelete:         setnull
+    created_at:
+    updated_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+    updated_at:
+
+  event_type:
+    id:
+    title:
+      type:             varchar(256)
+      required:         true
+    description:
+      type:             longvarchar
+
+  event_section:
+    id:
+    event_id:
+      type: integer
+      foreignTable: event
+      foreignReference: id
+      onDelete: cascade
+      required: true
+    section_id:
+      type: integer
+      foreignTable: section
+      foreignReference: id
+      onDelete: cascade
+      required: true
+    _uniques:
+      unique_event_section: [event_id, section_id]
+
+  field:
+    id:
+    label:
+      type:             varchar(256)
+    type:
+      type:             integer
+    is_required:
+      type:             boolean
+    default_value:
+      type:             longvarchar
+    sort:
+      type:             integer
+    form_id:
+      type:             integer
+      foreignTable:     form
+      foreignReference: id
+      onDelete:         cascade
+
+  form:
+    id:
+    title:
+      type:       varchar(256)
+      required:   true
+    name:
+      type:       varchar(256)
+    description:
+      type:       longvarchar
+    comment:
+      type:       longvarchar
+    rows:
+      type:       integer
+    is_poll:
+      type:       boolean
+    is_active:
+      type:       boolean
+    success_msg:
+      type:       varchar(256)
+    email:
+      type:       varchar(255)
+    created_at:
+    updated_at:
+    created_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         restrict
+      onUpdate:         cascade
+    updated_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         restrict
+      onUpdate:         cascade
+
+  article_form:
+    article_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         cascade
+    form_id:
+      type:             integer
+      foreignTable:     form
+      foreignReference: id
+      onDelete:         restrict
+
+  gallery:
+    id:
+    name:
+      type:             varchar(256)
+      required:         true
+    description:
+      type:             longvarchar
+    comment:
+      type:             longvarchar
+    is_horizontal:
+      type:             boolean
+      default:          true
+    visible_items:
+      type:             tinyint
+      default:          0
+    is_published:
+      type:             boolean
+    created_at:
+    published_at:
+      type:             timestamp
+    #Version 2.4.0
+    created_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         setnull
+    updated_at:
+    updated_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         setnull
+    published_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         setnull
+
+  article_gallery:
+    article_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         cascade
+    gallery_id:
+      type:             integer
+      foreignTable:     gallery
+      foreignReference: id
+      onDelete:         restrict
+
+  article_group:
+    id:
+    name:
+      type:             varchar(256)
+      required:         true
+    description:
+      type:             longvarchar
+    comment:
+      type:             longvarchar
+    visible_items:
+      type:             tinyint
+      default:          0
+    is_published:
+      type:             boolean
+    created_at:
+    published_at:
+      type:             timestamp
+    #version 2.4.0
+    created_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         setnull
+    updated_at:
+    updated_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         setnull
+
+  article_article_group:
+    article_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         cascade
+    article_group_id:
+      type:             integer
+      foreignTable:     article_group
+      foreignReference: id
+      onDelete:         cascade
+    priority:
+      type:             tinyint
+      default:          0
+
+  link:
+    id:
+    name:
+      type:             varchar(256)
+    uri:
+      type:             varchar(256)
+    url:
+      type:             varchar(256)
+    created_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+    created_at:
+    updated_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+    updated_at:
+
+  link_group:
+    id:
+    name:
+      type:             varchar(256)
+
+  article_link_group:
+    article_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         cascade
+    link_group_id:
+      type:             integer
+      foreignTable:     link_group
+      foreignReference: id
+      onDelete:         restrict
+
+  link_group_link:
+    link_group_id:
+      type:             integer
+      foreignTable:     link_group
+      foreignReference: id
+      onDelete:         cascade
+    link_id:
+      type:             integer
+      foreignTable:     link
+      foreignReference: id
+      onDelete:         cascade
+
+  mail_log:
+    id:
+    mail_from:
+      type:             varchar(255)
+      required:         true
+    mail_to:
+      type:             varchar(255)
+      required:         true
+    subject:
+      type:             varchar(255)
+      required:         true
+    body:
+      type:             longvarchar
+      required:         true
+    sender_name:
+      type:             varchar(255)
+      required:         true
+    section_name:
+      type:             varchar(255)
+      required:         false
+    article_name:
+      type:             varchar(255)
+      required:         false
+    created_at:
+
+  multimedia:
+    id:
+    name:
+      type:             varchar(256)
+      required:         true
+    title:
+      type:             varchar(256)
+      required:         true
+    description:
+      type:             longvarchar
+    comment:
+      type:             longvarchar
+    is_deleted:
+      type:             boolean
+    small_uri:
+      type:             varchar(256)
+    medium_uri:
+      type:             varchar(256)
+    large_uri:
+      type:             varchar(256)
+      required:         true
+    author:
+      type:             varchar(256)
+    uploaded_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         setnull
+    copyright:
+      type:             varchar(256)
+    type:
+      type:             varchar(20)
+    language:
+      type:             varchar(5)
+    duration:
+      type:             tinyint
+    location:
+      type:             varchar(256)
+    subject:
+      type:             varchar(256)
+    topics:
+      type:             varchar(256)
+    height:
+      type:             bigint
+    width:
+      type:             bigint
+    mime_type:
+      type:             varchar(256)
+      required:         true
+    created_at:
+    ## New FLV params attribute
+    flv_params:
+      type:             longvarchar
+    ## New is_external attribute for handling external multimedia resources
+    is_external:
+      type:             boolean
+      default:          false
+    ## New player_id attribute references a subclass of FlashVideoPlayer according to FlashVideoPlayerOptions class
+    player_id:
+      type:             integer
+    ## New external_uri attribute for referencing external multimedia resources
+    external_uri:
+      type:             longvarchar
+    ### Check!
+    times_seen:
+      type:             integer
+    rating:
+      type:             decimal
+    times_rated:
+      type:             integer
+    times_downloaded:
+      type:             integer
+    ## New longdesc attribute for referencing the file that contents the long description of an image (this provides accessibility)
+    longdesc_uri:
+      type:             varchar(256)
+      required:         false
+    ## Version 2.4
+    updated_at:
+    updated_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         setnull
+
+  article_multimedia:
+    article_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         cascade
+    multimedia_id:
+      type:             integer
+      foreignTable:     multimedia
+      foreignReference: id
+      onDelete:         restrict
+
+  multimedia_gallery:
+    multimedia_id:
+      type:             integer
+      foreignTable:     multimedia
+      foreignReference: id
+      onDelete:         cascade
+    gallery_id:
+      type:             integer
+      foreignTable:     gallery
+      foreignReference: id
+      onDelete:         cascade
+    priority:
+      type:             tinyint
+      default:          0
+
+  multimedia_tag:
+    multimedia_id:
+      type:             integer
+      foreignTable:     multimedia
+      foreignReference: id
+      onDelete:         cascade
+    tag_id:
+      type:             integer
+      foreignTable:     tag
+      foreignReference: id
+      onDelete:         cascade
+
+  article_section:
+    article_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         cascade
+    section_id:
+      type:             integer
+      foreignTable:     section
+      foreignReference: id
+      onDelete:         cascade
+    priority:
+      type:             tinyint
+      default:          0
+
+  shortcut:
+    id:
+    multimedia_id:
+      type:             integer
+      foreignTable:     multimedia
+      foreignReference: id
+      onDelete:         restrict
+    container_slotlet_id:
+      type:             integer
+      foreignTable:     container_slotlet
+      foreignReference: id
+      onDelete:         setnull
+    title:
+      type:             varchar(256)
+      required:         true
+    body:
+      type:             longvarchar
+    reference:
+      type:             varchar(256)
+      required:         true
+    reference_type:
+      type:             tinyint
+      default:          0
+    open_in_new_window:
+      type:             boolean
+      default:          false
+    priority:
+      type:             tinyint
+      default:          0
+    comment:
+      type:             longvarchar
+    is_published:
+      type:             boolean
+      default:          false
+    created_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+    created_at:
+    updated_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+    updated_at:
+
+  slotlet:
+    id:
+    name:
+      type:             varchar(256)
+      required:         true
+    cls:
+      type:             varchar(256)
+      required:         true
+
+  container:
+    id:
+    name:
+      type:             varchar(256)
+      required:         true
+
+  container_slotlet:
+    id:
+    container_id:
+      type:             integer
+      foreignTable:     container
+      foreignReference: id
+      onDelete:         cascade
+    slotlet_id:
+      type:             integer
+      foreignTable:     slotlet
+      foreignReference: id
+      onDelete:         restrict
+    name:
+      type:             varchar(256)
+      required:         true
+    priority:
+      type:             integer
+      default:          0
+    rss_channel_id:
+      type:             integer
+      foreignTable:     rss_channel
+      foreignReference: id
+      onDelete:         restrict
+    visible_rss:
+      type:             integer
+      default:          3
+
+  source:
+    id:
+    name:
+      type:             varchar(256)
+      required:         true
+    description:
+      type:             longvarchar
+    comment:
+      type:             longvarchar
+
+  tag:
+    id:
+    name:
+      type:             varchar(256)
+      required:         true
+    description:
+      type:             longvarchar
+    comment:
+      type:             longvarchar
+
+  section_tag:
+    section_id:
+      type:             integer
+      foreignTable:     section
+      foreignReference: id
+      onDelete:         cascade
+    tag_id:
+      type:             integer
+      foreignTable:     tag
+      foreignReference: id
+      onDelete:         cascade
+
+  article_tag:
+    article_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         cascade
+    tag_id:
+      type:             integer
+      foreignTable:     tag
+      foreignReference: id
+      onDelete:         cascade
+
+  template:
+    id:
+    name:
+      type:             varchar(256)
+      required:         true
+    public_name:
+      type:             varchar(255)
+    comment:
+      type:             longvarchar
+    created_at:
+    updated_at:
+    created_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+    updated_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+
+  section:
+    id:
+    name:
+      type:             varchar(256)
+      required:         true
+    title:
+      type:             longvarchar
+      required:         true
+    priority:
+      type:             tinyint
+      default:          0
+    description:
+      type:             longvarchar
+    comment:
+      type:             longvarchar
+    is_published:
+      type:             boolean
+      default:          false
+    multimedia_id:
+      type:             integer
+      foreignTable:     multimedia
+      foreignReference: id
+      onDelete:         setnull
+    section_id:
+      type:             integer
+      foreignTable:     section
+      foreignReference: id
+      onDelete:         restrict
+    template_id:
+      type:             integer
+      foreignTable:     template
+      foreignReference: id
+      onDelete:         setnull
+    article_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         restrict
+    layout_id:
+      type:             integer
+      foreignTable:     layout
+      foreignReference: id
+      onDelete:         setnull
+    color:
+      type:             varchar(7)
+    article_group_id:
+      type:             integer
+      foreignTable:     article_group
+      foreignReference: id
+      onDelete:         restrict
+    _indexes:
+      name_index:       [name]
+
+  news_space:
+    id:
+    type:
+      type:             tinyint
+    comment:
+      type:             longvarchar
+    row_number:
+      type:             tinyint
+    column_number:
+      type:             tinyint
+    template_id:
+      type:             integer
+      foreignTable:     template
+      foreignReference: id
+      onDelete:         cascade
+    article_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         restrict
+    width:
+      type:             float
+
+#  section_sf_guard_permission:
+#    id:
+#    section_id:
+#      type:             integer
+#      foreignTable:     section
+#      foreignReference: id
+#      onDelete:         cascade
+#    sf_guard_permission_id:
+#      type:             integer
+#      foreignTable:     sf_guard_permission
+#      foreignReference: id
+#      onDelete:         restrict
+
+  rss_channel:
+    id:
+    title:
+      type:             varchar(255)
+      required:         true
+    link:
+      type:             varchar(255)
+      required:         true
+    is_active:
+      type:             boolean
+      required:         true
+    created_at:
+    updated_at:
+    created_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         restrict
+    updated_by:
+      type:             integer
+      foreignTable:     sf_guard_user
+      foreignReference: id
+      onDelete:         restrict
+
+  article_rss_channel:
+    article_id:
+      type:             integer
+      foreignTable:     article
+      foreignReference: id
+      onDelete:         cascade
+    rss_channel_id:
+      type:             integer
+      foreignTable:     rss_channel
+      foreignReference: id
+      onDelete:         restrict
+
+  layout:
+    id:
+    name:
+      type:             varchar(255)
+      required:         true
+      index:            unique
+    article_layout:
+      type:             longvarchar
+    template_layout:
+      type:             longvarchar
+    is_default:
+      type:             boolean
+      default:          false
+    virtual_section_id: # Reference class VirtualSection
+      type:             integer
+    created_at:
+    updated_at:
+
+  temporary_layout:
+    id:
+    layout:
+      type:             longvarchar
+
+  section_link:
+    id:
+    section_id:
+      type:             integer
+      foreignTable:     section
+      foreignReference: id
+      onDelete:         cascade
+      required:         true
+    link_id:
+      type:             integer
+      foreignTable:     link
+      foreignReference: id
+      onDelete:         cascade
+      required:         true
+    target_blank:
+      type: boolean
+      default: true
+    _uniques:
+      unique_section_link: [section_id, link_id]
+
+  section_document:
+    id:
+    section_id:
+      type:             integer
+      foreignTable:     section
+      foreignReference: id
+      onDelete:         cascade
+      required:         true
+    document_id:
+      type:             integer
+      foreignTable:     document
+      foreignReference: id
+      onDelete:         cascade
+      required:         true
+    _uniques:
+      unique_section_document: [section_id, document_id]

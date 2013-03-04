@@ -1,0 +1,17 @@
+fillin:
+  enabled:                    true
+
+fields:
+  rss_channel{title}:
+    required:
+      msg:                    Es necesario ingresar el titulo del canal
+    sfPropelUniqueValidator:
+      class:                  RssChannel
+      column:                 title
+      unique_error:           El nombre del canal ya existe
+
+  rss_channel{link}:
+    required:
+      msg:                    El necesario ingresar el link del canar RSS
+    sfUrlValidator:
+      url_error:              Es necesario ingresar una direccion valida

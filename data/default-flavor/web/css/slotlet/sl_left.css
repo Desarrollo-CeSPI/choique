@@ -1,0 +1,127 @@
+
+
+/* SECTIONS */
+
+
+
+.sections {
+  font-size: 9px;
+  line-height: 16px;
+  list-style: none;
+  margin: 0 0 0px 0;
+  padding: 0;
+}
+
+a img {
+  border:0;
+}
+
+ .sections a  {
+  padding-right: 6px;
+  padding-left: 6px;
+}
+
+ .sections .arrow {
+  float:right;
+}
+
+ .sections .first-level {
+  background:#fff; 
+  display: block;
+  border:0px solid #ccc;
+	min-height:16px;
+  margin-top:2px;
+}
+
+ .sections .first-level a {
+  display: block;
+  
+}
+
+ .sections .with-arrow {
+  outline:none;
+}
+
+ .sections .first-level a:hover,
+ .sections .first-level .selected,
+ .sections .second-level a:hover,
+ .sections .second-level .selected {
+  background: #edede3;
+}
+
+ .sections .first-level .arrow:hover {
+  background:none;
+  
+}
+
+ .sections .with-arrow a:hover,
+ .sections .with-arrow .selected {
+ 
+}
+
+
+
+
+#left_menu {
+  float:left;
+  width:100%;
+  font-size:12px;
+}
+
+#left_menu a {
+  font-size:11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000;
+  border-top:1px solid #000;
+  border-bottom:1px solid #000;
+}
+
+#left_menu a:hover {
+  color:#ccc;
+}
+
+
+
+.sections .first-level a {
+  color: #000;
+  padding:0px 0px 0px 5px;
+  
+  
+}
+
+.sections .second-level {
+  list-style: none;
+  color:#666;
+  margin:0;
+ 
+}
+
+.sections .second-level a {
+  display: block;
+  color: #666;
+}
+
+#contextual_menu {
+  margin:0px;
+}
+
+
+#contextual_menu .first-level,
+#contextual_menu .second-level {
+  border:1px solid #000;
+}
+
+#contextual_menu .second-level {
+  border-top: none !important;
+}
+
+#left .no-padding a {
+	padding: 0 !important;
+}
+
+#left .no-padding a img {
+	border: 0 !important;	
+}
+
+

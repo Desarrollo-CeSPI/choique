@@ -1,0 +1,10 @@
+all:
+  propel:
+    class:      sfPropelDatabase
+    param:
+      phptype:  mysql
+      port:     3306
+      hostspec: #db_host#
+      database: #db_name#
+      username: #db_user#
+      password: #db_pass#

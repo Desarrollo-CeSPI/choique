@@ -1,0 +1,65 @@
+generator:
+  class:                      sfAdvancedAdminGenerator
+  param:                      
+    model_class:              Tag
+    theme:                    default_mod
+    css:                      backend/admin_theme_black
+                              
+
+    fields:                   
+      name:                   
+        name:                 Nombre
+      description:            
+        name:                 Descripción
+      comment:                
+        name:                 Comentario
+        help:                 Para uso interno
+
+    filters:
+      fields:
+        name:
+          help: Utilice * como wildcard
+
+                              
+    list:                     
+      sort:                   [id, desc]
+      title:                  Listado de categorías
+      display:                [name, description, comment]
+      filters:                [name]
+      object_actions:         
+        _show:
+        _edit:
+          credentials:         [ [ reporter_admin, designer_admin ]]
+        _delete:              
+          credentials:         [ [ reporter_admin, designer_admin ]]
+      actions:                
+        _create:
+          credentials:         [ [ reporter_admin, designer_admin ]]
+
+                              
+    create:                   
+      title:                  Crear una nueva categoría
+      display:
+        Información general:  [name, description, comment]
+      actions:              
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+                            
+    edit:                   
+      title:                  Editar categoría "%%name%%"
+      display:
+        Información general:  [name, description, comment]
+      actions:              
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+                              
+    show:                     
+      title:                  Detalle de la categoría "%%name%%"
+      display:
+        Información general:  [name, description, comment]
+      actions:
+        _list:

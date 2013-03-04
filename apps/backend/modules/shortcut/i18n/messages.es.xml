@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file orginal="global" source-language="en_US" datatype="plaintext">
+    <body>
+      <trans-unit id="1">
+        <source>Shortcut list</source>
+        <target>Listado de atajos/destaques</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Url reference</source>
+        <target>Referencia url</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Priority</source>
+        <target>Prioridad</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Type</source>
+        <target>Tipo</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Icon representation</source>
+        <target>Ícono</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Open method</source>
+        <target>Método de apetura</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Is left shortcut</source>
+        <target>Se dibuja a izquierda</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Url reference:</source>
+        <target>Referencia url:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Priority:</source>
+        <target>Prioridad:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Type:</source>
+        <target>Tipo:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Icon:</source>
+        <target>Ícono:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Open method:</source>
+        <target>Método de apertura:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Is left shortcut:</source>
+        <target>Se dibuja a izquierda:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Html representation:</source>
+        <target>Previsualización:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Same window</source>
+        <target>Misma ventana</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>New window</source>
+        <target>Nueva ventana</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Shortcut</source>
+        <target>Atajo</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Shortcut icon</source>
+        <target>Destaque</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Same window or new window</source>
+        <target>Modo en que se abre el atajo/destaque, esto es, si se abre en la misma página o en otra</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Check if the new shortcut is painted in the left of the screen</source>
+        <target>Activar si el nuevo shortcut se dibuja a la izquierda de la pantalla</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

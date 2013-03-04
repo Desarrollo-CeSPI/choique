@@ -1,0 +1,146 @@
+= sfCaptchaGD plugin =
+
+The `sfCaptchaGDPlugin` is a symfony plugin that provides captcha functionality based on GD library.
+
+It gives you the lib with Captcha class and the module to secure your symfony forms in a minute with a good captcha.
+
+== Installation ==
+
+Install the plugin for sf 1.1
+  
+  {{{
+    php symfony plugin:install sfCaptchaGDPlugin
+  }}}
+
+
+Install the plugin for sf 1.0
+  
+  {{{
+    php symfony plugin-install http://plugins.symfony-project.com/sfCaptchaGDPlugin
+  }}}
+  
+Enable one or more modules in your `settings.yml`
+    * sfCaptchaGD
+
+  {{{
+    all:
+      .settings:
+        enabled_modules:      [default, sfCaptchaGD]
+  }}}
+
+
+Clear your cache
+  
+  {{{
+    symfony cc
+  }}}
+
+== Secure your form in symfony 1.1 ==
+
+Here is an example form class:
+{{{
+    class ContactForm extends sfForm
+    {
+      public function configure()
+      {
+        $this->setWidgets(array(
+          'name'    => new sfWidgetFormInput(),
+          'email'   => new sfWidgetFormInput(),
+          'message' => new sfWidgetFormTextarea(),
+          'captcha' => new sfWidgetFormInput(),
+        ));
+        $this->widgetSchema->setLabels(array(
+          'name'    => 'Your name',
+          'email'   => 'Your email address',
+          'message' => 'Your message',
+          'captcha' => 'Enter captcha code',
+        ));
+    
+        $this->setValidators(array(
+          'name'    => new sfValidatorString(array('required' => true)),
+          'email'   => new sfValidatorEmail(),
+          'message' => new sfValidatorString(array('min_length' => 4, 'required' => true)),
+          
+          // Options: 
+          // length(optional) - length of code
+          'captcha' => new sfValidatorCaptchaGD(array('length' => 4, 'required' => true), array('length' => 'Code length must be %length% characters', 'captcha' => 'Entered code is wrong')),
+        ));
+    
+      }
+    }
+}}}
+
+Here is an example template:
+{{{
+    <form action="<?php echo url_for('contact/index') ?>" method="POST">
+      <table>
+        <?php echo $form['name']->renderRow() ?>
+        <?php echo $form['email']->renderRow() ?>
+        <?php echo $form['message']->renderRow() ?>
+        <?php echo $form['captcha']->renderRow() ?>
+        <tr>
+          <td></td>
+          <td><a href='' onClick='return false' title='Reload image'><img src='/captcha?<?php echo time(); ?>' onClick='this.src="/captcha?r=" + Math.random() + "&reload=1"' border='0'></a></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="submit" />
+          </td>
+        </tr>
+      </table>
+    </form>
+}}}
+
+== Secure your form in symfony 1.0 ==
+
+To secure a symfony form:
+
+Put the following lines inside of your form
+  {{{
+    <?php if ($sf_request->hasError('captcha')) echo form_error('captcha') ?>
+    <?php echo input_tag('captcha', $sf_params->get('captcha')) ?><br>
+    <a href='' onClick='return false' title='Reload image'><img src='/captcha?<?php echo time(); ?>' onClick='this.src="/captcha?r=" + Math.random() + "&reload=1"'></a>
+  }}}
+
+Put the following code into your form's validator yml file:
+
+  {{{
+        fields:
+          captcha:
+            required:
+              msg:            Enter characters from image
+            sfCaptchaGDValidator:
+              captcha_error:  Entered characters are wrong, try again
+  }}}
+
+== Configuration options ==
+These options are default for captcha, you can change any of them, putting in app.yml, i.e. /apps/frontend/config/app.yml
+
+{{{
+all:
+    sf_captchagd:
+        image_width:                100 # image width in pixels
+        image_height:               30 # image height in pixels
+        chars:                      "123456789" # possible chars in captcha
+        length:                     4 # length of captcha
+        font_size:                  18 # font size
+        
+        # possible chars colors
+        font_color:                 ["252525", "8b8787", "550707", "3526E6", "88531E"]
+        
+        # chars fonts
+        fonts:                      ["akbar/akbar.ttf", "brushcut/BRUSHCUT.TTF", "molten/molten.ttf", "planet_benson/Planetbe.ttf", "whoobub/WHOOBUB_.TTF"] 
+        background_color:           DDDDDD # image background color
+        border_color:               000000 # image border color
+}}}
+
+Clear your cache
+  
+  {{{
+    symfony cc
+  }}}
+
+All done!
+
+== TODO ==
+

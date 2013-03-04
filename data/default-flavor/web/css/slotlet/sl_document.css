@@ -1,0 +1,38 @@
+.documents_slotlet
+{
+	margin-bottom:10px;
+	padding:0;
+}
+
+.documents_slotlet .title
+{
+	text-align: left;
+	font-family: arial, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 5px 21px 10px 21px;
+	color:#555;
+        border-top:1px solid #ccc;
+        padding-top:10px;
+}
+
+.documents_slotlet .content
+{
+	text-align: left;
+        margin: 3px 21px 10px 21px;
+        padding:15px;
+}
+
+.documents_slotlet .content .content-child
+{
+	padding:0;
+	display:list-item;
+        list-style:square inside none !important;
+	color:#333;
+}
+
+.documents_slotlet .content .content-child a
+{
+	text-transform:none;
+	text-decoration:none;
+}

@@ -1,0 +1,3 @@
+editSuccess:
+  stylesheets:  [backend/template_editor, backend/articles, /sf/prototype/css/input_auto_complete_tag]
+  javascripts:  [/sf/prototype/js/dragdrop]

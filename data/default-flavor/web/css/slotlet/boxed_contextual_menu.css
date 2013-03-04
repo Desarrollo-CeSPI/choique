@@ -1,0 +1,92 @@
+/** menu oculto **/
+.boxed_contextual_menu_container
+{
+  background:#666;
+  width:282px;
+  height:170px;
+  overflow: hidden;
+}
+
+.boxed_contextual_menu_container .hidden_menu
+{
+  margin: 0px;
+  padding: 0px;
+  list-style-image: none;
+  list-style-type: none;
+}
+
+.boxed_contextual_menu_container .hidden_menu li
+{
+  float:left;
+}
+
+.boxed_contextual_menu_container .hidden_menu li a
+{
+  width:130px;
+  height:75px;
+  vertical-align:bottom;
+  display:table-cell;
+  margin:0px;
+  padding:5px;
+  font-size: 14px !important;
+  font-family:Arial, Helvetica, sans-serif;
+  text-align:right;
+  background:#666;
+  color: #fff;
+  text-transform:uppercase;
+  text-decoration:none;
+  border-left:1px solid #ccc;
+  border-top:1px solid #ccc;
+}
+
+.boxed_contextual_menu_container .hidden_menu li a:hover
+{
+  text-decoration: none;
+	background:#ccc;
+	color:#555;
+}
+
+/** menu desplegado **/
+.boxed_contextual_menu_container .hidden_menu_title
+{
+  margin:0px;
+  padding:5px;
+  font-size: 14px !important;
+  font-family:Arial, Helvetica, sans-serif;
+  text-align:left;
+  background:#666;
+  color: #fff;
+  text-transform:uppercase;
+  text-decoration:none;
+}
+
+.boxed_contextual_menu_container .hidden_menu_items
+{
+  margin: 0px;
+  padding: 0px;
+  list-style-image: none;
+  list-style-type: none;
+}
+
+.boxed_contextual_menu_container .hidden_menu_items li a
+{
+  margin:0px;
+  padding:2px 5px;
+  font-size: 11px !important;
+  font-family:Arial, Helvetica, sans-serif;
+  text-align:left;
+  background:#666;
+  color: #fff;
+  text-transform:uppercase;
+  text-decoration:none;
+  float:left;
+  width:180px;
+  margin-left:80px;
+}
+
+.boxed_contextual_menu_container .hidden_menu_items li a:hover
+{
+  text-decoration: none;
+	background:#ccc;
+	color:#555;
+}

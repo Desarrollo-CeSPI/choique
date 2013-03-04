@@ -1,0 +1,47 @@
+CMSIndex:
+  models:
+    Article:
+      partial:  article/search_result
+      fields:
+        id:           unindexed
+        title:        text
+        article_title: text
+        heading:      text
+        description:  text
+        body:
+          type:         text
+          transform:    strip_tags_with_whitespaces
+      title:          title
+      description:    heading
+
+    Section:
+      partial:  section/search_result
+      fields:
+        id:           unindexed
+        title:
+          type:       text
+          boost:      2
+        name:         unindexed
+        description:  text
+      title:          title
+      description:    description
+
+    Document:
+      partial:  search/document_search_result
+      fields:
+        id:             unindexed
+        title:          text
+        document_title: text
+        content:        text
+        uri:            unindexed
+      title:            title
+      description:      HTMLRepresentation
+
+  index:
+    encoding:         UTF-8
+    cultures:         [es_AR]
+    stop_words:       [uno, una]
+    short_words:      3
+    analyzer:         utf8num
+    case_sensitive:   false
+    mb_string:        true

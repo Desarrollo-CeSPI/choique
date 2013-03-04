@@ -1,0 +1,13 @@
+printPreviewSuccess:
+  layout:   clean_layout
+  metas:
+    title:  Previsualización de Impresión
+
+sendByEmailFormSuccess:
+  layout: clean_layout
+
+sendByEmailSuccess:
+  layout: clean_layout
+
+sendArticleByEmailSuccess:
+  layout: clean_layout

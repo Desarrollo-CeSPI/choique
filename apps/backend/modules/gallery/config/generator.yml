@@ -1,0 +1,119 @@
+generator:
+  class:                        sfAdvancedAdminGenerator
+  param:
+    model_class:                Gallery
+    theme:                      default_mod
+    css:                        backend/admin_theme_black
+
+    fields:
+      name:
+        name:                   Nombre
+      description:
+        name:                   Descripción
+      comment:
+        name:                   Comentario
+      is_horizontal:
+        name:                   Horizontal
+      visible_items:
+        name:                   Cantidad de elementos visibles
+      is_deleted:
+        name:                   Borrada
+      is_published:
+        name:                   Publicada
+      updated_at:
+        name:                       Última actualización
+        params:                     date_format="dd/MM/yyyy H:mm"
+      created_at:
+        name:                       Fecha de creación
+        params:                     date_format="dd/MM/yyyy H:mm"
+      published_at:
+        name:                   Fecha de publicación
+      multimedia_gallery:
+          name:                 Elementos
+      references:
+        name:                   Referenciado en
+      html_representation:
+        name:                   Previsualización
+      created_by_user:          
+        name:                   Creado por
+      updated_by_user:
+        name:                   Actualizado por
+      published_by_user:        
+        name:                   Publicado por
+      
+
+    filters:
+      fields:
+        name:
+          help: Utilice * como wildcard
+
+    list:
+      fields:
+        description_excerpt:
+          name:                 Descripción
+          help:                 Se muestran solo los primeros 40 caracteres
+      sort:                     [created_at, desc]
+      title:                    Listado de galerías
+      display:                  [name, description_excerpt, visible_items, updated_at, created_at, created_by_user, current_status]
+      filters:                  [name, is_published ]
+      object_actions:
+        _show:
+        _edit:
+          condition: canEdit
+        unpublish:
+          name:                 Despublicar
+          action:               unpublish
+          condition:            canUnpublish
+          credentials:          [ [ reporter_admin, designer_admin ]]
+        publish:
+          name:                 Publicar
+          action:               publish
+          icon:                 backend/publish_icon.png
+          credentials:          [ [ reporter_admin, designer_admin ]]
+          condition:            canPublish
+        edit_priorities:
+          name:                 Modificar orden de multimedias
+          action:               editPriorities
+          icon:                 backend/section_priorities.png
+          condition:            canEdit
+        _delete:
+          condition:            canDelete
+      actions:
+        _create:
+
+    create:
+      fields:
+        is_published:
+          credentials:              [ [ reporter_admin, designer_admin ]]
+      title:                    Crear una nueva galería
+      display:
+        Información general:    [name, description, comment, is_horizontal, visible_items, is_published]
+        Archivos multimedia:    [_multimedia_gallery]
+      actions:
+        _list:
+        _save_and_list:
+        _save:
+          name:                 Guardar y seguir editando
+
+    edit:
+      fields:
+        is_published:
+          credentials:              [ [ reporter_admin, designer_admin ]]
+      title:                    Editar "%%name%%"
+      display:
+        Información general:    [name, description, comment, is_horizontal, visible_items, is_published]
+        Contenido de la galería: [_multimedia_gallery]
+      actions:
+        _list:
+        _save_and_list:
+        _save:
+          name:                 Guardar y seguir editando
+
+    show:
+      title:                    Previsualización de la galería "%%name%%"
+      display:
+        Información general:      [name, description, comment, is_horizontal, visible_items, current_status, _references, is_published]
+        Información de Auditoria: [created_at, created_by_user, updated_at, updated_by_user, published_at, published_by_user]     
+        Vista previa:             [HTMLRepresentation]
+      actions:
+        _list:

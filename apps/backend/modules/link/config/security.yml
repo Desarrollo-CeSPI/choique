@@ -1,0 +1,6 @@
+all:
+  is_secure:    on
+
+delete:
+  is_secure:    on
+  credentials:  [ [ reporter_admin, designer_admin ]]

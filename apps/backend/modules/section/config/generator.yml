@@ -1,0 +1,167 @@
+generator:
+  class:                        sfAdvancedAdminGenerator
+  param:
+    model_class:                Section
+    theme:                      default_mod
+    css:                        backend/admin_theme_black
+
+    fields:
+      name:
+        name:                   Nombre
+      comment:
+        name:                   Comentario
+        help:                   Exclusivamente uso interno
+      priority:
+        name:                   Prioridad          
+        help:                   Debe ser un valor numérico positivo, donde 0 es la menor prioridad
+      is_published:
+        name:                   Publicado
+      multimedia:
+        name:                   Banner de la sección
+      multimedia_id:
+        name:                   Banner de la sección
+      template_id:
+        name:                   Portada
+      template:
+        name:                   Portada
+      article_id:
+        name:                   Artículo para portada
+        help:                   El artículo seleccionado se mostrará como portada de la sección en el caso que la misma no posea una portada asociada.
+      article:
+        name:                   Artículo para portada
+      section_id:
+        name:                   Sección padre
+      section_related_by_section_id:
+        name:                   Sección padre
+      section_tag:
+        name:                   Categorías
+        type:                   admin_double_list
+        params:                 through_class=SectionTag style="width:250px;"
+      section_documents:
+        name:                   Documentos
+        type:                   admin_double_list
+        params:                 through_class=SectionDocument style="width:250px;"
+      section_links:
+        name:                   Vínculos
+        type:                   admin_double_list
+        params:                 through_class=SectionLink style="width:250px;"
+      title:
+        name:                   Título
+      description:
+        name:                   Descripción
+      layout:
+        name:                   Distribución
+      layout_id:
+        name:                   Distribución
+      article_group_id:
+        name:                   Galería de artículos
+        params:                 peer_method=retrievePublished
+      article_group:
+        name:                   Galería de artículos
+
+
+    filters:
+      fields:
+        title:
+          help: Utilice * como wildcard
+        name:
+          help: Utilice * como wildcard
+
+    list:
+      sort:                     [id, desc]
+      title:                    Listado de secciones
+      display:                  [=title, name, description, comment, is_published, template, section_related_by_section_id, priority ]
+      filters:                  [title, name, is_published, template_id, _section_id]
+      object_actions:
+        _show:
+        _edit:
+          condition: canEdit
+        edit_priorities:
+          name:                 Modificar prioridades de novedades
+          action:               editPriorities
+          icon:                 backend/section_priorities.png
+          credentials:          [[ reporter_admin, designer_admin ]]
+          condition: canEdit
+        increase_priority:
+          name:                 Subir Prioridad
+          action:               increasePriority
+          icon:                 backend/priority_up.png
+          credentials:          [ [reporter_admin, designer_admin] ]
+          condition: canEdit
+        decrease_priority:
+          name:                 Bajar Prioridad
+          action:               decreasePriority
+          icon:                 backend/priority_down.png
+          credentials:          [ [reporter_admin, designer_admin] ]
+          condition: canEdit
+        unpublish:
+          action:                   unpublish
+          name:                     Despublicar
+          credentials:              [ [ reporter_admin, designer_admin ]]
+          condition:                canUnpublish
+        publish:
+          action:                   publish
+          name:                     Publicar
+          icon:                     backend/publish_icon.png
+          credentials:              [ [ reporter_admin, designer_admin ]]
+          condition:                canPublish
+        _delete:
+          credentials:          [ [reporter_admin, designer_admin] ]
+          condition:            canDelete
+      actions:
+        _create:
+
+    create:
+      fields:
+        is_published:
+          credentials:              [ [ reporter_admin, designer_admin ]]
+      title:                    Crear una nueva sección
+      display:
+        Información general:    [title, name, _color, description, comment]
+        Organización:           [priority, is_published, <?php CmsConfiguration::get('check_use_tags', true) and print 'section_tag, ' ?>_section_id, layout_id]
+        Contenidos:             [multimedia_id, template_id, _article_id, article_group_id]
+        Contenidos de sección:  [_section_links_form, section_documents]
+      actions:
+        _list:
+        _save:
+          name:                 Guardar y seguir editando
+        _save_and_list:
+
+    edit:
+      fields:
+        is_published:
+          credentials:              [ [ reporter_admin, designer_admin ]]
+        section_id:
+          credentials:              [ [ reporter_admin, designer_admin ]]
+      title:                    Editar sección "%%name%%"
+      display:
+        Información general:    [title, name, _color, description, comment]
+        Organización:           [priority, is_published, <?php CmsConfiguration::get('check_use_tags', true) and print 'section_tag, ' ?>_section_id, layout_id]
+        Contenidos:             [multimedia_id, template_id, _article_id, article_group_id]
+        Contenidos de sección:  [_section_links_form, section_documents]
+      actions:
+        _list:
+        _save:
+          name:                 Guardar y seguir editando
+        _save_and_list:
+
+    show:
+      fields:
+        comment:
+          help:                 ""
+        priority:
+          help:                 ""
+        color_plain:
+          name:                 "Color"
+      title:                    Detalle de la sección "%%name%%"
+      display:
+        Información general:    [title, name, _color_plain, description, comment]
+        Organización:           [priority, is_published, <?php CmsConfiguration::get('check_use_tags', true) and print '_section_tag, ' ?>section_related_by_section_id, layout]
+        Contenidos:             [_multimedia, _template, _article, _article_group]
+        Contenidos de sección:  [_section_links, _section_documents]
+      actions:
+        _delete:      
+          credentials:          [deleteSection]
+          condition:            canDelete
+        _list:
+          credentials:          [showSection]

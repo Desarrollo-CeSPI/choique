@@ -1,0 +1,14 @@
+all:
+  is_secure:        on
+
+delete:
+  is_secure:        on
+  credentials:      [[ reporter_admin, designer_admin ]]
+
+publish:
+  is_secure:        on
+  credentials:      [[ reporter_admin, designer_admin ]]
+
+unpublish:
+  is_secure:        on
+  credentials:      [[ reporter_admin, designer_admin ]]

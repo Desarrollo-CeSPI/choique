@@ -1,0 +1,52 @@
+generator:
+  class:                  sfAdvancedAdminGenerator
+  param:
+    model_class:          MailLog
+    theme:                default_mod
+    css:                  backend/admin_theme_black
+
+    fields:
+      mail_from:
+        name:             Enviado desde
+      mail_to:
+        name:             Enviado a
+      subject:
+        name:             Asunto
+      body_excerpt:
+        name:             Cuerpo
+        help:             Se muestran los primeros 30 caracteres.
+      body:
+        name:             Cuerpo
+      sender_name:
+        name:             Remitente
+      section_name:
+        name:             Sección visitada
+      article_name:
+        name:             Artículo visitado
+      created_at:
+        name:             Fecha de envío
+        
+    list:
+      sort:               [created_at, desc]
+      title:              Listado de correos enviados desde el portal
+      filters:            [sender_name, mail_to, mail_from, created_at]
+      display:            [=sender_name, subject, section_name, article_name, created_at]
+      click_action:       show
+      object_actions:
+        _show:
+          credentials:    [showMailLog]
+        _delete:
+          credentials:    [deleteMailLog]
+      actions:
+        export:
+          name:           Exportar listado xls
+          action:         export
+          params:         class=sf_admin_action_create
+          credentials:    [exportMailLog]
+
+    show:
+      title:              Detalle del correo
+      display:
+        Información del correo: [sender_name, mail_to, mail_from, subject, body, section_name, article_name, created_at ]
+      actions:
+        _list:            [showMailLog]

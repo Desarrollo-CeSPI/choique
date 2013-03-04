@@ -1,0 +1,3 @@
+all:
+  yui_js_dir: /sfYUIPlugin/js/yui
+  yui_js_suffix: '-min'

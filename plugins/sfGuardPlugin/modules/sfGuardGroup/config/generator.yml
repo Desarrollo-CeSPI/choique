@@ -1,0 +1,55 @@
+generator:
+  class:                sfAdvancedAdminGenerator
+  param:
+    model_class:        sfGuardGroup
+    theme:              default_mod
+    css:                backend/admin_theme_black
+
+    fields:
+      permissions:
+        name:         Permisos
+        type:         admin_double_list
+        params:       through_class=sfGuardGroupPermission style="width:250px;"
+
+    list:
+      title:            Listado de grupos
+      display:          [=name, description]
+      object_actions:
+        _show:
+          credentials:  [showGroup]
+        _edit:
+          credentials:  [editGroup]
+        _delete:
+          credentials:  [deleteGroup]
+      actions:
+        _create:
+          credentials:  [createGroup]
+
+    create:
+      title:            Crear un nuevo grupo
+      display:          [name, description, permissions]
+      actions:
+        _list:
+          credentials:  [showGroup]
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+
+    edit:
+      title:            Editar el grupo "%%name%%"
+      display:          [name, description, permissions]
+      actions:
+        _list:
+          credentials:  [showGroup]
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+        _delete:
+          credentials:  [deleteGroup]
+
+    show:
+      title:            Detalle del grupo "%%name%%"
+      display:          [name, description, permissions]
+      actions:
+        _list:
+          credentials:  [showGroup]

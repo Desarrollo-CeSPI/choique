@@ -1,0 +1,99 @@
+.carousel-component-vertical {
+    position: relative;
+    overflow: hidden;
+    display: none;
+}
+
+.carousel-component-vertical ul.carousel-list {
+    width: 10000000px;
+    position: relative;
+    z-index: 1;
+}
+
+.carousel-component-vertical .carousel-list li { 
+    float: left;
+    list-style: none;
+    overflow: hidden;
+}
+
+.carousel-component-vertical .carousel-vertical li { 
+    margin-bottom: 0px;
+    /* Fix for extra spacing in IE */
+    float: left;
+    clear: left;  
+    /* Force the LI to respect the HEIGHT specified */
+    overflow: hidden;
+    display: block;
+}
+
+.carousel-component-vertical .carousel-clip-region {
+    overflow: hidden;
+    margin: 0px auto;
+    position: relative; 
+}
+
+.carousel-component-vertical {
+    background: #e2edfa;
+    padding: 0px;
+    -moz-border-radius: 6px;
+    color: #618cbe;
+}
+.carousel-component-vertical ul.carousel-list { 
+    margin: 0px;
+    padding: 0px;
+    line-height: 0px;
+}
+.carousel-component-vertical .carousel-list li {
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    font: 10px verdana, arial, sans-serif;
+    color: #666;
+}
+.carousel-component-vertical .carousel-vertical li {
+}
+.carousel-component-vertical ul.carousel-vertical {
+}
+
+.carousel-component-vertical {
+    padding: 4px;
+    margin: 0px;
+    width: 77px;
+}
+
+.carousel-component-vertical .carousel-list li {
+    margin: 0px;
+    padding: 4px;
+    width: 77px;
+}
+
+.carousel-component-vertical .carousel-vertical li {
+    margin-bottom: 4px;
+    height: 89px;
+}
+
+.carousel-component-vertical .carousel-list li a {
+    display: block;
+    border: 1px solid #e2edfa;
+    outline: none;
+}
+
+.carousel-component-vertical .carousel-list li a:hover {
+    border: 1px solid #aaaaaa;
+}
+
+.carousel-component-vertical .carousel-list li img {
+    display: block;
+}
+
+#up-arrow {
+    cursor: pointer;
+    margin-left: 32px;
+    margin-top: 20px;
+}
+
+#down-arrow {
+    cursor: pointer;
+    margin-left: 32px;
+    margin-top: 5px;
+}

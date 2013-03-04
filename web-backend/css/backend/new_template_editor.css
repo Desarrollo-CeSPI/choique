@@ -1,0 +1,439 @@
+html *
+{
+  outline: 0;
+}
+
+a img
+{
+  border: 0;
+}
+
+.editor-container
+{
+  width: 49%;
+  margin: 1%;
+}
+
+.container
+{
+  width: 100%;
+}
+
+#articles_list
+{
+  border: 1px solid #ccc;
+  background-color: #FFFFC0;
+  padding: 4px;
+}
+
+.actions
+{
+  padding: 4px;
+  text-align: left;
+  margin: 0px;
+  border: 1px solid #ccc;
+  background-color: #444;
+  font-size: 11px;
+  color: #eee;
+  width: 100%;
+}
+
+.action label
+{
+  color: #eee !important;
+}
+
+.actions .title
+{
+  font-weight: bold;
+  margin-right: 3px;
+  padding-right: 2px;
+  padding-bottom: 2px;
+  border-right: 1px solid #ccc;
+}
+
+.top
+{
+  border-bottom: 0;
+  margin-bottom: 0;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright: 4px;
+}
+
+.bottom
+{
+  border-top: 0;
+  margin-top: 0;
+  -moz-border-radius-bottomleft: 4px;
+  -moz-border-radius-bottomright: 4px;
+}
+
+.actions img#action_indicator,
+.actions img#articles_indicator,
+.actions img#autocomplete_indicator
+{
+  margin-left: 6px;
+  float: right
+}
+
+.actions .action img
+{
+  vertical-align: middle;
+}
+
+.actions a
+{
+  color: #eee;
+  font-weight: bold;
+}
+
+.actions .action
+{
+  margin-right: 4px;
+}
+
+.row
+{
+  list-style: none;
+  clear: both;
+  padding: 4px !important;
+  margin: 0 auto !important;
+}
+
+.editor-container .row
+{
+  float: left;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-top:none;
+  margin: 0px;
+}
+
+.highlight
+{
+  background-color: #b7c4c8;
+}
+
+.item
+{
+  float: left;
+  border: 1px solid #6f8a91;
+  margin-right: 2px !important;
+  margin-bottom: 2px !important;
+  padding: 0;
+  background-color: #fff;
+  -moz-border-radius: 4px;
+}
+
+.item a img
+{
+  border: 0;
+}
+
+.item .description
+{
+  padding: 2px;
+  background-color: #ececec;
+}
+
+.row .delete_row
+{
+  float: right;
+  margin-right: -20px !important;
+}
+
+.item .description .multimedia
+{
+  display: block;
+  border: 1px solid #6f8a91;
+  background-color: #fff;
+  text-align: center;
+  height: 48px;
+  overflow: hidden;
+  margin-bottom: 4px;
+  color: #999;
+  font-size: 10px;
+}
+
+.item .description .absent
+{
+  padding-top: 16px;
+  height: 32px;
+}
+
+.item .description .title
+{
+  font-size: 10px;
+  text-align: center;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.item .description .representation
+{
+  font-size: 9px;
+  font-style: italic;
+  color: #777;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.item .interactions
+{
+/*
+  text-align: center;
+  float: right;
+  width: 24px;
+*/
+  padding: 2px;
+}
+
+.item .interactions .interaction select
+{
+  padding: 0px !important;
+  height: 16px;
+  vertical-align: top !important;
+}
+
+.item .interactions .interaction
+{
+  margin-right: 6px;
+  display: inline;
+}
+
+.item .interactions .selector
+{
+  position: absolute;
+  border: 1px solid #6f8a91;
+  padding: 2px;
+  background: #fff;
+  z-index: 99999 !important;
+}
+
+.item .interactions .selector a
+{
+  padding: 1px;
+}
+
+.item .interactions .selector img
+{
+  vertical-align: middle;
+}
+
+.item .interactions .selector a:hover
+{
+  background-color: #b7c4c8;
+}
+
+.item .interactions .selector a:hover img
+{
+  
+  
+}
+
+.item .interactions .interaction .handle:hover
+{
+  cursor: move;
+}
+
+#indicator
+{
+  text-align: center;
+  border: 1px solid #6f8a91;
+  padding: 12px;
+  background-color: #b7c4c8;
+  -moz-border-radius: 4px;
+  width: 25%;
+  margin: 12px auto;
+  color: #fff;
+}
+
+#indicator img
+{
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+#preview
+{
+  border: 0;
+  position: absolute;
+  height: 98%;
+  width: 98%;
+  top: 5px;
+  right: 5px;
+  left: 5px;
+  bottom: 5px;
+  background-color: #fff;
+  border: 1px solid #6f8a91;
+}
+
+.articles-container
+{
+  position: absolute;
+  left: 55%;
+  width: 40%;
+}
+
+
+.articles-container .row img
+{
+  vertical-align: middle;
+}
+
+.articles-container .search
+{
+
+}
+
+.articles-container .search input
+{
+  width: 15em;
+}
+
+.articles-container .search label
+{
+  float: none !important;
+  display: inline !important;
+  width: auto !important;
+  padding: 3px !important;
+}
+
+#article_name_auto_complete
+{
+  z-index: 999;
+}
+
+.hint
+{
+  font-size: 9px;
+  color: #666;
+}
+
+.articles-container .article-details-toggle
+{
+  float: right;
+  margin: 0px;
+  padding: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-topleft: 3px;
+  border: 1px solid #ccc;
+  background-color: #C0FFC0;
+}
+
+.help-container .help-toggle
+{
+  margin-right: 3px;
+  padding: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-topleft: 3px;
+}
+
+.help-container .help-toggle a,
+.articles-container .article-details-toggle a
+{
+  color: #000;
+}
+
+
+.help-container .active a,
+.articles-container .active a
+{
+  color: #444;
+}
+
+.articles-container .article-details
+{
+  border: 1px solid #ccc;
+  padding: 6px;
+  margin: 2px;
+  margin-top: 10px;
+  color: #99a;
+  background-color: #fff;
+}
+
+.articles-container .article-details .multimedia
+{
+  float: right;
+}
+
+.articles-container .article-details .label
+{
+  font-weight: bold;
+  color: #6f8a91;
+}
+
+.articles-container .actions
+{
+  margin-top: 0;
+}
+
+.articles-container .actions .auto_complete
+{
+  background: #eee;
+  color: #333;
+}
+
+.articles-container .actions .auto_complete li:hover
+{
+  cursor: pointer;
+}
+
+.articles-container .actions .auto_complete li.selected
+{
+  background-color: #6f8a91;
+  color: #fff;
+}
+
+/**
+#template_edit_form ul.sf_admin_actions li input.sf_admin_action_save
+{
+  border: 1px outset #6f8a91 !important;
+  background-color: #6f8a91 !important;
+  color: #fff !important;
+}
+
+#template_edit_form ul.sf_admin_actions li input.sf_admin_action_list
+{
+  border: 1px outset #6f8a91 !important;
+  background-color: #b7c4c8 !important;
+  color: #111 !important;
+}
+**/
+
+.help-container
+{
+  float: left;
+}
+
+.help-container img
+{
+  vertical-align: middle;
+}
+
+.help-container #template_editor_help
+{
+  border: 1px solid #6f8a91;
+  background-color: #eee;
+}
+
+.help-container #template_editor_help h2
+{
+  color: #6f8a91;
+  font-weight: bold;
+  font-size: 120%;
+  margin: 6px 10px;
+}
+
+.help-container #template_editor_help p
+{
+  margin: 1px 6px 5px 6px;
+  color: #222;
+}
+
+.help-container #template_editor_help p .image
+{
+  width: 24px;
+  float: left;
+  text-align: center;
+}

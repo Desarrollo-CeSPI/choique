@@ -1,0 +1,27 @@
+all:
+  is_secure: on
+
+editPriorities:
+  is_secure: on
+  credentials: [ [reporter_admin, designer_admin] ]
+
+increasePriority:
+  is_secure: on
+  credentials: [ [reporter_admin, designer_admin] ]
+
+decreasePriority:
+  is_secure: on
+  credentials: [ [reporter_admin, designer_admin] ]
+
+delete:
+  is_secure: on
+  credentials: [ [reporter_admin, designer_admin] ]
+
+publish:
+  is_secure: on
+  credentials: [ [reporter_admin, designer_admin] ]
+
+unpublish:
+  is_secure: on
+  credentials: [ [reporter_admin, designer_admin] ]
+

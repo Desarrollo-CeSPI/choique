@@ -1,0 +1,78 @@
+generator:
+  class:                sfAdvancedAdminGenerator
+  param:
+    model_class:        Document
+    theme:              default_mod
+    css:                backend/admin_theme_black
+
+    fields:
+      name:
+        name:           Nombre
+      title:
+        name:           Título
+      uri:
+        name:           Archivo
+        type:           admin_input_file_tag
+        help:           "Los tipos de documentos permitidos son:<br />.doc (documento de word), .pdf (portable document file), .rtf (rich text format), .xls (hoja de cálculo de excel), .ppt (presentación de powerpoint), .zip (archivo comprimido en formato zip)"
+      references:
+        name:           Referenciado en
+      html_representation:
+        name:           Vista previa
+      uploaded_by_user:
+        name:           Subido por
+      updated_by_user:
+        name:           Actualizado por
+      updated_at:
+        name:                       Última actualización
+        params:                     date_format="dd/MM/yyyy H:mm"
+      created_at:
+        name:                       Fecha de creación
+        params:                     date_format="dd/MM/yyyy H:mm"
+
+    filters:
+      fields:
+        title:
+          help: Utilice * como wildcard
+        name:
+          help: Utilice * como wildcard
+
+    list:
+      title:            Listado de documentos
+      sort:             [created_at, desc]
+      display:          [name, title, uploaded_by_user, updated_at, created_at]
+      filters:          [name, title]
+      object_actions:
+        _show:
+        _edit:
+          condition:    canEdit
+        _delete:
+          credentials:  [[ reporter_admin, designer_admin ]]
+          condition:    canDelete
+      actions:
+        _create:
+        
+    create:
+      title:            Crear un nuevo documento
+      display:          [name, title, uri]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+
+    edit:
+      title:            Editar documento "%%title%%"
+      display:          [name, title, uri]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+          
+    show:
+      title:            Detalle del documento "%%title%%"
+      display:          
+        Información General:         [ name, title, html_representation, _references ]
+        Información de Auditoria:    [ uploaded_by_user, created_at, updated_by_user, updated_at ]
+      actions:
+        _list:

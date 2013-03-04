@@ -1,0 +1,12 @@
+methods:                [post]
+fields:
+  article_group{name}:
+    required:
+      msg:              Es necesario ingresar un nombre para la galería de artículos
+  article_group{visible_items}:
+    sfNumberValidator:
+      nan_error:        Please enter an integer
+      min:              1
+      min_error:        La cantidad de items visibles debe ser como mínimo 1.
+fillin:
+  enabled:              true

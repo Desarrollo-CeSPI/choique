@@ -1,0 +1,258 @@
+contenidos:
+  title:                Contenidos periodísticos
+  credentials:          [[   designer_admin, designer, reporter_admin, reporter ]]
+  submenu:
+    articulos:
+      title:            Artículos
+      url:              article/list
+      submenu:
+        listado:
+          title:        Listado
+          url:          article/list
+        nuevo:
+          title:        Nuevo
+          url:          article/create
+    galeria_articulos:
+      title:            Galerías de artículos
+      url:              articlegroup/list
+      submenu:
+        listado:
+          title:        Listado
+          url:          articlegroup/list
+        nuevo:
+          title:        Nueva
+          url:          articlegroup/create
+
+
+multimedial:
+  title:                Contenidos multimediales
+  credentials:          [[   designer_admin, designer, reporter_admin, reporter ]]
+  submenu:
+    mmedia:
+      title:            Multimedia
+      url:              multimedia/list
+      submenu:
+        listado:
+          title:        Listado
+          url:          multimedia/list
+        nuevo:
+          title:        Nuevo
+          url:          multimedia/create
+    galerias:
+      title:            Galerías
+      url:              gallery/list
+      submenu:
+        listado:
+          title:        Listado
+          url:          gallery/list
+        nueva:
+          title:        Nueva
+          url:          gallery/create
+    documentos:
+      title:            Documentos
+      url:              document/list
+      submenu:
+        listado:
+          title:        Listado
+          url:          document/list
+        nuevo:
+          title:        Nuevo
+          url:          document/create
+
+
+contenidos_otros:
+  title:                Contenidos especiales
+  credentials:          [[   designer_admin, designer, reporter_admin, reporter ]]
+  submenu:
+<?php if (CmsConfiguration::get('check_use_forms', true)): ?>
+    forms:
+      title:            Formularios/Encuestas
+      url:              form/list
+      submenu:
+        listado:
+          title:        Listado
+          url:          form/list
+        nuevo:
+          title:        Nuevo
+          url:          form/create
+
+<?php endif; ?>
+
+    rsschannel:
+      title:            Canales Externos de RSS
+      url:              rsschannel/list
+      submenu:
+        listado:
+          title:        Listado
+          url:          rsschannel/list
+        nuevo:
+          title:        Nuevo
+          url:          rsschannel/create
+    atajos:
+      title:            Atajos
+      url:              shortcut/list
+      submenu:
+        listado:
+          title:        Listado
+          url:          shortcut/list
+        nuevo:
+          title:        Nuevo
+          url:          shortcut/create
+    vinculos:
+      title:            Vínculos
+      url:              link/list
+      submenu:
+        listado:
+          title:        Listado
+          url:          link/list
+        nuevo:
+          title:        Nuevo
+          url:          link/create
+    calendar:
+      title:            Calendario
+      submenu:
+        eventos:
+          title:        Listado de Eventos
+          url:          event/list
+        nuevo:
+          title:    Nuevo Evento
+          url:      event/create
+        tipos_evento:
+          title:        Tipos de evento
+          url:          eventtype/list
+          credentials:         [ [reporter_admin, designer_admin] ]
+          submenu:
+            t_e_listado:
+              title:    Listado
+              url:      eventtype/list
+            t_e_nuevo:
+              title:    Nuevo
+              url:      eventtype/create
+
+
+estilosvisuales:
+  title:           Estilos visuales
+  credentials:     [ [designer, designer_admin] ]
+  submenu:
+    actual:
+      title:       Seleccionar estilo visual
+      url:         flavors/selectFlavor
+      credentials:     [ designer_admin ]
+    editar:
+      title:       Editar estilo visual actual
+      url:         editor/index
+      credentials:     [ designer_admin ]
+    crear:
+      title:       Instalar nuevo estilo visual
+      url:         flavors/installFlavor
+      credentials:     [ [designer, designer_admin] ]
+    download:
+      title:       Descargar estilo visual actual
+      url:         flavors/downloadFlavor
+      credentials:     [ [designer, designer_admin] ]
+    delete:
+      title:       Eliminar estilos visuales
+      url:         flavors/deleteFlavor
+      credentials:     [ designer_admin ]
+
+organizacion:
+  title:                Organización
+  credentials:          [[  designer_admin, reporter, designer, reporter_admin ]]
+  submenu:
+    distribucion:
+<?php if (CmsConfiguration::get('check_use_layout_per_section', false)): ?>
+      title:            Distribuciones
+      credentials:          [ designer_admin ]
+      url:          layout/index
+      submenu:
+        listado:
+          title:        Listado
+          credentials:          [[ designer_admin, reporter_admin ]]
+          url:          layout/index
+
+<?php else: ?>
+      title:            Distribución
+      submenu:
+        editar:
+          title:        Editar
+          url:          slotlet/index
+
+<?php endif; ?>
+
+    secciones:
+      title:            Secciones
+      url:              section/list
+      submenu:
+        listado:
+          title:        Listado
+          url:          section/list
+        nueva:
+          title:        Nueva
+          url:          section/create
+    portadas:
+      title:            Portadas
+      credentials:      [[  designer_admin, reporter_admin ]]
+      url:              template/list
+      submenu:
+        listado:
+          title:        Listado
+          url:          template/list
+        nueva:
+          title:        Nueva
+          url:          template/create
+
+administracion:
+  title:               Administración
+  credentials:         [ [ reporter_admin, designer_admin] ]
+  submenu:
+    usuarios:
+      title:           Usuarios
+      url:         sfGuardUser/list
+      credentials:  [admin ]
+    mails:
+      title:           Listado de Mails
+      url:         maillog/list
+      credentials:  [admin ]
+    configuracion:
+      title:           Configuración
+      url:         administration/index
+      credentials:  [admin ]
+
+<?php if (CmsConfiguration::get('check_use_sources', true)): ?>
+    fuentes_periodisticas:
+      title:            Fuentes periodísticas
+      url:              source/list
+      credentials:         [ [reporter_admin ] ]
+      submenu:
+        listado:
+          title:        Listado
+          url:          source/list
+        nueva:
+          title:        Nueva
+          url:          source/create
+
+<?php endif; ?>
+<?php if (CmsConfiguration::get('check_use_tags', true)): ?>
+    categorias:
+      title:            Categorías
+      url:              tag/list
+      credentials:         [ [reporter_admin, designer_admin] ]
+      submenu:
+        listado:
+          title:        Listado
+          url:          tag/list
+        nueva:
+          title:        Nueva
+          url:          tag/create
+
+<?php endif; ?>
+
+ayuda:
+  title:               Ayuda
+  credentials:          [[   designer_admin, designer, reporter_admin, reporter ]]
+  submenu:
+    manual:
+      title:            Manual
+      url:              <?php echo image_path('/manual.pdf', true) ?>
+
+

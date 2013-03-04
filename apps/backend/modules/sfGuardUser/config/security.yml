@@ -1,0 +1,25 @@
+all:
+  is_secure:        on
+
+create:
+  is_secure:        on
+  credentials:      [super_admin]
+
+delete:
+  is_secure:        on
+  credentials:      [super_admin]
+
+list:
+  is_secure:        on
+  credentials:      [super_admin]
+
+show:
+  is_secure:        on
+  credentials:      [super_admin]
+
+edit:
+  is_secure:        on
+  credentials:      [super_admin]
+
+changePassword:
+  is_secure:        on

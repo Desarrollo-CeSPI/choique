@@ -1,0 +1,17 @@
+---
+default: 
+  http_metas: 
+    content-type: text/html
+  metas: 
+    robots: index, follow
+    keywords: CMS,
+    language: es_AR
+  stylesheets: 
+  javascripts: 
+    - common
+    - jquery-1.4.2.min.js
+    - no-conflict.js
+    - /sfPrototypePlugin/js/prototype
+  has_layout: 1
+  layout: layout
+  with_navigation: true

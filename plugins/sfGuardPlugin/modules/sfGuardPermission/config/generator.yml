@@ -1,0 +1,49 @@
+generator:
+  class:                sfAdvancedAdminGenerator
+  param:
+    model_class:        sfGuardPermission
+    theme:              default_mod
+    css:                backend/admin_theme_black
+
+    fields:
+      section:
+        name:           Permiso de sección
+      name:
+        name:           Nombre
+      description:
+        name:           Descripción
+
+    filters:
+      fields:
+        name:
+          help: Utilice * como wildcard
+
+    list:
+      peer_method:      doSelectSectionPermissions
+      peer_count_method:      doCountSectionPermissions
+      filters:          [ name ]
+      title:            Listado de permisos para ser usados en secciones
+      display:          [name, description]
+      object_actions:
+        _edit:
+        _delete:
+      actions:
+        _create:
+
+    create:
+      title:            Crear permiso de seccion
+      display:          [name, description]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+
+    edit:
+      title:            Editar permiso de seccion "%%name%%"
+      display:          [name, description ]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:

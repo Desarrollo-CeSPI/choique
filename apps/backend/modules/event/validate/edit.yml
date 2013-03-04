@@ -1,0 +1,16 @@
+methods:                        [post]
+fields:
+  event{title}:
+    required:
+      msg:                      Es necesario ingresar un título para el evento
+  event{event_type_id}:
+    required:
+      msg:                      Es necesario ingresar un tipo de evento
+  event{begins_at}:
+    required:
+      msg:                      Es necesario ingresar una fecha de comienzo del evento
+  event{ends_at}:
+    required:
+      msg:                      Es necesario ingresar una fecha de fin del evento
+fillin:
+  enabled:                      true

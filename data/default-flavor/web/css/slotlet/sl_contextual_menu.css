@@ -1,0 +1,94 @@
+/* SECTIONS */
+.sl_section {
+  font-size: 9px;
+  line-height: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a img {
+  border: 0;
+}
+
+ .sl_section a  {
+  padding-right: 6px;
+  padding-left: 6px;
+}
+
+ .sl_section .arrow {
+  float: right;
+}
+
+ .sl_section .first-level {
+  background: #fff; 
+  display: block;
+  border: 1px solid #c8c8c8;
+	min-height: 16px;
+  margin-top: 2px;
+}
+
+ .sl_section .first-level a {
+  display: block;
+}
+
+ .sl_section .with-arrow {
+}
+
+ .sl_section .first-level a:hover,
+ .sl_section .first-level .selected,
+ .sl_section .second-level a:hover,
+ .sl_section .second-level .selected {
+  background: #edede3;
+}
+
+ .sl_section .first-level .arrow:hover {
+  background: none;
+}
+
+ .sl_section .with-arrow a:hover,
+ .sl_section .with-arrow .selected {
+}
+
+ .sl_section .first-level a {
+  color: #000;
+}
+
+ .sl_section .second-level {
+  list-style: none;
+  color: #666;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #c8c8c8;
+  border-top: 0;
+}
+
+ .sl_section .second-level a {
+  display: block;
+  color: #666;
+}
+
+#contextual_menu .first-level,
+#contextual_menu .second-level {
+  border: 1px solid #d2d293 !important;
+}
+
+#contextual_menu .second-level {
+  border-top: none !important;
+}
+
+#left .no-padding a {
+	padding: 0 !important;
+}
+
+#left .no-padding a img {
+	border: 0 !important;	
+}
+
+#ad div {
+  margin-top: 2px;
+}
+
+.hidden {
+        display: none;
+}

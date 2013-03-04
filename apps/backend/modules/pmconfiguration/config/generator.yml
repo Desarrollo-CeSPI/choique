@@ -1,0 +1,15 @@
+generator:
+  class:              sfAdvancedAdminGenerator
+  param:
+    model_class:      pmConfiguration
+    theme:            default
+
+    fields:
+      pm_modules:
+        name: Addons habilitados
+
+    edit:
+      title: Habilitar/Deshabilitar addons
+      display: [_pm_modules]
+      actions:
+        _save:

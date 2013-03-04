@@ -1,0 +1,16 @@
+methods:                        [post, get]
+fields:
+  subject:
+    required:
+      msg:                      El asunto del mensaje no puede estar vacío
+  sender_name:
+    required:
+      msg:                      El nombre del remitente no puede estar vacío 
+  sender_mail:
+    required:
+      msg:                      El mail no puede estar vacío
+    sfEmailValidator:
+      email_error:              El mail no es válido
+  body:  
+    required:
+      msg:                      El cuerpo del mensaje no puede estar vacío

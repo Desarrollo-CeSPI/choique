@@ -1,0 +1,141 @@
+generator:
+  class:                  sfAdvancedAdminGenerator
+  param:
+    model_class:          Event
+    theme:                default_mod
+    css:                  backend/admin_theme_black
+    
+    fields:
+      id:
+        name:             ID
+      is_published:
+        name:             Publicado
+      title:
+        name:             Título
+      description:
+        name:             Descripción
+      comment:
+        name:             Comentario
+        help:             Exclusivamente uso interno
+      location:
+        name:             Lugar
+      begins_at:
+        name:             Inicio
+        required:         true
+        params:                     date_format="dd/MM/yyyy H:mm"
+      ends_at:
+        name:             Finalización
+        required:         true
+      contact:
+        name:             Información de contacto
+      organizer:
+        name:             Organizador
+      event_type_id:
+        name:             Tipo de evento
+        required: true
+      event_type:
+        name:             Tipo de evento
+      author:
+        name:             Creado por
+      user_name:
+        name:             Autor
+      author_name:
+        name:             Creado por
+      article_id:
+        name:             Artículo relacionado
+      article:
+        name:             Artículo relacionado
+      event_sections:
+        name:             Secciones relacionadas
+        type:             admin_double_list
+        params:           through_class=EventSection style="width:350px;"
+      show_event_sections:
+        name:             Secciones relacionadas
+      created_at: 
+        name:             Creado el
+      updated_by_user:
+        name:             Actualizado por
+      updated_at:
+        name:             Actualizado el
+
+    filters:
+      fields:
+        title:
+          help: Utilice * como wildcard
+        organizer:
+          help: Utilice * como wildcard
+    
+    list:
+      fields:
+        event_type:
+          join_fields:              [EventPeer::EVENT_TYPE_ID, EventTypePeer::ID]
+          sort_column:              [EventTypePeer::TITLE]
+        author_name:
+          join_fields:              [EventPeer::AUTHOR, sfGuardUserPeer::ID, Criteria::LEFT_JOIN ]
+          sort_column:              [sfGuardUserPeer::NAME]
+      sort:               [id, desc]
+      title:              Listado de eventos
+      display:            [title, event_type, author_name, comment, article, is_published, begins_at]
+      filters:            [title, organizer, event_type_id, is_published, begins_at]
+      object_actions:
+        _show:            
+        _edit:            
+          condition: canEdit
+        unpublish:
+          action:                   unpublish
+          name:                     Despublicar
+          credentials:              [ [ reporter_admin, designer_admin ]]
+          condition:                canUnpublish
+        publish:
+          action:                   publish
+          name:                     Publicar
+          icon:                     backend/publish_icon.png
+          credentials:              [ [ reporter_admin, designer_admin ]]
+          condition:                canPublish
+        _delete:          
+          condition: canDelete
+          credentials:      [[ reporter_admin, designer_admin ]]
+      actions:
+        export:
+          name:           Exportar listado xls
+          action:         export
+          params:         class=sf_admin_action_edit
+        _create:          
+
+    create:
+      fields:
+        is_published:
+          credentials:      [[ reporter_admin, designer_admin ]]
+      title:            Crear un nuevo evento
+      display:            
+        Datos:          [title, description, comment, location, begins_at, ends_at, is_published, contact, organizer, event_type_id]
+        Articulo relacionado:   [_article_id]
+        Secciones relacionadas: [~event_sections]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+              
+    edit:
+      fields:
+        is_published:
+          credentials:      [[ reporter_admin, designer_admin ]]
+      title:                  Editar evento "%%title%%"
+      display:                
+        Datos:                  [title, description, comment, location, begins_at, ends_at, contact, organizer, event_type_id, is_published]
+        Articulo relacionado:   [_article_id]
+        Secciones relacionadas: [~event_sections]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+        
+    show:
+      title:              Previsualización del evento "%%title%%"
+      display:            
+        Información General:         [title, description, comment, location, begins_at, ends_at, contact, organizer, event_type, _show_event_sections, article, is_published]
+        Información de auditoria:    [created_at, author_name, updated_at, updated_by_user]
+      actions:
+        _list:

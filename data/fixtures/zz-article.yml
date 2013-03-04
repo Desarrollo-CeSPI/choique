@@ -1,0 +1,32 @@
+Article:
+  bienvenida:
+    type: 0
+    name:                       _bienvenido_a_choique_
+    title:                      ¡Bienvenido a Choique CMS!
+    heading:                    Un manejador de contenidos a medida
+    comment:                    Este es un artículo de prueba autogenerado por Choique CMS
+    upper_description:          Choique CMS
+    body: |
+      <p>
+        Muchas gracias por elegir Choique.
+      </p>
+      <p>
+        Choique CMS es un manejador de contenidos desarrollado por el
+        <a title="Choique - Centro Superior del Procesamiento de la Informaci&oacute;n" href="http://www.cespi.unlp.edu.ar" target="_blank">CeSPI</a>
+        - <a title="Choique - UNLP" href="http://www.unlp.edu.ar" target="_blank">Universidad Nacional de La Plata</a>.
+      </p>
+      <p>
+        Esta es una plantilla visual inicial del manejador de contenidos, que puede ser modificada
+        muy f&aacute;cilmente desde el mismo producto.
+      </p>
+      <p>
+        Para comenzar puede ingresar a la interfaz de administraci&oacute;n y personalizar el sitio a su gusto.
+      </p>
+    created_by:                 admin
+    is_published:               true
+    is_archived:                false
+    published_at:               "<?php echo date('Y-m-d H:i:s') ?>"
+    contact:                    desarrollo@cespi.unlp.edu.ar
+    times_read:                 0
+    open_as_popup:              false
+    section_id:                 home

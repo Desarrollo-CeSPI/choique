@@ -1,0 +1,50 @@
+generator:
+  class:                  sfAdvancedAdminGenerator
+  param:
+    model_class:          EventType
+    theme:                default_mod
+    css:                  backend/admin_theme_black
+
+    fields:
+      id:
+        name:             ID
+      title:
+        name:             Título
+      description:
+        name:             Descripción
+
+    list:
+      sort:               [id, desc]
+      title:              Listado de tipos de eventos
+      display:            [title]
+      filters:            false
+      object_actions:
+        _edit:            
+        _delete:          
+          condition:      canDelete
+      actions:
+        _create:          
+    
+    create:
+      title:              Crear nuevo tipo de evento
+      display:            [title, description]
+      actions:
+        _list:             
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:            
+   
+    edit:
+      title:              Editar tipo de evento  "%%title%%"
+      display:            [title, description]
+      actions:
+        _list:             
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+   
+    show:
+      title:              Previsualización del tipo de evento  "%%title%%"
+      display:            [title, description]
+      actions:
+        _list:             

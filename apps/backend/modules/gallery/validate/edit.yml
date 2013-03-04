@@ -1,0 +1,15 @@
+methods:                [post]
+fields:
+  gallery{name}:
+    required:
+      msg:              Es necesario ingresar un nombre para la galería
+  gallery{visible_items}:
+    sfNumberValidator:
+      nan_error:        Please enter an integer
+      min:              1
+      min_error:        La cantidad de items visibles debe ser como mínimo 1. 
+    sfCallbackValidator:
+      callback:         [Gallery, visible_items_check]
+      invalid_error:    La cantidad de items visibles superó la cantidad máxima configurada.
+fillin:
+  enabled:              true

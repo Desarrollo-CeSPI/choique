@@ -1,0 +1,497 @@
+= Unobtrusive JavaScript Plug-In =
+
+The `sfUJSPlugin` offers helpers that facilitate the creation of interactive effects with JavaScript in an unobtrusive way.
+
+If you want to learn more about the unobtrusive approach to JavaScript, and how you can use JavaScript to enhance usability without sacrificing accessibility, read [http://onlinetools.org/articles/unobtrusivejavascript/index.html this article].
+
+''Warning'': This plugin is in Alpha state. Syntax is subject to change.
+
+== Introduction ==
+
+Doing unobtrusive JavaScript can be a pain for several reasons:
+
+  * You need to traverse the DOM after it's been built to modify an element's style/behaviour. If the element that you want to modify doesn't have an `id`, you have to refer to it using complicated CSS selectors/XPath queries, hard to read and to maintain when the template changes.
+  * The behaviours and the structure appear separated from each other in the code, and that makes debugging difficult. Templates and JavaScript files are far from each other in the symfony directory structure. In particular, a template with a lot of unobtrusive visual effects becomes unmaintainable because of the constant switch between the XHTML and the JS file.
+  * The 'rails-like' syntax of Ajax helpers is quite adapted to Rapid Application Development, because the code is concise and readable. UJS is most of the time longer to write, since you need to declare a JavaScript block in the template, and you must first find the DOM element you want to modify.
+
+All these lead to an alternative way to code UJS, using PHP helpers in the template. The `sfUJSPlugin` can be used to add interactive effects and Ajax calls to your pages, and is an alternative to the [http://www.symfony-project.com/book/trunk/11-Ajax-Integration symfony Javascript helpers]. This implementation uses [http://jquery.com/ JQuery] as the underlying JavaScript framework, but the same could be achieved with [http://www.prototypejs.org/ Prototype].
+
+The UJS implementation of this plugin uses the [wiki:sfPJSPlugin], which provides a way to call dynamically generated JavaScript files. The benefit of UJS over PJS alone is that you can write JavaScript through helpers directly in the main template and avoid switching back and forth to a behaviour template.
+
+== Installation ==
+
+  * Install the plugin
+  
+  {{{
+  $ symfony plugin-install http://plugins.symfony-project.com/sfUJSPlugin
+  }}}
+  
+  * Alternatively, if you don't have PEAR installed, you can download the latest package attached to this plugin's wiki page and extract it under your project's `plugins/` directory
+  
+  * If it is not installed yet, install the [wiki:sfPJSPlugin], which is necessary to run this plugin.
+
+  * Enable the `sfUJS` module in the `settings.yml`:
+    
+{{{
+all:
+  .settings:
+    enabled_modules:        [default, sfUJS]
+}}}
+
+  * Activate the `sfUJSFilter` in the `apps/myapp/filters.yml`:
+
+{{{
+rendering: ~
+web_debug: ~
+security:  ~
+
+# generally, you will want to insert your own filters here
+
+cache:     ~
+common:    ~
+
+UJS:
+  class: sfUJSFilter
+
+flash:     ~
+execution: ~
+}}}
+
+  * Optional: You can choose to use the UJS alternative to the `Tag` helper so that every mention of an event handler (such as `onclick`) in a symfony helper gets rendered in an unobtrusive way. This is done by copying the `sfUJSPlugin/lib/helper/UJSTagHelper.php` file into `myapp/lib/helper/TagHelper.php` and clearing the cache (see below)
+
+  * Clear the cache to enable the autoloading to find the new classes
+  
+  {{{
+  $ symfony cc
+  }}}
+
+== Basic syntax ==
+
+=== Declaring the helper in templates ===
+
+The UJS plugin provides a set of helpers to be used within templates. As for other helpers, you must declare the related helper group to make the helper functions available in the template. 
+{{{
+<?php use_helper('UJS') ?>
+}}}
+
+=== Adding JavaScript code unobtrusively ===
+
+The following template code:
+{{{
+<div id="foobar">
+  I'm here !
+</div>
+<?php UJS("$('#foobar').css('display', 'none')") ?>
+}}}
+
+Renders as follows:
+{{{
+<head>
+  <script type="text/javascript" src="/UJS/script/key/bc8b3812f3d7a20f7ed7c1ab25ec449a.php"></script>
+</head>
+<body>
+  <div id="foobar">
+    I'm here !
+  </div>
+</body>
+}}}
+
+The filter contained in the plugin automatically declares the use of a special JavaScript file, which is generated dynamically by the `UJS/script` action. This action packages all the code included by calls to the `UJS()` helper. In the previous example, the included JavaScript is:
+{{{
+$().ready(function(){
+    $('#foobar').css('display', 'none');
+ })
+}}}
+
+The resulting DOM after execution is:
+{{{
+<div id="foobar" style="display:none">
+  I'm here !
+</div>
+}}}
+
+Alternatively, you can write the Javascript code between two helper calls, to avoid complicated quotes escaping problems.
+{{{
+<?php UJS_block() ?>
+$('#foobar').css('display', 'none');
+<?php UJS_end_block() ?>
+// same as
+<?php UJS("$('#foobar').css('display', 'none')") ?>
+}}}
+
+=== Static vs dynamic UJS inclusion ===
+
+By default, all code declared with UJS helpers ends up in an attached file. That's the way the plugin achieves complete unobtrusiveness: there is absolutely no JavaScript code in the XHTML response, and the behaviour layer is clearly separated from the content layer. This also allows for caching of the behaviour code by the browsers, just like CSS files are cached to avoid reloading style declarations. As compared to embedded code, UJS code saves server bandwith and accelerates the display on the client side.
+
+This works fine as long as the UJS code is static. But on some special cases, the UJS code depends on the user session or on the database, and in this case separating the UJS code from the reponse creates issues due to caching. That's why the helper provides a way to directly embed UJS code in the XHTML instead of getting it via the `UJS/script` action.
+
+There are three ways to enable this 'non-static' behaviour:
+
+ - Set the `static` response parameter to `false` in the `symfony/view/UJS` namespace. This is mostly useful for when you want to define this behaviour in an actions file:
+{{{ 
+sfContext::getInstance()->getResponse()->setParameter('static', false, 'symfony/view/UJS');
+}}}
+
+ - Call the `UJS_set_inclusion(false)` helper at the end of a template to declare that the UJS code of the template is not static:
+{{{ 
+<?php UJS_set_inclusion(false) ?>
+}}}
+
+ - Alternately, you can define that the default inclusion method for all templates is to embed instead of attach via the `app.yml` file:
+{{{
+all:
+  UJSPlugin:
+    static: false
+}}}    
+
+Once the UJS code is declared non-static, the UJS plugin filter will no longer include the `UJS/script` action as an external script, but rather look for a `</body>` tag and insert a `<script>` content just before. So for instance, the following template code:
+{{{
+<div id="foobar">
+  I'm here !
+</div>
+<?php UJS("$('#foobar').css('display', 'none')") ?>
+<?php UJS_set_inclusion(false) ?>
+}}}
+
+Renders as follows:
+{{{
+<div id="foobar">
+  I'm here !
+</div>
+...
+<script>
+//  <![CDATA[
+$().ready(function(){
+   $('#foobar').css('display', 'none');
+ })
+//  ]]>
+</script>
+</body>
+}}}
+
+If you prefer that the UJS code appears somewhere else in the document, all the `include_UJS()` helper somewhere in your template/layout, and the plugin will use this placeholder instead of looking for a `</body>` for script inclusion.
+
+== UJS Helpers documentation ==
+
+The `UJS()` helper is just one of a bunch of helpers proposed by the `UJS` helper group to facilitate the writing of UJS code with PHP. The other helpers of the plugin, for which you will find complete syntax and examples below, are:
+
+ - `UJS_add_behaviour($selector, $event, $code)`
+ - `UJS_change attributes($selector, $attributes)`
+ - `UJS_change style($selector, $style_attributes)`
+ - `UJS_write($code)`
+ - `UJS_link_to_function($text, $code)`
+ - `UJS_button_to_function($text, $code)`
+ - `UJS_ajaxify_link($selector, $ajax_options)`
+ - `UJS_ajaxify_form($selector, $ajax_options)`
+ - `UJS_ajaxify($selector, $ajax_options)`
+
+=== Automatic iteration with jQuery ===
+
+UJS uses jQuery to translate the helpers into JavaScript. This means that the code you write can also use JQuery, since the library is automatically included by the helper functions.
+
+One of the great advantages of jQuery is that when a selector returns more than one DOM element, calling a method on the result of the selector automatically iterates over the results. So for instance,
+
+{{{
+ $('p').css('color', 'red');
+}}}
+
+...will loop over all `<p>` elements of the document and change their `color` CSS attribute to `red`.
+
+The UJSPlugin helpers support the same automatic iteration feature, so all the helpers expecting a selector as first parameter can work with a selector returning one or more results.
+
+=== Adding a behaviour unobtrusively ===
+
+The following template code:
+
+{{{
+<div id="foobar">
+  click me
+</div>
+<?php UJS_add_behaviour('#foobar', 'click', "alert('foobar')") ?>
+}}}
+
+Renders as follows:
+
+{{{
+<div id="foobar">
+  click me
+</div>
+
+// in linked UJS/script
+$().ready(function(){
+  $('#foobar').click(function() { alert('foobar') });
+}
+}}}
+
+And the resulting DOM after execution is:
+
+{{{
+<div id="foobar" onclick="alert('foobar')">
+  click me
+</div>
+}}}
+
+=== Modifying an element unobtrusively ===
+
+The following template code:
+
+{{{
+<div id="foobar">
+  I'm here !
+</div>
+<?php UJS_change_attributes('#foobar', 'style=color:yellow class=foo') ?>
+<?php UJS_change_style('#foobar', 'text-decoration:underline') ?>
+}}}
+
+Renders as follows:
+
+{{{
+<div id="foobar">
+  I'm here !
+</div>
+
+// in linked UJS/script
+$().ready(function(){
+    $('#foobar').attr('style', 'color:yellow').attr('class', 'foo');
+    $('#foobar').css('text-decoration', 'underline');
+ })
+}}}
+
+And the resulting DOM after execution is:
+
+{{{
+<div id="foobar" style="color:yellow; text-decoration:underline" class="foo">
+  I'm here !
+</div>
+}}}
+
+=== Adding some content unobtrusively ===
+
+The following template code:
+
+{{{
+<?php UJS_write('<a href="#" onclick="$(\'#foobar\').toggle();return false;">click me</a>') ?>
+<div id="foobar">
+  I'm here !
+</div>
+<?php UJS_change_style('#foobar', 'display:none') ?>
+}}}
+
+Renders as follows:
+
+{{{
+<span style="display: none" class="UJS_placeholder" id="UJS_0"></span> 
+<div id="foobar">
+  I'm here !
+</div>
+
+// in linked UJS/script
+$().ready(function(){
+    $('#UJS_0').after('<a href="#" onclick="$(\'#foobar\').toggle();return false;">click me</a>');
+    $('#UJS_0').remove();
+    $('#foobar').css('display', 'none');
+ })
+}}}
+
+And the resulting DOM after execution is:
+
+{{{
+<a href="#" onclick="$('#foobar').toggle();return false;">click me</a>
+<div id="foobar" style="display:none"">
+  I'm here !
+</div>
+}}}
+
+Alternatively, you can write the HTML code between two helper calls, to avoid complicated quotes escaping problems.
+
+{{{
+<?php UJS_write_block() ?>
+<a href="#" onclick="$('#foobar').toggle();return false;">click me</a>
+<?php UJS_end_write_block() ?>
+// same as
+<?php UJS_write('<a href="#" onclick="$(\'#foobar\').toggle();return false;">click me</a>') ?>
+}}}
+
+== UJS started by a click ==
+
+The most common JavaScript effects are triggered by a user click, either on a link or on a button. Just like the regular JavaScript helpers, the UJS helper group provides two helpers just for that purpose:
+
+{{{
+<?php echo UJS_link_to_function('click me', "alert('foobar')") ?> 
+<?php echo UJS_button_to_function('and also click me', "alert('foobarbaz')") ?> 
+}}}
+
+These two lines render as follows:
+
+{{{
+<span style="display: none" class="UJS_placeholder" id="UJS_0"></span> 
+<span style="display: none" class="UJS_placeholder" id="UJS_1"></span> 
+
+// in linked UJS/script
+$().ready(function(){
+$('#UJS_0').after('<a href="#" onclick="alert(\'foobar\'); return false;">click me</a>');$('#UJS_0').remove();
+$('#UJS_1').after('<input type="button" value="and also click me" onclick="alert(\'foobarbaz\')" />');$('#UJS_1').remove();
+})
+}}}
+
+And the resulting DOM after execution is:
+
+{{{
+<a onclick="alert('foobar'); return false;" href="#">click me</a>
+<input type="button" onclick="alert('foobarbaz')" value="and also click me"/>
+}}}
+
+=== UJS remote update started by a click (Ajax) ===
+
+The plugin provides helpers to modify an existing link, button or form to make it Ajax, so that clicking/submitting it will issue a remote call and update a DOM element with the response.
+
+The following template code:
+
+{{{
+<div id="ajax_feedback">
+  ajax feedback zone
+</div>
+<?php echo link_to('click me', 'foo/bar', 'id=1234') ?>
+<?php UJS_ajaxify_link('#1234', array(
+  'update' => '#ajax_feedback', 
+  'url' => 'foo/ajaxbar',
+)) ?>
+}}}
+
+Renders as follows:
+
+{{{
+<div id="ajax_feedback">
+  ajax feedback zone
+</div>
+<a href="/foo/bar" id="1234">click me</a>
+
+// in linked UJS/script
+$().ready(function(){
+  $('#1234').click(function() { $.ajax({url: '/foo/ajaxbar', success: function(response) { $('#ajax_feedback').html(response) }}); return false });
+})
+}}}
+
+The syntax is the same for all the UJS Ajax helpers. `UJS_ajaxify_link()` (to ajaxify a link), `UJS_ajaxify_form()` (to ajaxify a form) and `UJS_ajaxify()` (to ajaxify whatever element) all expect two parameters: a CSS3 selector of the element(s) to ajaxify, and an associative array of Ajax options. The possible Ajax options are:
+
+  - `url`: Internal URI of the action called remotely
+  - `update`: Selector of the element(s) to update with the remote response
+  - `position`: If specified, the remote response will not replace the content of the `update` element, but rather complement it. Possible values are `before`, `top`, `bottom`, and `after`.
+  - You can specify code to be executed at various steps of the Ajax request execution via the callback options:
+    - `beforeSend`
+    - `success`
+    - `error`
+    - `complete`
+  - `confirm`: Adds a confirmation dialog.
+  - `condition`: Perform remote request conditionally by this expression. Use this to describe browser-side conditions when request should not be initiated.
+
+== Replacement for usual helpers ==
+
+=== Catching all event handlers in helper calls ===
+
+Symfony already contains quite a lot of helpers outputting HTML elements. All these helpers support setting additional attributes, including event handlers. For instance, the `link_to()` helper transforms this call:
+
+{{{<?php echo link_to('click me', 'foo/bar', 'onclick=alert("you clicked me!")') ?>}}}
+
+Into:
+
+{{{<a href="/foo/bar" onclick="alert(\"you clicked me!\")">click me</a>}}}
+
+This is obtrusive code, for sure, but a damn fast way to define event handlers. What if symfony coud do the translation for you, so that every event handler defined in a symfony helper gets rendered in an unobtrusive way? That's exactly what the `UJSTag` helper group does.
+
+To enable this helper, copy the `lib/helper/UJSTagHelper.php` file bundled in this plugin into your application's `lib/helper/` directory, and rename it to `TagHelper.php`.
+
+Now, every mention of an event handler in a symfony helper call will be catched and transformed into an UJS behaviour. So the previous helper call:
+
+{{{<?php echo link_to('click me', 'foo/bar', 'onclick=alert(\'you clicked me!\')') ?>}}}
+
+Will be transformed into:
+
+{{{
+<a id="UJS_0" href="/foo/bar">click me</a>
+
+// in linked UJS/script
+$().ready(function(){
+  $('#UJS_0').click( function() { alert('you clicked me!') } );
+})
+}}}
+
+=== UJS for dummies ===
+
+So, you have always been using the classic 'Javascript' helper group, you don't want to learn a new syntax, but you want unobtrusiveness? You don't really deserve it, but hey, it's possible. This plugin comes with an alternative to the 'Javascript' helper group that uses the same syntax, but outputs unobtrusive code instead of obtrusive one.
+
+To enable this helper, copy the `lib/helper/UJSJavascriptHelper.php` file bundled in this plugin into your application's `lib/helper/` directory, and rename it to `JavascriptHelper.php`. From then on, symfony will use this file when you call `<?php use_helper('Javascript') ?>` instead of the one package with the framework.
+
+Use the helpers as you always did:
+
+{{{
+<?php use_helper('UJavascript') ?>
+<div id="ajax_feedback">
+  ajax feedback zone
+</div>
+<?php link_to_remote('click me for Ajax', array(
+  'update' => 'ajax_feedback', 
+  'url' => 'test/ajax',
+)) ?>
+}}}
+
+Renders as follows:
+
+{{{
+<div id="ajax_feedback">
+  ajax feedback zone
+</div>
+<span style="display: none" class="UJS_placeholder" id="UJS_0"></span>  
+
+// in linked UJS/script
+$().ready(function(){
+  $('#UJS_0').after('<a href="#" onclick="jQuery.ajax({url: \'/frontend_dev.php/test/ajax\', success: function(response) { $(\'#ajax_feedback\').html(response) }}); return false;">click me for Ajax</a>');$('#UJS_0').remove();
+})
+}}}
+
+Helpers implemented in the `UJavascript` helper group are:
+
+ - `link_to_remote()`
+ - `link_to_function()`
+ - `button_to_remote()`
+ - `button_to_function()`
+
+'''Warning''': Although this is very practical, using this helper is not advised. Unobtrusiveness is not just a post-processing, it's a way to design interactions. You will never achieve true unobtrusiveness unless you drop the habits taken with the Javascript helpers, and this means stop using the functions listed ahead.
+
+'''Warning''': Due to a bug in `sfWebDebug` ([http://www.symfony-project.com/trac/ticket/1548 #1548]), this method will work in production but not in the development environment.
+
+== Todo ==
+
+  * Server-side and browser-side caching of unobtrusive script file
+  * More unit tests
+  * Visual effects
+  * Complex interactions
+  * Prototype implementation
+  * add sfPJSPlugin as a PEAR dependency
+
+== Changelog ==
+
+=== 2007-05-20 | 0.6.0 Beta ===
+
+  * francois: Added unit tests (uses jQuery's testing framework, slightly modified)
+  * francois: fixed a bug in `UJS_change_style()`. Now recognizes combined style modifications
+  * francois: '''BC break''' Renamed module `UJS` to `sfUJS`
+
+=== 2007-04-27 | 0.5.2 Alpha ===
+
+  * francois: Now uses sfPJSPlugin to build dynamic JavaScript file
+  * francois: Fixed problem with static mode when URL_REWRITING is turned on
+  * francois: Fixed compatibility with flash variables
+
+=== 2007-03-07 | 0.5.1 Alpha ===
+
+  * francois: added the `UJavascript` helper group as an alternative to the normal `Javascript` helper group
+  * francois: added `UJS_ajaxify` helpers
+  * francois: Replaced '$' with 'jQuery' in generated JS code to allow compatibility with Prototype
+  * francois: Refactored documentation
+  * francois: Made UJS code inclusion static by default (i.e packed into a single .js file called in the template)
+  * francois: Fixed a bug in `UJSTagHelper` when `UJS` helper was not loaded
+
+=== 2007-02-27 | 0.5.0 Alpha ===
+
+  * francois: Initial release

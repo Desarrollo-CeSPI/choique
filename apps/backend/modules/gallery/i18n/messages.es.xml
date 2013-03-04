@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file orginal="global" source-language="en_US" datatype="plaintext">
+    <body>
+      <trans-unit id="1">
+        <source>Gallery list</source>
+        <target>Listado de galerías</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Is horizontal</source>
+        <target>Es horizontal</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Is horizontal:</source>
+        <target>Es horizontal:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Number of visible multimedia files</source>
+        <target>Cantidad de archivos multimedia visibles</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Number of visible multimedia files:</source>
+        <target>Cantidad de archivos multimedia visibles:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Created at</source>
+        <target>Fecha de creación</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Created at:</source>
+        <target>Fecha de creación:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Current status</source>
+        <target>Estado actual</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Current status:</source>
+        <target>Estado actual:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Multimedia files:</source>
+        <target>Archivos multimedia:</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Data</source>
+        <target>Datos</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Multimedia files</source>
+        <target>Archivos multimedia</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Previsualization</source>
+        <target>Previsualización</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>Previsualization:</source>
+        <target>Previsualización:</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

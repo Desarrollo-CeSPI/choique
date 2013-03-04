@@ -1,0 +1,28 @@
+methods:
+  post: [ username, password ]
+
+names:
+
+  username:
+    required:         true
+    required_msg:     Your username is required
+    validators:       [userValidator]
+
+  password:
+    required:         true
+    required_msg:     Your password is required
+  
+
+captchaValidator:
+  class:              sfCaptchaGDValidator
+  param:
+    captcha_error:  Entered characters are wrong, try again
+ 
+
+userValidator:
+    class:            sfGuardUserValidator
+    param:
+      password_field: password
+      remember_field: remember
+
+

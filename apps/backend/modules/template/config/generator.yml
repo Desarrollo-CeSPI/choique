@@ -1,0 +1,88 @@
+generator:
+  class:                sfAdvancedAdminGenerator
+  param:               
+    model_class:        Template
+    theme:              default_mod
+    css:                backend/admin_theme_black
+                       
+    fields:            
+      id:              
+        name:           Id
+      name:            
+        name:           Nombre descriptivo
+      comment:         
+        name:           Comentario
+        help:           Para uso interno
+      html:            
+        name:           Vista previa
+      editor:          
+        name:           Editor
+      note:            
+        name:           Nota
+      preview:
+        name:           Previsualización
+      public_name:
+        name:           URL RSS generado
+      created_at:
+        name:                       Fecha de creación
+        params:                     date_format="dd/MM/yyyy H:mm"
+      updated_at:
+        name:                       Fecha de creación
+        params:                     date_format="dd/MM/yyyy H:mm"
+
+
+    list:
+      sort:             [id, desc]
+      title:            Listado de portadas
+      display:          [name,  _public_name, author, created_at, updated_at ]
+      object_actions:
+        _show:
+        _edit:
+          condition: canEdit
+        new_editor:
+          action:       newEditor
+          name:         Editar diseño
+          icon:         backend/template_editor.png
+          condition:    canEdit
+        _delete:
+          condition:    canDelete
+      actions:
+        _create:
+      filters:          [ name, comment ]
+    
+    create:
+      title:            Crear una nueva portada
+      display:
+        "Información":  [name, public_name, comment]
+        "Diseño":       [_note]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+          name:         Guardar cambios y editar diseño
+
+    edit:
+      title:            Editar portada "%%name%%"
+      display:
+        "Información":  [name, public_name, comment]
+        "Diseño":       [_editor]
+      actions:
+        _list:
+        _save:
+          name:                     Guardar y seguir editando
+        _save_and_list:
+          name:         Guardar cambios y editar diseño
+
+    show:
+      fields:
+        comment:
+          help:         ""
+      title:            Detalle de la portada "%%name%%"
+      display:
+        "Información":  [name, _public_name, comment, author, created_at, updated_at]
+        "Diseño":       [_preview]
+      actions:
+        _edit:
+          condition: canEdit
+        _list:

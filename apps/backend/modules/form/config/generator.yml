@@ -1,0 +1,111 @@
+generator:
+  class:                  sfAdvancedAdminGenerator
+  param:
+    model_class:          Form
+    theme:                default_mod
+    css:                  backend/admin_theme_black
+
+    fields:
+      name:
+        name:             Nombre
+      title:
+        name:             Título
+        help:             Título del formulario
+      description:
+        name:             Descripción
+        help:             Descripción del formulario
+        params:           size=80x10
+      references:
+        name:             Referenciado en
+      comment:
+        name:             Comentario
+        help:             Comentario interno para documentación
+        params:           size=80x10
+      is_poll:
+        name:             Es encuesta
+        help:             Si es una encuesta, se mostrarán los resultados despues de guardar los datos.
+      is_active:
+        name:             Está activa
+        help:             Para las encuestas se mostrará la última en activarse. Para los formularios, no podrán mostrarse si no están activos.
+      success_msg:
+        name:             Mensaje de éxito
+        help:             Mensaje a mostrar cuando el formulario se recibe con éxito.
+      updated_at:
+        name:                       Última actualización
+        params:                     date_format="dd/MM/yyyy H:mm"
+      created_at:
+        name:                       Fecha de creación
+        params:                     date_format="dd/MM/yyyy H:mm"
+      html_representation:
+        name:             Previsualización
+      email:
+        name:             E-mail de destino
+        help:             Si carga este campo, cada vez que se envíen datos de este formulario serán enviados por mail a la dirección aquí especificada.
+      created_by_user:
+        name:           Creado por
+
+    filters:
+      fields:
+        title:
+          help: Utilice * como wildcard
+        name:
+          help: Utilice * como wildcard
+
+    list:
+      sort:               [created_at, desc]
+      title:              Listado de formularios
+      display:            [name, title, email, is_poll, is_active, updated_at, created_at, created_by_user]
+      filters:            [name, title]
+      max_per_page:       25
+      object_actions:
+        show_results:
+          name:           ver resultados
+          action:         showResults
+          condition:      canEdit
+        _show:
+        _edit:
+          condition:      canEdit
+        _delete:
+          condition:      canDelete
+          credentials:    [[ reporter_admin, designer_admin ]]
+      actions:
+        _create:
+
+    create:
+      title:              Crear formulario
+      display:            [title, description, comment, email, is_poll, is_active, success_msg]
+      actions:
+        _list:
+        _save:
+          name:           Guardar y seguir editando
+        _save_and_list:
+
+    edit:
+      title:              Editar formulario "%%name%%"
+      display:            [title, description, comment, email, is_poll, is_active, success_msg]
+      actions:
+        _list:
+        _save:
+          name:           Guardar y seguir editando
+        _save_and_list:
+          name:           save
+        _show:
+        _edit_form:
+          name:           Editar formulario
+          action:         editForm
+          condition:      canEdit
+
+    show:
+      title:              Previsualización del formulario "%%name%%"
+      display:
+        Información General:            [ title, description, comment, email, is_poll, is_active, success_msg, _references ]
+        Información de Auditoria:       [ created_at, created_by_user, updated_at, updated_by_user ]        
+        Previsualización HTML:          [ html_representation ]
+      actions:
+        _list:
+        _edit:
+          condition: canEdit
+        _edit_form:
+          name:           Editar formulario
+          action:         editForm
+          condition:      canEdit

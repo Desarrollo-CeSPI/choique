@@ -1,0 +1,121 @@
+/* atajo */
+
+.shortuct_article  a,
+.shortcut_external a,
+.shortcut_section  a,
+.shortcut_none  
+{
+    text-transform:uppercase;
+    text-decoration:none;
+}
+
+.shortuct_article  a:hover,
+.shortcut_external a:hover,
+.shortcut_section  a:hover,
+.shortcut_none  
+{
+     color:#ccc;
+}
+
+
+/* button blue */
+
+
+.shortcut_slotlet_blue .shortuct_article  a,
+.shortcut_slotlet_blue .shortcut_external a,
+.shortcut_slotlet_blue .shortcut_section  a,
+.shortcut_slotlet_blue .shortcut_none  
+{
+    text-transform:uppercase;
+    text-decoration:none;
+    margin:0;
+    padding:0;
+    border:1px solid #ccc;
+    display:block;
+    height:120px;
+}
+
+.shortcut_slotlet_blue .shortuct_article  a:hover,
+.shortcut_slotlet_blue .shortcut_external a:hover,
+.shortcut_slotlet_blue .shortcut_section  a:hover,
+.shortcut_slotlet_blue .shortcut_none  
+{
+     background:#00b9e9;
+     border:1px solid #ccc;
+}
+
+
+/* ir a Facultad | ir a Museo */
+
+.shortcut_slotlet_ir_a .shortuct_article  a,
+.shortcut_slotlet_ir_a .shortcut_external a,
+.shortcut_slotlet_ir_a .shortcut_section  a,
+.shortcut_slotlet_ir_a .shortcut_none  
+{
+    color:#4e5426;
+    font-size:18px;
+    font-weight:bold;
+    text-align:center;
+}
+
+
+.shortcut_slotlet_ir_a .shortuct_article  a:hover,
+.shortcut_slotlet_ir_a .shortcut_external a:hover,
+.shortcut_slotlet_ir_a .shortcut_section  a:hover,
+.shortcut_slotlet_ir_a .shortcut_none
+
+{
+     color:#999;
+}
+
+/* donwload */
+
+.shortcut_slotlet_donwload .shortuct_article  a,
+.shortcut_slotlet_donwload .shortcut_external a,
+.shortcut_slotlet_donwload .shortcut_section  a,
+.shortcut_slotlet_donwload .shortcut_none  
+{
+    color:#555;
+    font-size:12px;
+    font-weight:bold;
+    text-align:center;
+    display:block;
+    height:99px;
+}
+
+
+.shortcut_slotlet_donwload .shortuct_article  a:hover,
+.shortcut_slotlet_donwload .shortcut_external a:hover,
+.shortcut_slotlet_donwload .shortcut_section  a:hover,
+.shortcut_slotlet_donwload .shortcut_none
+
+{
+     background:#555;
+}
+
+
+/* donwload */
+
+.shortcut_slotlet_open .shortuct_article  a,
+.shortcut_slotlet_open .shortcut_external a,
+.shortcut_slotlet_open .shortcut_section  a,
+.shortcut_slotlet_open .shortcut_none  
+{
+    color:#777;
+    font-size:14px;
+    font-weight:bold;
+    text-align:center;
+    display:block;
+    text-transform:none;
+    text-align:left;
+}
+
+.shortcut_slotlet_open .description
+{
+    color:#b9d065;
+    font-size:12px;
+    text-align:center;
+    display:block;
+    text-align:left;
+}
+

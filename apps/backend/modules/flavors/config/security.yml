@@ -1,0 +1,12 @@
+all:
+  is_secure: on
+  credentials: [ [designer, designer_admin ]]
+
+selectFlavor:
+  is_secure: on
+  credentials: [ designer_admin ]
+
+deleteFlavor:
+  is_secure: on
+  credentials: [ designer_admin ]
+

@@ -1,0 +1,38 @@
+= sfCSRF plugin =
+
+The `sfCSRFPlugin` plugin provides protection against Cross Site Request Forgeries (http://en.wikipedia.org/wiki/Csrf).
+
+This plugin is a backport of a symfony 1.1 native feature.
+
+== Installation ==
+
+  * Install the plugin
+  
+  {{{
+    symfony plugin-install http://plugins.symfony-project.com/sfCSRFPlugin
+  }}}
+
+  * Enable the plugin in `filters.yml` and choose a secret
+
+  {{{
+    csrf:
+      class: sfCSRFFilter
+      param:
+        secret: my$ecret
+  }}}
+
+  * Clear you cache
+
+  {{{
+    symfony cc
+  }}}
+
+=== Usage ===
+
+As soon as you enable the plugin in your `filters.yml` configuration file, you are protected against CSRF attacks.
+
+=== How does it work? ===
+
+The CSRF filter automatically adds a hidden field called `_csrf_token` for every form before the response is sent to the browser. The token value is made of the user `session_id` and the `secret` you have configured in the `filters.yml` file.
+
+When a form is submitted in `POST`, the CSRF filter checks for the token value. If the token is not present or if the value is not the excepted one, the plugin send a `sfException` exception.

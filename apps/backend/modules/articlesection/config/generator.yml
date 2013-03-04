@@ -1,0 +1,48 @@
+generator:
+  class:                        sfAdvancedAdminGenerator
+  param:
+    model_class:                ArticleSection
+    theme:                      default_mod
+    css:                        backend/admin_theme_black
+
+    fields:
+      section_id:
+        name:                   Sección
+      priority:
+        name:                   Prioridad
+
+    list:
+      sort:                     [id, desc]
+      title:                    Listado de prioridades
+      display:                  [section, priority]
+      filters:                  [section_id, priority]
+      max_per_page:             25
+      object_actions:
+        _show:
+        increase_priority:
+          name:                 Subir Prioridad
+          action:               increasePriority
+          icon:                 backend/priority_up.png
+        decrease_priority:
+          name:                 Bajar Prioridad
+          action:               decreasePriority
+          icon:                 backend/priority_down.png
+        _delete:
+      actions:
+        _create:
+        back:
+          name:                 Volver
+          action:               back
+
+    create:
+      title:                    Asignar prioridad
+      display:                  [section_id, priority]
+      actions:
+        _list:
+        _save_and_list:
+
+    show:
+      title:                    Ver prioridad
+      display:                  [section, priority]
+      actions:
+        _list:

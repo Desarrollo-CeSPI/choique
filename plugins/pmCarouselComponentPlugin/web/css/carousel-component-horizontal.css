@@ -1,0 +1,95 @@
+.carousel-component-horizontal {
+    position: relative;
+    overflow: hidden;
+    display: none;
+}
+
+.carousel-component-horizontal ul.carousel-list {
+    width: 10000000px;
+    position: relative;
+    z-index: 1; 
+}
+
+.carousel-component-horizontal .carousel-list li {
+    float: left;
+    list-style: none;
+    overflow: hidden;
+}
+
+.carousel-component-horizontal {
+    width: auto;
+}
+
+.carousel-component-horizontal .carousel-clip-region {
+    overflow: hidden;
+    margin: 0px auto;
+    position: relative;
+}
+
+.carousel-component-horizontal {
+    background: #edede3;
+    padding: 0px;
+    -moz-border-radius: 6px;
+    color: #618cbe;
+}
+.carousel-component-horizontal ul.carousel-list {
+    margin: 0px;
+    padding: 0px;
+    line-height: 0px;
+}
+.carousel-component-horizontal .carousel-list li {
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    font: 10px verdana,arial,sans-serif;
+    color: #666;
+}
+
+.carousel-component-horizontal {
+    padding: 8px 16px 4px 16px;
+    margin :0px;
+}
+
+.carousel-component-horizontal .carousel-list li {
+    margin: 4px;
+    width: 79px;
+    height: 93px;
+}
+
+.carousel-component-horizontal .carousel-list li a {
+    display: block;
+    border: 1px solid #e2edfa;
+    outline: none;
+}
+
+.carousel-component-horizontal .carousel-list li a:hover {
+    border: 1px solid #aaaaaa; 
+}
+
+.carousel-component-horizontal .carousel-list li img {
+    border: 1px solid #999;
+    display: block; 
+}
+
+.carousel-component-horizontal .carousel-prev {
+    position: absolute;
+    top: 40px;
+    z-index: 3;
+    cursor: pointer; 
+    left: 5px; 
+}
+
+.carousel-component-horizontal .carousel-next {
+    position: absolute;
+    top: 40px;
+    z-index: 3;
+    cursor: pointer; 
+    right: 5px; 
+}
+
+.carousel-component-horizontal .name {
+  margin-top: -10px;
+  margin-bottom: 5px;
+  margin-left: 12px;
+  color: #918e87;
+}

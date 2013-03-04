@@ -1,0 +1,69 @@
+﻿body
+{
+  font-family: arial, sans-serif;
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+  background:#f1f1f3 url('../../images/frontend/openback.png') no-repeat top left;
+ /* background:#f1f1f3 url('../../images/frontend/bg_body.jpg') repeat;*/
+}
+ 
+
+a
+{
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover
+{
+  color: #999;
+  text-decoration: underline;
+}
+
+a img
+{
+  border: 0;
+}
+
+#wrapper
+{
+  margin:auto;
+  text-align: left;
+  width: 900px;
+  box-shadow: 0 5px 8px #79705E;
+  background: #fff;
+}
+
+#footer
+{
+  margin-top:25px;
+  text-align:left;
+  font-size:11px;
+  color: #555;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  padding: 10px;
+
+}
+
+.bg_body
+{
+  background:#fff;
+}
+
+
+.bg_body_color
+{
+ background:#fff url('../../images/frontend/bg_body_color.png') repeat-y;
+}
+
+.sl_separator_gray
+{
+  background:#f1f1f3;
+}
+
+.sl_separator_blue
+{
+  background:#009ee0;
+}

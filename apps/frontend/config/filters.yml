@@ -1,0 +1,20 @@
+rendering: ~
+web_debug: ~
+security:  ~
+
+# generally, you will want to insert your own filters here
+
+highlight:
+  class:    sfLuceneHighlightFilter
+
+csrf:
+  class: sfCSRFFilter
+  param:
+    secret: $3cr3t0_ch01qu3
+
+cache:      ~
+common:     ~
+flash:      ~
+execution:  ~
+UJS:
+  class:    sfUJSFilter

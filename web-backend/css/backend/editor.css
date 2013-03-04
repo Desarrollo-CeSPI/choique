@@ -1,0 +1,128 @@
+/** ARTICLE EDITOR **/
+
+#create-related-menu {
+  width: 17em;
+}
+
+.create-related-button {
+  display: block;
+  padding: 4px 6px 4px 24px;
+  border: 1px solid #669;
+  color: #eee;
+  background: url('../../sf/sf_admin/images/add.png') no-repeat 3px center #0b4995;
+  margin-bottom: 4px;
+}
+
+.create-related-button:hover {
+  text-decoration: none !important;
+  color: #fff;
+  background-color: #0c59b7;
+  border-color: #9b9bcb;
+}
+
+#create-related-multimedia {
+  background-image: url('../../images/backend/picture_plus.png');
+}
+
+#create-related-gallery {
+  background-image: url('../../images/backend/photo_album_plus.png');
+}
+
+#create-related-rsschannel {
+  background-image: url('../../images/backend/rss_plus.png');
+}
+
+
+
+#create-related-document {
+  background-image: url('../../images/backend/document_plus.png');
+}
+
+#create-related-form {
+  background-image: url('../../images/backend/blog_plus.png');
+}
+
+#create-related-notice {
+  margin-top: 16px !important;
+  text-align: center;
+  color: #2b8209;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/** GALLERY EDITOR **/
+#gallery_editor {
+  border: 1px solid #ddd;
+  background-color: #eee;
+}
+
+#gallery_editor .elements-list {
+  margin: 10px;
+}
+
+#gallery_editor .element {
+  float: left;
+  min-height: 102px;
+  border: 1px solid #aab;
+  -moz-border-radius: 5px;
+  background-color: #dde;
+  text-align: center;
+  padding: 6px;
+  margin: 3px;
+}
+
+#gallery_editor .element.article {
+  min-height: inherit !important;
+  max-width: 30%;
+}
+
+#gallery_editor .element.article .title {
+  font-weight: bolder;
+}
+
+#gallery_editor .element.article .heading {
+  width: 50%;
+  margin: 20px auto;
+}
+
+#gallery_editor .element a {
+  cursor: move;
+}
+
+#gallery_editor .element:hover {
+  border: 1px solid #bbc;
+  background-color: #ccd;
+}
+
+#gallery_editor .delete-icon {
+  text-align: right;
+}
+
+#gallery_editor .title {
+  margin-top: 10px;
+}
+
+#gallery_editor .thumb {
+  display: block;
+  text-align: center;
+}
+
+#gallery_editor .modify-order-button {
+  background-color: #669;
+  color: #fff;
+  float: left;
+  padding: 4px;
+  display: block;
+  border: 1px solid #669;
+  background-color: #0b4995;
+}
+
+#gallery_editor .modify-order-button:hover {
+  background-color: #0c59b7;
+  border-color: #9b9bcb;
+  text-decoration: none;
+}
+
+#gallery_editor .modify-order-button img {
+  vertical-align: middle;
+}
