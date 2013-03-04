@@ -4,4 +4,5 @@
 /config/choique.yml
 /config/app.yml
 /log/*log
-/cache/*
+/cache/backend
+/cache/frontend
