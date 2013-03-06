@@ -51,7 +51,7 @@ class ShareThisSocialTool implements SocialToolInterface
   <span class="st_facebook"></span>
   <span class="st_twitter"></span>
   <span class="st_linkedin"></span>
-  <span class='st_plusone_large'></span>
+  <span class="st_googleplus"></span>
 </div>
 <script type="text/javascript">
   var switchTo5x=false;
