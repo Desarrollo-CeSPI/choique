@@ -387,7 +387,7 @@ propel:
       foreignReference: id
       onDelete:         cascade
     priority:
-      type:             tinyint
+      type:             integer
       default:          0
 
   link:
@@ -571,7 +571,7 @@ propel:
       foreignReference: id
       onDelete:         cascade
     priority:
-      type:             tinyint
+      type:             integer
       default:          0
 
   multimedia_tag:
@@ -598,7 +598,7 @@ propel:
       foreignReference: id
       onDelete:         cascade
     priority:
-      type:             tinyint
+      type:             integer
       default:          0
 
   shortcut:
@@ -628,7 +628,7 @@ propel:
       type:             boolean
       default:          false
     priority:
-      type:             tinyint
+      type:             integer
       default:          0
     comment:
       type:             longvarchar
@@ -761,7 +761,7 @@ propel:
       type:             longvarchar
       required:         true
     priority:
-      type:             tinyint
+      type:             integer
       default:          0
     description:
       type:             longvarchar
