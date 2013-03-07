@@ -6,3 +6,6 @@
 /log/*log
 /cache/backend
 /cache/frontend
+/web-frontend/css/frontend
+/web-frontend/images/frontend
+/flavors/[a-zA-Z]*
