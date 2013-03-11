@@ -1,7 +1,8 @@
 all:
   choique:
     version: <?php echo file_get_contents(sfConfig::get('sf_root_dir').'/VERSION');?>
-    instance_name: Choique CMS
+
+    instance_name: "Choique CMS"
     url:
       frontend: #choique_frontend_url#
       backend:  #choique_backend_url#
