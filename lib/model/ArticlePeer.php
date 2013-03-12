@@ -28,9 +28,13 @@
  */ 
 class ArticlePeer extends BaseArticlePeer
 {
-  public static function retrievePublished()
+  public static function retrievePublished($c = null)
   {
-    $c = new Criteria();
+    if ($c === null)
+    {
+      $c = new Criteria();
+    }
+
     $c->add(self::IS_PUBLISHED, true);
     $c->addAscendingOrderByColumn(self::TITLE);
 

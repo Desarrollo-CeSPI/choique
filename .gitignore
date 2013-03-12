@@ -9,6 +9,7 @@ Gemfile
 /log/*log
 /cache/backend
 /cache/frontend
+/cache/*.php
 /web-frontend/css/frontend
 /web-frontend/images/frontend
 /flavors/[a-zA-Z]*
@@ -19,5 +20,6 @@ Gemfile.lock
 /data/sql/*map
 /lib/model/om/*php
 /lib/model/map/*php
-/plugins/sfGuardPlugin/lib/model/map/*php
-/plugins/sfGuardPlugin/lib/model/om/*php
+/plugins/*Plugin/lib/model/map/*php
+/plugins/*Plugin/lib/model/om/*php
+.idea
