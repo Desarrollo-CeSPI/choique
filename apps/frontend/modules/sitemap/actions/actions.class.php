@@ -62,4 +62,24 @@ class sitemapActions extends sfActions
     
     $this->first_level = array_diff($base_section->getPublishedChildren(), $sections_to_remove);
   }
+
+  public function executeXmlIndex()
+  {
+  }
+
+  public function executeXmlSections()
+  {
+    $criteria = new Criteria();
+    $criteria->addAscendingOrderByColumn(SectionPeer::SECTION_ID);
+
+    $this->sections = SectionPeer::retrievePublished($criteria);
+  }
+
+  public function executeXmlArticles()
+  {
+    $criteria = new Criteria();
+    $criteria->addDescendingOrderByColumn(ArticlePeer::UPDATED_AT);
+
+    $this->articles = ArticlePeer::retrievePublished($criteria);
+  }
 }
