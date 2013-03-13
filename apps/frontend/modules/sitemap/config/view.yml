@@ -1,0 +1,24 @@
+---
+xmlIndexSuccess:
+  http_metas:
+    content-type: text/xml
+  metas:          {}
+  stylesheets:    {}
+  javascripts:    {}
+  has_layout:     false
+
+xmlArticlesSuccess:
+  http_metas:
+    content-type: text/xml
+  metas:          {}
+  stylesheets:    {}
+  javascripts:    {}
+  has_layout:     false
+
+xmlSectionsSuccess:
+  http_metas:
+    content-type: text/xml
+  metas:          {}
+  stylesheets:    {}
+  javascripts:    {}
+  has_layout:     false

@@ -179,9 +179,13 @@ class SectionPeer extends BaseSectionPeer
     return $default_home_section;
   }
 
-  public static function retrievePublished()
+  public static function retrievePublished($c = null)
   {
-    $c = new Criteria();
+    if ($c === null)
+    {
+      $c = new Criteria();
+    }
+
     $c->add(SectionPeer::IS_PUBLISHED, true);
 
     return self::doSelect($c);

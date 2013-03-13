@@ -2,6 +2,18 @@ homepage:
   url:   /
   param: { module: default, action: index }
 
+sitemap_xml:
+  url:   /sitemap_index.xml
+  param: { module: sitemap, action: xmlIndex }
+
+sitemap_xml_articles:
+  url:   /sitemap_articles.xml
+  param: { module: sitemap, action: xmlArticles }
+
+sitemap_xml_sections:
+  url:   /sitemap_sections.xml
+  param: { module: sitemap, action: xmlSections }
+
 events_search:
   url:   /Eventos/*
   param: { module: event, action: index }
