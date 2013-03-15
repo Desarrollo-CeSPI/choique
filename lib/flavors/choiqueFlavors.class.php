@@ -318,15 +318,15 @@ class choiqueFlavors
       $target_css,
       $target_images
     ));
-    if (!$r) throw newLogicException("No se pudo eliminar el directorio: $target_css o $target_images!");
+    if (!$r) throw new LogicException("No se pudo eliminar el directorio: $target_css o $target_images!");
     
     $r = PathHelper::deepCopy($source_images, $target_images);
 
-    if (!$r) throw newLogicException("No se pudo copiar el directorio: $source_images en $target_images!");
+    if (!$r) throw new LogicException("No se pudo copiar el directorio: $source_images en $target_images!");
 
     $r = PathHelper::deepCopy($source_css, $target_css);
 
-    if (!$r) throw newLogicException("No se pudo copiar el directorio: $source_css en $target_css!");
+    if (!$r) throw new LogicException("No se pudo copiar el directorio: $source_css en $target_css!");
   
     return true;
  
