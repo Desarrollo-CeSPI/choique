@@ -311,8 +311,17 @@ class choiqueFlavors
 
     if ( !is_dir($source_css ) || !is_dir($source_images) || !is_dir($web_base_dir) ) throw new LogicException("Alguno de los directorios: $source_css o $source_images o $web_base_dir no existen!");
     
-    $target_css    = realpath("$web_base_dir/css/frontend");
-    $target_images = realpath("$web_base_dir/images/frontend");
+    if (!($target_css    = realpath("$web_base_dir/css/frontend")))
+    {
+      mkdir("$web_base_dir/css/frontend");
+      $target_css    = realpath("$web_base_dir/css/frontend");
+    }
+
+    if (!($target_images = realpath("$web_base_dir/images/frontend")))
+    {
+      mkdir ("$web_base_dir/images/frontend");
+      $target_images = realpath("$web_base_dir/images/frontend");
+    }
 
     $r = PathHelper::emptyDirectories(array(
       $target_css,
