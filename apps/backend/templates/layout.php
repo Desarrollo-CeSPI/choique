@@ -30,7 +30,7 @@
 <!--  it should be redefined according to the theme selected for the menu -->
 <script type="text/javascript">
 //<![CDATA[
-var myThemeOfficeBase = '<?php echo $sf_request->getUriPrefix().$sf_request->getRelativeUrlRoot() ?>/pmJSCookMenuPlugin/images/ThemeOffice/';
+var myThemeOfficeBase = '<?php echo $sf_request->getRelativeUrlRoot() ?>/pmJSCookMenuPlugin/images/ThemeOffice/';
 //]]>
 </script>
 </head>

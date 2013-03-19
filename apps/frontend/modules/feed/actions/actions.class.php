@@ -56,7 +56,7 @@ class feedActions extends sfActions
       $articles = ArticlePeer::doSelectForRssFeed();
     }
 
-    $this->feed = choiqueFeedPeer::create($articles, $title, $this->getRequest()->getUriPrefix());
+    $this->feed = choiqueFeedPeer::create($articles, $title, choiqueUtil::generateUrl('frontend',''));
   }
 
   // Generates an RSS feed from a template (using its articles)
@@ -66,7 +66,7 @@ class feedActions extends sfActions
 
     $this->forward404Unless($template);
 
-    $this->feed = choiqueFeedPeer::create($template->getArticles(), $this->getTitle(), $this->getRequest()->getUriPrefix());
+    $this->feed = choiqueFeedPeer::create($template->getArticles(), $this->getTitle(), choiqueUtil::generateUrl('frontend',''));
     
     $this->setTemplate('index');
   }
@@ -75,7 +75,7 @@ class feedActions extends sfActions
   public function executeCalendar()
   {
     $events     = EventPeer::retrieveStartingBetween(time(), strtotime('+1 month'), true);
-    $this->feed = choiqueFeedPeer::createFromEvents($events, $this->getTitle('Calendario de eventos'), $this->getRequest()->getUriPrefix());
+    $this->feed = choiqueFeedPeer::createFromEvents($events, $this->getTitle('Calendario de eventos'), choiqueUtil::generateUrl('frontend',''));
   }
 
   // Generates an RSS feed from news slotlet
@@ -92,7 +92,7 @@ class feedActions extends sfActions
       CmsConfiguration::get('check_sort_news_by_priority', true)
     );
 
-    $this->feed = choiqueFeedPeer::create($articles, $this->getTitle(), $this->getRequest()->getUriPrefix());
+    $this->feed = choiqueFeedPeer::create($articles, $this->getTitle(), choiqueUtil::generateUrl('frontend',''));
 
     $this->setTemplate('index');
   }

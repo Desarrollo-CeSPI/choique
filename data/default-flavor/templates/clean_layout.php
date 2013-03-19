@@ -7,7 +7,7 @@
 
 <?php include_title() ?>
 <?php
-	$uri = $sf_request->getUriPrefix().$sf_request->getRelativeUrlRoot();
+	$uri = $sf_request->getRelativeUrlRoot();
 	echo tag('link', array('rel' => 'shortcut icon', 'href' => $uri.'/favicon.ico'))."\n";
 	echo tag('link', array('rel' => 'search', 'type'=>'application/opensearchdescription+xml', 'href' => $uri.'/search.xml', 'title'=>'CMS Search'))."\n";
 ?>
