@@ -128,7 +128,7 @@ SLOTLET;
 
   protected function getContent($options)
   {
-    $section_template = '<li class="sl_menu_click_section">%section_link% %section_content%</li>';
+    $section_template = '<li class="sl_menu_click_section %section_name%">%section_link% %section_content%</li>';
     $content  = '';
     $extra    = $options['use_color_as_bg'] ? null : '<span class="%class%" style="background-color: %color%;">&nbsp;</span>';
     
@@ -155,7 +155,8 @@ SLOTLET;
       }
       $content .= strtr($section_template, array(
         '%section_link%'    => $section->getHTMLRepresentation($options['section_name'], $click_options, $extra_content),
-        '%section_content%' => $this->getSectionContent($section, $options)
+        '%section_content%' => $this->getSectionContent($section, $options),
+        '%section_name%'    => $section->getName()
       ));
     }
 
