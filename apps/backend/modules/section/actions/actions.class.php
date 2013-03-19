@@ -241,7 +241,6 @@ class sectionActions extends autosectionActions
       $max_depth = Section::$MAX_DEPTH;
       $boost = 10 * ($max_depth - $section->getDepth());
       $priority = $boost + $i;
-
       $article_section->setPriority($priority);
       $article_section->save();
     }

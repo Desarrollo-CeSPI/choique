@@ -24,3 +24,8 @@ function hideShowChildrens(link)
 
   return false;
 }
+
+jQuery(function() {
+  jQuery('.dropdown-menu').mouseleave(function(){ jQuery(this).hide() })
+});
+
