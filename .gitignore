@@ -4,6 +4,7 @@
 /config/choique.yml
 /config/app.yml
 /config/deploy.rb
+/config/images.yml
 Capfile
 Gemfile
 /log/*log

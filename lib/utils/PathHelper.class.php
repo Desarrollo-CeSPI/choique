@@ -66,7 +66,9 @@ class PathHelper
   {
     $path = realpath(self::getRoot().'/'.ltrim($relative_path, '/'));
 
-    if (strlen($path) < strlen(self::getRoot()) || !is_readable($path))
+    $root = realpath(self::getRoot());
+
+    if (strlen($path) < strlen($root) || !is_readable($path))
     {
       throw new DomainException('La ruta ingresada es inválida.');
     }
@@ -96,7 +98,7 @@ class PathHelper
       $base = self::getRoot();
     }
 
-    $path = $base;
+    $path = realpath($base);
 
     $matches = sfFinder::type($type)
       ->ignore_version_control()
@@ -106,7 +108,8 @@ class PathHelper
 
     natsort($matches);
 
-    $pad   = strlen(self::getRoot());
+
+    $pad   = strlen(realpath(self::getRoot()));
     $start = strlen($path);
 
     $response = array();
