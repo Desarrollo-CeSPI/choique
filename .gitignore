@@ -13,6 +13,7 @@ Gemfile
 /cache/*.php
 /web-frontend/css/frontend
 /web-frontend/images/frontend
+/web-frontend/uploads/*/*.*
 /flavors/[a-zA-Z]*
 Gemfile.lock
 /backups/*
