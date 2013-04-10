@@ -1,19 +1,19 @@
-<?php 
+<?php
 /*
  * Choique CMS - A Content Management System.
  * Copyright (C) 2012 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
- * 
+ *
  * This file is part of Choique CMS.
- * 
+ *
  * Choique CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License v2.0 as published by
  * the Free Software Foundation.
- * 
+ *
  * Choique CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Choique CMS.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
@@ -22,17 +22,17 @@
 /**
  * Subclass for representing a row from the 'document' table.
  *
- * 
+ *
  *
  * @package lib.model
- */ 
+ */
 class Document extends BaseDocument
 {
   public function __toString()
   {
     return $this->getTitle();
   }
-  
+
   public function setName($v)
   {
     sfLoader::loadHelpers(array('CmsEscaping'));
@@ -60,7 +60,7 @@ class Document extends BaseDocument
   {
     return sfGuardUserPeer::retrieveByPK($this->getUploadedBy());
   }
-  
+
   public function getUploadedByUser()
   {
     $author = $this->getUploadedByAsGuardUser();
@@ -79,7 +79,7 @@ class Document extends BaseDocument
 
   /**
    *    Return a string holding an HTML representation of this
-   *    document 
+   *    document
    *
    *    @return string
    */
@@ -121,13 +121,10 @@ HTML;
 
   public function getUrl()
   {
-    $request = sfContext::getInstance()->getRequest();
-    $uri     = $request->getUri();
-    $script  = $_SERVER['REQUEST_URI'];
-    $urlroot = $request->getRelativeUrlRoot();
-    $file    = substr($script, strlen($urlroot) + 1);
+    $root = sfContext::getInstance()->getRequest()->getRelativeUrlRoot();
+    $path = sfConfig::get('cms_docs_path');
 
-    return substr( $uri, 0, strrpos($uri,$file)).'uploads/docs/'.$this->getUri();
+    return sprintf('%s/%s/%s', $root, $path, $this->getUri());
   }
 
   public function removeFile($name)
@@ -150,7 +147,7 @@ HTML;
 
       return parent::delete($con);
     }
-    else 
+    else
     {
       return false;
     }
@@ -174,7 +171,7 @@ HTML;
     $ext = strtolower ( pathinfo( $this->getUri(), PATHINFO_EXTENSION ) );
     $extractor = $this->getExtractorForExtension($ext );
     if ( !is_null( $extractor) )
-    { 
+    {
         $extractor_command = explode(' ',$extractor);
         if (file_exists($extractor_command[0]) )
         {
