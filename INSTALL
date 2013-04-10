@@ -1,139 +1,154 @@
-Requerimientos
-==============
+# Requerimientos
+
 * PHP >= 5.2 
 * pecl Imagick
 * pecl fileinfo (Ya está instalada en versiones actuales de PHP)
 
-Instalación:
-============
-Descomprimir el paquete
-Copiar en un directorio todo el proyecto. 
-Los únicos directorios visible por el web server deberán ser: 
-  - web-frontend
-  - web-backend
-Se recomienda que web-frontend sea público mientras que web-backend sea un VirtualHost 
-aparte con más restricciones de seguridad. Ver el apartado seguridad al final de
-este archivo.
+# Instalación
 
-Configurar la Base de datos
-===========================
-MySQL
------
-  Configurar config/databases.yml segun corresponda
-  Configurar config/propel.ini segun corresponda
-  ################### NOTA ###########################
-  Puede usar lib/vendor/eztools/bin/ezconfigure.sh ejecutando
+- Descomprimir el paquete y copiar en un directorio todo el proyecto o clonar el repositorio: `git clone git://github.com/Desarrollo-CeSPI/choique.git`
+- Los únicos directorios visibles por el web server deberán ser: 
+  - `web-frontend`
+  - `web-backend`
 
-  ./lib/vendor/eztools/bin/ezconfigure.sh
+**Se recomienda que `web-frontend` sea público mientras que `web-backend` sea un VirtualHost 
+aparte con más restricciones de seguridad. Ver el apartado seguridad al final de esta guía.**
 
-  Siga los pasos indicados en pantalla
-  ####################################################
+# Configuración de la Base de datos
 
-POSTGRES
---------
-Los archivos a configurar, asi como el comando de configuracion antes 
-mencionados solo funcionan con MySQL. Si se desea configurar choique con el 
-motor de base de datos Postgres entonces debe editar los archivos manualmente 
-como se indica a continuacion:
+## MySQL
 
-config/databases.yml:
-  all:
-    propel:
-      class:      sfPropelDatabase
-      param:
-        phptype:  pgsql
-        hostspec: #HOTS#
-        database: #DB_NAME#
-        username: #DB_USER#
-        password: #DB_PASS#
-        port:     #DB_PORT#
+* Configurar `config/databases.yml` con los datos de acceso a la base de datos
+* Configurar `config/propel.ini` con los datos de acceso a la base de datos
 
-config/propel.ini
-  propel.database             =  pgsql
-  propel.database.createUrl  =   pgsql://#DB_USER#:#DB_PASS#@#DB_HOST#:#DB_PORT#/
-  propel.database.url        =   pgsql://DB_USER#:#DB_PASS#@#DB_HOST#:#DB_PORT#/#DB_NAME#
+**Nota:** Puede usar el asistente `lib/vendor/eztools/bin/ezconfigure.sh` para
+luego seguir los pasos en pantalla, ejecutando:
 
+```bash
+$ ./lib/vendor/eztools/bin/ezconfigure.sh
+```
 
-Inicializar de la aplicación
-============================
-Configurar Choique
-------------------
-* Modificar config/app.yml: para una explicación más detallada leer README
+## POSTGRES
 
-* Editar el nombre de la sesion de backend en apps/backend/config/factories.yml
+Los archivos a configurar, así como el comando de configuración antes 
+mencionados solo funcionan con MySQL. Si se desea configurar **Choique** con el 
+motor de base de datos **Postgres** entonces deberá editar los archivos manualmente 
+como se indica a continuación:
 
+```yaml
+# config/databases.yml
+all:
+  propel:
+    class:      sfPropelDatabase
+    param:
+      phptype:  pgsql
+      hostspec: #HOST#
+      database: #DB_NAME#
+      username: #DB_USER#
+      password: #DB_PASS#
+      port:     #DB_PORT#
+```
+
+```ini
+# config/propel.ini
+propel.database           = pgsql
+propel.database.createUrl = pgsql://#DB_USER#:#DB_PASS#@#DB_HOST#:#DB_PORT#/
+propel.database.url       = pgsql://DB_USER#:#DB_PASS#@#DB_HOST#:#DB_PORT#/#DB_NAME#
+```
+
+# Inicialización de la aplicación
+
+## Configuración de Choique
+
+- Modificar el archivo `config/app.yml`. Para una explicación más detallada referirse
+  al archivo [README.md](https://github.com/Desarrollo-CeSPI/choique/blob/master/README.md)
+- Editar el nombre de la sesión del backend en `apps/backend/config/factories.yml`:
+
+```yaml
 all:
   storage:
     class: sfSessionStorage
     param:
-      session_name: UN_NOMBRE       <<< cambiar este valor
+      session_name: UN_NOMBRE   # <<< Cambiar este valor
+```
 
+## Correr los siguientes comandos
 
+* Antes de iniciar la instalación asegurese que los valores de configuración de PHP
+  en `/etc/php5/cli/php.ini` y `/etc/php5/apache2/php.ini` (o equivalentes según su
+  entorno) sean adecuados. Por ejemplo: `memory_limit = 256M`.
 
-Correr los siguientes comandos
-------------------------------
+* Si es la primera vez que se instala correr antes que cualquier otro comando:
 
-* Antes de iniciar la instalación asegurese que los siguientes valores de
-    /etc/php5/cli/php.ini
-    /etc/php5/apache2/php.ini
-  tienen valores adecuados, por ejemplo 256MBytes
-    memory_limit = 256M
+```bash
+$ php symfony choique-flavors-initialize
+```
 
-* Si es la primera vez que se instala correr antes de otro comando:
-    php symfony choique-flavors-initialize
+  * Es requerido disponer de al menos un estilo visual instalado para que el sitio funcione.
+  * Para listar los estilos visuales utilizar `php symfony choique-flavors-list`.
 
-*******************************************************************************
-IMPORTANTE
-*******************************************************************************
-* Si desea inicializar la base de datos, cree una base de datos vacía Correr el 
-  script php symfony propel-build-all-load backend
-  Importante:
-    * Debe estar correctamente configurado el archivo databases.yml 
-      antes descriptos.
-    * En en caso de existir ya una base de datos, la misma sera destruida. Hacer
-      un dump (volcado) de los datos en caso de querer conservarlos.
+* Para establecer correctamente los permisos sobre los directorios, ejecute el siguiente comando:
 
-* Si no desea inicializar la base de datos, unicamente correr
-    php symfony propel-build-model
-*******************************************************************************
-NOTA si al correr el comando php symfony propel-build-all-load backend da el 
-error
- [Zend_Search_Lucene_Exception]                    
-  Index doesn't exists in the specified directory.  
-Corra el siguiente comando
-  php symfony lucene-rebuild backend
-*******************************************************************************
+```bash
+$ php symfony choique-fix-perms
+```
 
-* Acomodar los permisos sobre los directorios, ejecute el siguiente script:
-    php symfony choique-fix-perms
+* Para inicializar los índice de búsqueda del sitio, ejecutar:
 
-  Importante:
-    * Es requerido disponer de al menos un estilo visual instalado para que 
-      funcione
-    * Para listar los estilos visuales utilizar 
-        php symfony choique-flavors-list
+```bash
+$ php symfony choique-reindex
+```
 
-* Inicializar el indice de busqueda    
-    php symfony choique-reindex
+### Importante
 
-Configurar Apache
-=================
-Choique es un proyecto que consta de dos aplicaciones:
-  * Frontend: el portal que ven los usuarios finales
-  * Backend: el administrador de contenidos. Esta aplicación debe ASEGURARSE
+Si desea inicializar la base de datos, cree una base de datos vacía, configure
+acorde a la base de datos el archivo `config/databases.yml` (como se explica
+en un apartado anterior)  y luego ejecute el siguiente comando:
 
-Las aplicaciones symfony requieren que esté habilitado el modulo de apache:
-  mod-rewrite
+```bash
+$ php symfony propel-build-all-load backend
+```
 
-Para configurar las reescrituras del mod-rewrite, puede utilizarse un .htaccess, 
-ya provisto en este proyecto dentro de los directorios
-  web
-  web-backend
-sin embargo se aconseja utilizar una configuracion que no admita redefinir la 
+En caso de tratarse de una base de datos ya existente, tenga en cuenta que corriendo
+el comando anterior la misma **será destruida**, por lo que es recomendable que haga
+un dump (volcado de datos) **antes de ejecutar el comando** en caso de querer conservarlos.
+
+Si no desea inicializar la base de datos, únicamente necesitará ejecutar, luego de
+configurar el archivo `config/propel.ini`:
+
+```bash
+$ php symfony propel-build-model
+```
+
+**Nota:** Si al correr alguno de los comandos anteriores ocurre el siguiente error:
+
+```
+[Zend_Search_Lucene_Exception]
+  Index doesn't exists in the specified directory.
+```
+
+ejecute el siguiente comando, que creará los índices faltantes:
+
+```bash
+$ php symfony lucene-rebuild backend
+```
+
+# Configuración de Apache
+
+**Choique** es un proyecto que consta de dos aplicaciones:
+  * **Frontend**: Es el portal que ven los usuarios finales.
+  * **Backend**: Es el administrador de contenidos. Esta aplicación **debe funcionar en un entorno seguro**.
+
+Las aplicaciones symfony requieren que esté habilitado el modulo `rewrite` de Apache.
+
+Para configurar las reescrituras del `mod-rewrite`, puede utilizarse un `.htaccess`, 
+ya provisto en este proyecto dentro de los directorios públicos (`web-frontend` y `web-backend`).
+Sin embargo, se aconseja utilizar una configuración que no admita redefinir la 
 configuracion de apache con .htaccess, por ejemplo con el directorio web. 
 
-Un ejemplo de virtual host aconsejable sería como sigue
+Un ejemplo de VirtualHost aconsejable sería el siguiente:
 
+```htaccess
   <VirtualHost *:80>
     ServerName www.xxx.com
 
@@ -146,7 +161,6 @@ Un ejemplo de virtual host aconsejable sería como sigue
     <Directory /xxx/choique>
       AllowOverride None
     </Directory>
-
 
     <Directory /xxx/choique/web >
       Options FollowSymLinks
@@ -172,23 +186,23 @@ Un ejemplo de virtual host aconsejable sería como sigue
     LogLevel warn
     CustomLog ${APACHE_LOG_DIR}/xxx-access.log combined
 </VirtualHost>
+```
 
-Lo mismo con el directorio web-backend
+Y de manera similar con el directorio `web-backend`.
 
-Algunos consejos de seguridad
------------------------------
-* Asegurar la configuracion provista por /etc/apache2/con.d/security
-* Utilizar SSL para el backend
-* Utilizar un VirtualHost separado para web-backend
-* No permitir el uso de .htaccess ni en frontend ni en backend
-* Restringir de ser posible el acceso al backend a un conjunto de IPs/Redes
-* De ser posible cambiar el puerto en el que atiende el backend por uno no 
-  estandar
-* Deshabilitar en todo momento la ejecución de scripts bajo el directorio 
-  uploads:
+## Algunos consejos de seguridad
 
-Acceso por primera vez
-----------------------
-El acceso al backend luego de una instalación nueva sera:
-usuario: admin
-password: admin
+* Asegurar la configuracion provista por `/etc/apache2/con.d/security`.
+* Utilizar SSL para el Backend.
+* Utilizar un VirtualHost separado para `web-backend`.
+* No permitir el uso de `.htaccess` ni en el Frontend ni en Backend.
+* Restringir, de ser posible, el acceso al Backend a un conjunto de IPs/Redes.
+* De ser posible cambiar el puerto en el que atiende el Backend por uno no estándar.
+* Deshabilitar en todo momento la ejecución de scripts bajo el directorio `uploads`.
+
+# Primer acceso
+
+El acceso al Backend luego de una instalación nueva será:
+
+* **Usuario:** admin
+* **Password:** admin
