@@ -1,3 +1,4 @@
+.idea
 /config/*.xml
 /config/databases.yml
 /config/propel.ini
@@ -9,6 +10,7 @@ Gemfile
 /log/*log
 /cache/backend
 /cache/frontend
+/cache/*.php
 /web-frontend/css/frontend
 /web-frontend/images/frontend
 /flavors/[a-zA-Z]*
