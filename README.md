@@ -11,7 +11,7 @@ eliminando la carpta web, y creando dos carpetas diferentes para cada aplicacion
   * `web-frontend`: carpeta web para la aplicacion del frontend.
   * `web-backend`: carpeta web para la aplicacion del backend.
 
-Leer el documento `INSTALL` para realizar una instalación con los valores por defecto
+Leer el documento `INSTALL.md` para realizar una instalación con los valores por defecto
 
 
 ## Valores a editar en config/app.yml
