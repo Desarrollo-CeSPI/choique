@@ -271,4 +271,134 @@
         }
     }
   }
+
+  pake_desc('Create/update user');
+  pake_task('choique-user-update-or-create-admin');
+  
+  /**
+   * Select flavor
+   *
+   *
+   * @param object $task
+   * @param array $args
+   */
+  function run_choique_user_update_or_create_admin($task, $args)
+  {
+    if (count($args) < 2)
+    {
+      echo "\n".pakeColor::colorize("You don't provide a username and password\n", array('fg'=>'red', 'bold'=>true));
+    }
+    else
+    {
+      $username=$args[0];
+      $password=$args[1];
+
+      define('SF_ROOT_DIR',    sfConfig::get('sf_root_dir'));
+      define('SF_APP',         'backend');
+      define('SF_ENVIRONMENT', 'prod');
+      define('SF_DEBUG',       true);
+      // get configuration
+      require_once SF_ROOT_DIR.DIRECTORY_SEPARATOR.'apps'.DIRECTORY_SEPARATOR.SF_APP.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.php';
+      $databaseManager = new sfDatabaseManager();
+      $databaseManager->initialize();
+
+      $user = sfGuardUserPeer::retrieveByUsername($username);
+      $created = false;
+      if (!$user) {
+        $created = true;
+        $user = new sfGuardUser();
+        $user->setUsername($username);
+      }
+      $user->setPassword($password);
+      $user->setIsActive(true);
+      $user->setIsSuperAdmin(true);
+      $user->save();
+
+      echo "\n".pakeColor::colorize(sprintf("User %s successfully\n", $created? "created":"updated"), array('fg'=>'green', 'bold'=>true));
+
+    }
+  }
+
+  pake_desc('Disable user');
+  pake_task('choique-user-disable');
+  
+  /**
+   * Select flavor
+   *
+   *
+   * @param object $task
+   * @param array $args
+   */
+  function run_choique_user_disable($task, $args)
+  {
+    if (count($args) < 1)
+    {
+      echo "\n".pakeColor::colorize("You don't provide a username\n", array('fg'=>'red', 'bold'=>true));
+    }
+    else
+    {
+      $username=$args[0];
+
+      define('SF_ROOT_DIR',    sfConfig::get('sf_root_dir'));
+      define('SF_APP',         'backend');
+      define('SF_ENVIRONMENT', 'prod');
+      define('SF_DEBUG',       true);
+      // get configuration
+      require_once SF_ROOT_DIR.DIRECTORY_SEPARATOR.'apps'.DIRECTORY_SEPARATOR.SF_APP.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.php';
+      $databaseManager = new sfDatabaseManager();
+      $databaseManager->initialize();
+
+      $user = sfGuardUserPeer::retrieveByUsername($username, true);
+      if (!$user) {
+        echo "\n".pakeColor::colorize("Username $username is just disabled or username is unknown\n", array('fg'=>'red', 'bold'=>true));
+         return;
+      }
+      $user->setIsActive(false);
+      $user->save();
+
+      echo "\n".pakeColor::colorize("User successfully disabled \n", array('fg'=>'green', 'bold'=>true));
+    }
+  }
+
+  pake_desc('Enable user');
+  pake_task('choique-user-enable');
+  
+  /**
+   * Select flavor
+   *
+   *
+   * @param object $task
+   * @param array $args
+   */
+  function run_choique_user_enable($task, $args)
+  {
+    if (count($args) < 1)
+    {
+      echo "\n".pakeColor::colorize("You don't provide a username\n", array('fg'=>'red', 'bold'=>true));
+    }
+    else
+    {
+      $username=$args[0];
+
+      define('SF_ROOT_DIR',    sfConfig::get('sf_root_dir'));
+      define('SF_APP',         'backend');
+      define('SF_ENVIRONMENT', 'prod');
+      define('SF_DEBUG',       true);
+      // get configuration
+      require_once SF_ROOT_DIR.DIRECTORY_SEPARATOR.'apps'.DIRECTORY_SEPARATOR.SF_APP.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.php';
+      $databaseManager = new sfDatabaseManager();
+      $databaseManager->initialize();
+
+      $user = sfGuardUserPeer::retrieveByUsername($username, false);
+      if (!$user) {
+        echo "\n".pakeColor::colorize("Username $username is just enabled or username is unknown\n", array('fg'=>'red', 'bold'=>true));
+         return;
+      }
+      $user->setIsActive(true);
+      $user->save();
+
+      echo "\n".pakeColor::colorize("User successfully enabled \n", array('fg'=>'green', 'bold'=>true));
+    }
+  }
+
   
