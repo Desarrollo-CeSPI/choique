@@ -301,8 +301,9 @@
       require_once SF_ROOT_DIR.DIRECTORY_SEPARATOR.'apps'.DIRECTORY_SEPARATOR.SF_APP.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.php';
       $databaseManager = new sfDatabaseManager();
       $databaseManager->initialize();
-
-      $user = sfGuardUserPeer::retrieveByUsername($username);
+      $c = new Criteria();
+      $c->add(sfGuardUserPeer::USERNAME, $username);
+      $user = sfGuardUserPeer::doSelectOne($c);
       $created = false;
       if (!$user) {
         $created = true;
