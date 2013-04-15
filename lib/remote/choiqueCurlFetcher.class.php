@@ -58,7 +58,8 @@ class choiqueCurlFetcher implements FetcherInterface
       CURLOPT_VERBOSE        => false,
       CURLOPT_CONNECTTIMEOUT => 3,
       CURLOPT_TIMEOUT        => 3,
-      CURLOPT_RETURNTRANSFER => true
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_SSL_VERIFYPEER => false
     ));
 
     $contents = curl_exec($curl_handle);
