@@ -39,9 +39,18 @@
     // This is a hack for the backend's editor.
     if (null !== $layout = LayoutPeer::active())
     {
-
       $options['section_name']='NONE';
       return include_layout($layout, $content, $options);
+    }
+
+    if (sfContext::hasInstance())
+    {
+      $sf_user = sfContext::getInstance()->getUser();
+
+      if ($sf_user && $sf_user->hasAttribute('mobile_mode') && $sf_user->getAttribute('mobile_mode'))
+      {
+        return include_layout_for_mobile($section_name, $content, $options);
+      }
     }
 
     // If there is a current virtual section set, use its layout.
@@ -60,6 +69,19 @@
     $options['section_name'] = $section->getName();
 
     include_layout($section->getLayout(), $content, $options);
+  }
+
+  function include_layout_for_mobile($section_name, $content, $options) 
+  {
+    if (!isset($options['main_content']))
+    {
+      $options['main_content'] = SlotletManager::getMainContent();
+    }
+    $mobile_layout = 
+      $options['main_content'] instanceof Article ?
+      VirtualSection::VS_MOBILE_CONTENT :
+      VirtualSection::VS_MOBILE_HOME; 
+    return include_layout_for_virtual_section($mobile_layout, $content, $options);
   }
 
   /**
@@ -91,6 +113,7 @@
       'aspect'  => $aspect,
       'content' => $content
     ), $options);
+
 
     if ('article' == $options['aspect'] || ('template' == $options['aspect'] && $layout->isTemplateLayoutEmpty()))
     {

@@ -55,4 +55,16 @@ class defaultActions extends sfActions
   {
     $this->setLayout('clean_layout');
   }
+
+  public function executeSetMobileMode()
+  {
+    $this->getUser()->setAttribute('mobile_mode', true);
+    $this->redirect('@homepage');
+  }
+
+  public function executeUnsetMobileMode()
+  {
+    $this->getUser()->setAttribute('mobile_mode', false);
+    $this->redirect('@homepage');
+  }
 }
