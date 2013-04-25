@@ -58,12 +58,14 @@ class defaultActions extends sfActions
 
   public function executeSetMobileMode()
   {
+    $this->getResponse()->setCookie('mobile_mode_set', true);
     $this->getUser()->setAttribute('mobile_mode', true);
     $this->redirect('@homepage');
   }
 
   public function executeUnsetMobileMode()
   {
+    $this->getResponse()->setCookie('mobile_mode_set', true);
     $this->getUser()->setAttribute('mobile_mode', false);
     $this->redirect('@homepage');
   }
