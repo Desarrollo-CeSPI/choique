@@ -38,6 +38,8 @@ class Shortcut extends BaseShortcut implements SlotletInterface
   const NONE_STRING                    = 'Ninguno';
   const REFERENCE_TYPE_EXTERNAL_POP_UP = 4;
   const EXTERNAL_POP_UP_STRING         = 'Externo en Pop Up';
+  const REFERENCE_TYPE_MOBILE = 5;
+  const REFERENCE_TYPE_NO_MOBILE = 6;
   
   public function __toString() 
   {
@@ -104,6 +106,12 @@ class Shortcut extends BaseShortcut implements SlotletInterface
       case self::REFERENCE_TYPE_SECTION:
         $section = SectionPeer::retrieveByPK($this->getReference());
         $route   = ($section) ? sprintf("@template_by_name?name=%s", $section->getName()) : '';
+        break;
+      case self::REFERENCE_TYPE_MOBILE:
+        $route = '@mobile';
+        break;
+      case self::REFERENCE_TYPE_NO_MOBILE:
+        $route = '@no_mobile';
         break;
       case self::REFERENCE_TYPE_NONE:
         break;
