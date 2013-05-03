@@ -101,7 +101,7 @@ class Document extends BaseDocument
       $innerHTML = __('descargar el documento') . ' "' . $this->getTitle() . '"';
     }
 
-    return link_to($innerHTML, $this->getUrl(), array('title' => $this->getTitle()));
+    return content_tag('a', $innerHTML, array('href' => $this->getUrl(), 'title' => $this->getTitle()));
   }
 
   public function getSearchResultRepresentation()
