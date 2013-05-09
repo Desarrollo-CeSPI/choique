@@ -1,17 +1,23 @@
 # Requerimientos
 
-* PHP >= 5.2 
+* PHP >= 5.2
 * pecl Imagick
 * pecl fileinfo (Ya está instalada en versiones actuales de PHP)
 
 # Instalación
 
-- Descomprimir el paquete y copiar en un directorio todo el proyecto o clonar el repositorio: `git clone git://github.com/Desarrollo-CeSPI/choique.git`
-- Los únicos directorios visibles por el web server deberán ser: 
+- Descargar un paquete de Choique [desde GitHub](https://github.com/Desarrollo-CeSPI/choique/tags)
+  o clonar el repositorio utilizando `git`. **Se recomienda siempre descargar la última versión disponible**.
+- Descomprimir el paquete y copiar en un directorio todo el proyecto.
+- Renombrar:
+  - `config/databases.yml-default` a `config/databases.yml`,
+  - `config/propel.ini-default` a `config/propel.ini`,
+  - `config/app.yml-default` a `config/app.yml`.
+- Los únicos directorios visibles por el web server deberán ser:
   - `web-frontend`
   - `web-backend`
 
-**Se recomienda que `web-frontend` sea público mientras que `web-backend` sea un VirtualHost 
+**Se recomienda que `web-frontend` sea público mientras que `web-backend` sea un VirtualHost
 aparte con más restricciones de seguridad. Ver el apartado seguridad al final de esta guía.**
 
 # Configuración de la Base de datos
@@ -30,9 +36,9 @@ $ ./lib/vendor/eztools/bin/ezconfigure.sh
 
 ## POSTGRES
 
-Los archivos a configurar, así como el comando de configuración antes 
-mencionados solo funcionan con MySQL. Si se desea configurar **Choique** con el 
-motor de base de datos **Postgres** entonces deberá editar los archivos manualmente 
+Los archivos a configurar, así como el comando de configuración antes
+mencionados solo funcionan con MySQL. Si se desea configurar **Choique** con el
+motor de base de datos **Postgres** entonces deberá editar los archivos manualmente
 como se indica a continuación:
 
 ```yaml
@@ -74,9 +80,13 @@ all:
 
 ## Correr los siguientes comandos
 
+### Configuración de PHP
+
 * Antes de iniciar la instalación asegurese que los valores de configuración de PHP
   en `/etc/php5/cli/php.ini` y `/etc/php5/apache2/php.ini` (o equivalentes según su
   entorno) sean adecuados. Por ejemplo: `memory_limit = 256M`.
+
+### Primera inicialización
 
 * Si es la primera vez que se instala correr antes que cualquier otro comando:
 
@@ -84,26 +94,11 @@ all:
 $ php symfony choique-flavors-initialize
 ```
 
-  * Es requerido disponer de al menos un estilo visual instalado para que el sitio funcione.
-  * Para listar los estilos visuales utilizar `php symfony choique-flavors-list`.
-
-* Para establecer correctamente los permisos sobre los directorios, ejecute el siguiente comando:
-
-```bash
-$ php symfony choique-fix-perms
-```
-
-* Para inicializar los índice de búsqueda del sitio, ejecutar:
-
-```bash
-$ php symfony choique-reindex
-```
-
 ### Importante
 
-Si desea inicializar la base de datos, cree una base de datos vacía, configure
+**Si desea inicializar la base de datos**, cree una base de datos vacía, configure
 acorde a la base de datos el archivo `config/databases.yml` (como se explica
-en un apartado anterior)  y luego ejecute el siguiente comando:
+en un apartado anterior) y luego ejecute el siguiente comando:
 
 ```bash
 $ php symfony propel-build-all-load backend
@@ -113,14 +108,37 @@ En caso de tratarse de una base de datos ya existente, tenga en cuenta que corri
 el comando anterior la misma **será destruida**, por lo que es recomendable que haga
 un dump (volcado de datos) **antes de ejecutar el comando** en caso de querer conservarlos.
 
-Si no desea inicializar la base de datos, únicamente necesitará ejecutar, luego de
+**Si no desea inicializar la base de datos**, únicamente necesitará ejecutar, luego de
 configurar el archivo `config/propel.ini`:
 
 ```bash
 $ php symfony propel-build-model
 ```
 
-**Nota:** Si al correr alguno de los comandos anteriores ocurre el siguiente error:
+### Estilos visuales
+
+* Es requerido disponer de al menos un estilo visual instalado para que el sitio funcione.
+* Para listar los estilos visuales utilizar `php symfony choique-flavors-list`.
+
+### Permisos
+
+* Para establecer correctamente los permisos sobre los directorios, ejecute el siguiente comando:
+
+```bash
+$ php symfony choique-fix-perms && php symfony clear-cache
+```
+
+### Indexación para la búsqueda
+
+* Para inicializar los índice de búsqueda del sitio, ejecutar:
+
+```bash
+$ php symfony choique-reindex
+```
+
+### Problemas?
+
+Si al correr alguno de los comandos anteriores ocurre el siguiente error:
 
 ```
 [Zend_Search_Lucene_Exception]
@@ -141,10 +159,10 @@ $ php symfony lucene-rebuild backend
 
 Las aplicaciones symfony requieren que esté habilitado el modulo `rewrite` de Apache.
 
-Para configurar las reescrituras del `mod-rewrite`, puede utilizarse un `.htaccess`, 
+Para configurar las reescrituras del `mod-rewrite`, puede utilizarse un `.htaccess`,
 ya provisto en este proyecto dentro de los directorios públicos (`web-frontend` y `web-backend`).
-Sin embargo, se aconseja utilizar una configuración que no admita redefinir la 
-configuracion de apache con .htaccess, por ejemplo con el directorio web. 
+Sin embargo, se aconseja utilizar una configuración que no admita redefinir la
+configuracion de apache con .htaccess, por ejemplo con el directorio web.
 
 Un ejemplo de VirtualHost aconsejable sería el siguiente:
 
@@ -202,7 +220,7 @@ Y de manera similar con el directorio `web-backend`.
 
 # Primer acceso
 
-El acceso al Backend luego de una instalación nueva será:
+El acceso al backend luego de una instalación nueva será:
 
-* **Usuario:** admin
-* **Password:** admin
+* **Usuario:** `admin`
+* **Contraseña:** `admin`
