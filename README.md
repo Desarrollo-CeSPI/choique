@@ -3,16 +3,17 @@
 **Choique** es un administrador de contenidos desarrollado a medida para sitios de 
 la [Universidad Nacional de La Plata UNLP](http://www.unlp.edu.ar/). 
 
-# Configuracion
+## Instalación
+
+Leer el documento `INSTALL.md` para realizar una instalación con los valores por defecto.
+
+## Configuracion
 
 **Choique** fue desarrollado en symfony 1.0 y por tanto respeta la jerarquía de carpetas que 
 provee el framework. Sin embargo, se ha modificado el comportamiento original del framework
 eliminando la carpta web, y creando dos carpetas diferentes para cada aplicacion del CMS:
   * `web-frontend`: carpeta web para la aplicacion del frontend.
   * `web-backend`: carpeta web para la aplicacion del backend.
-
-Leer el documento `INSTALL.md` para realizar una instalación con los valores por defecto
-
 
 ## Valores a editar en config/app.yml
 
