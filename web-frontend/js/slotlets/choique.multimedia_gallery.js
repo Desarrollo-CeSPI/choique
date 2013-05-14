@@ -1,4 +1,4 @@
-if (typeof(Choique) !== 'undefined')
+if (typeof(Choique) === 'undefined')
 {
   Choique = {};
 }
