@@ -1,9 +1,9 @@
 propel.targetPackage       = lib.model
 propel.packageObjectModel  = true
 propel.project             = choique
-propel.database            = mysql
-propel.database.createUrl  = mysql://#db_user#:#db_pass#@#db_host#/
-propel.database.url        = mysql://#db_user#:#db_pass#@#db_host#/#db_name#
+propel.database            = #db_type#
+propel.database.createUrl  = #db_type#://#db_user#:#db_pass#@#db_host#/
+propel.database.url        = #db_type#://#db_user#:#db_pass#@#db_host#/#db_name#
 
 propel.mysql.tableType     = InnoDB
 
