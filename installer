@@ -33,7 +33,7 @@ function run()
   $options = array('remove' => array(), 'warnings' => array());
   $options['source']   = request('Ingrese la URL desde donde descargar el paquete .zip de Choique CMS', latest_version_url());
   $options['appname']  = request('Nombre de la instancia a instalar', 'choique');
-  $options['path']     = request('Ruta para la instancia a instalar', "/tmp/{$options['appname']}");
+  $options['path']     = request('Ruta para la instancia a instalar', "/var/www/{$options['appname']}");
   $options['fronturl'] = request('URL por la que se accederá al frontend (aplicación pública)', 'http://www.choique.example.com');
   $options['backurl']  = request('URL por la que se accederá al backend (aplicación privada)', 'http://administracion.choique.example.com');
   $options['session']  = request('Nombre de la sesión PHP para la administración', create_session_name($options['appname']));
