@@ -5,6 +5,15 @@ la [Universidad Nacional de La Plata UNLP](http://www.unlp.edu.ar/).
 
 ## Instalación
 
+### Automática
+
+```bash
+$ curl -s https://raw.github.com/Desarrollo-CeSPI/choique/master/installer.sh > /tmp/choique-installer.sh \
+  && sh /tmp/choique-installer.sh
+```
+
+### Manual
+
 Leer el documento `INSTALL.md` para realizar una instalación con los valores por defecto.
 
 ## Configuracion
