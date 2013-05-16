@@ -1,0 +1,691 @@
+#!/usr/bin/env php
+<?php
+
+/*
+ * Choique CMS - A Content Management System.
+ * Copyright (C) 2012 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
+ *
+ * This file is part of Choique CMS.
+ *
+ * Choique CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License v2.0 as published by
+ * the Free Software Foundation.
+ *
+ * Choique CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Choique CMS.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
+ */
+
+/**
+ * Run the installer.
+ */
+function run()
+{
+  output('<success>Gracias por elegir Choique CMS!</success>');
+  output('<info>Este instalador lo guiará en el proceso de configuración inicial de una nueva instancia del CMS.</info>');
+
+  output("\n\n<success>Configuración inicial</success>\n");
+
+  $options = array('remove' => array(), 'warnings' => array());
+  $options['source']   = request('Ingrese la URL desde donde descargar el paquete .zip de Choique CMS', latest_version_url());
+  $options['appname']  = request('Nombre de la instancia a instalar', 'choique');
+  $options['path']     = request('Ruta para la instancia a instalar', "/tmp/{$options['appname']}");
+  $options['fronturl'] = request('URL por la que se accederá al frontend (aplicación pública)', 'http://www.choique.example.com');
+  $options['backurl']  = request('URL por la que se accederá al backend (aplicación privada)', 'http://administracion.choique.example.com');
+  $options['session']  = request('Nombre de la sesión PHP para la administración', create_session_name($options['appname']));
+  $options['dbdata']   = array(
+    'type'  => request('Motor de base de datos a utilizar', 'mysql', array('mysql', 'pgsql')),
+    'name'  => request('Nombre de la base de datos', $options['appname']),
+    'host'  => request('Host de la base de datos', 'localhost'),
+    'port'  => request('Puerto para acceder a la base de datos'),
+    'user'  => request('Usuario para acceder a la base de datos', 'root'),
+    'pass'  => request('Contraseña de acceso a la base de datos'),
+    'build' => request('Reconstruir estructura de base de datos?', 's', array('s', 'n')) === 's',
+  );
+
+  output("\n<success>Comenzando instalación</success>\n");
+
+  check_environment($options);
+  fetch_latest_release($options);
+  create_structure($options);
+  move_files($options);
+  configure_application($options);
+  fix_permissions($options);
+  prepare_database($options);
+  prepare_application($options);
+  cleanup($options);
+
+  output_warnings($options);
+
+  output("\n<warning>Recuerde que deberá dar de alta los VirtualHosts en su servidor web\napuntando a</warning> <info>{$options['path']}/web-frontend</info> <warning>y</warning> <info>{$options['path']}/web-backend</info><warning>,\ny reiniciarlo antes de poder usar esta nueva instancia.</warning>");
+  output("\nPara mayor información puede leer los archivos incluidos en la instalación: <info>{$options['path']}/README.md</info> y <info>{$options['path']}/INSTALL.md</info>.");
+
+  output("\nYa se puede acceder a la nueva instancia de <info>Choique CMS</info>:\n\t- A la aplicación pública mediante <info>{$options['fronturl']}</info>\n\t- A la aplicación de administración mediante <info>{$options['backurl']}</info>", false);
+
+  if ($options['dbdata']['build'])
+  {
+    output(" utilizando el usuario <success>admin</success> y la contraseña <success>admin</success>.\n\t<warning>Es altamente recomendable cambiar la contraseña de acceso.</warning>", false);
+  }
+
+  output("\n\n<success>Finalizado!</success> <info>Choique CMS se instaló correctamente.</info>\n<success>Muchas gracias!</success>\n");
+}
+
+/**
+ * Perform some environment checks prior to actually running this installer.
+ *
+ * @param array $options The set of options.
+ */
+function check_environment($options)
+{
+  output(sprintf('%-70s', '<info>Realizando chequeos iniciales del entorno...</info> '), false);
+
+  if (PHP_VERSION_ID < 50200)
+  {
+    $php_version = PHP_VERSION;
+    output("<error>Falló.</error>\n\t<error>La versión de PHP instalada ({$php_version}) es menor que la recomendada (5.2).</error>\n\nPor favor, actualice la versión a una más reciente y ejecute este instalador nuevamente.");
+    exit(1);
+  }
+
+  if (file_exists($options['path']))
+  {
+    output("<error>Falló.</error>\n\t<error>La ruta de destino {$options['path']} ya existe.</error>\n\nPor favor, elimine el directorio existente y ejecute este instalador nuevamente o indique una nueva ruta de destino.");
+    exit(2);
+  }
+
+  $base_dir = dirname($options['path']);
+
+  if (!file_exists($base_dir))
+  {
+    output("<error>Falló.</error>\n\t<error>El directorio {$base_dir} no existe.</error>\n\nPor favor, cree ese directorio, asígnele los permisos correspondientes y ejecute este instalador nuevamente o indique una nueva ruta de destino.");
+    exit(3);
+  }
+
+  if (!is_writable($base_dir))
+  {
+    output("<error>Falló.</error>\n\t<error>No se dispone de permisos para escribir en el directorio {$base_dir}.</error>\n\nPor favor, asígnele los permisos correspondientes y ejecute este instalador nuevamente o indique una nueva ruta de destino.");
+    exit(4);
+  }
+
+  output('<success>Listo.</success>');
+}
+
+/**
+ * Fetch the latest available release of Choique CMS and unpack it.
+ *
+ * @param array $options The set of options.
+ */
+function fetch_latest_release(&$options)
+{
+  output(sprintf('%-70s', '<info>Descargando la ultima version de Choique CMS...</info> '), false);
+
+  if (function_exists('curl_init'))
+  {
+    $curl_options = array(
+      CURLOPT_URL            => $options['source'],
+      CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_RETURNTRANSFER => true,
+      // Hack to show GitHub that we are not a robot :)
+      CURLOPT_USERAGENT      => 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.5) Gecko/20041107 Firefox/1.0',
+      CURLOPT_FAILONERROR    => true,
+      CURLOPT_SSL_VERIFYHOST => false,
+      CURLOPT_SSL_VERIFYPEER => false,
+    );
+
+    $curl_handler = curl_init();
+    curl_setopt_array($curl_handler, $curl_options);
+    $contents = curl_exec($curl_handler);
+    curl_close($curl_handler);
+  }
+  else
+  {
+    $contents = @file_get_contents($options['source']);
+  }
+
+  if (false === $contents)
+  {
+    output("<error>Falló.</error>\n\t<error>No se pudo descargar el paquete desde {$options['source']}.</error>\n\nPor favor, ejecute nuevamente este instalador, chequeando que la URL ingresada sea correcta y que este equipo pueda descargar el paquete desde allí.");
+    exit(5);
+  }
+
+  // Create temporary zip file with the package
+  $options['remove'][] = $source = tempnam(sys_get_temp_dir(), 'choique');
+  $written = file_put_contents($source, $contents);
+
+  if (false === $written)
+  {
+    output("<error>Falló.</error>\n\t<error>No se crear un archivo temporal para la descarga.</error>\n\nPor favor, chequee que PHP se encuentre correctamente instalado y ejecute nuevamente este instalador.");
+    exit(6);
+  }
+
+  // Create temporary directory to unzip the downloaded package
+  $options['remove'][] = $target = tempnam(sys_get_temp_dir(), 'choique');
+  unlink($target);
+  mkdir($target);
+
+  // Unzip the package
+  if (!class_exists('ZipArchive'))
+  {
+    output("<error>Falló.</error>\n\t<error>La clase ZipArchive no está disponible.</error>\n\nPor favor, verifique que la instalación de PHP contenga extensiones para manejo de archivos Zip y ejecute nuevamente este instalador.\n<info>Para mayor información visite http://ar2.php.net/manual/en/book.zip.php</info>");
+    exit(7);
+  }
+
+  $zip = new ZipArchive();
+  if ($zip->open($source))
+  {
+    $zip->extractTo($target);
+    $zip->close();
+  }
+
+  // The unpacked files are in a subdirectory inside $target
+  //   - use that as the temporary path for future tasks.
+  $subdirectories = glob(rtrim($target, '/') . '/*', GLOB_ONLYDIR);
+  $options['temporary_path'] = $subdirectories[0];
+
+  output('<success>Listo.</success>');
+}
+
+/**
+ * Create the required directory structure for the new instance.
+ *
+ * @param array $options The set of options.
+ */
+function create_structure($options)
+{
+  output(sprintf('%-70s', '<info>Creando la estructura de directorios...</info> '), false);
+
+  $renamed = rename($options['temporary_path'], $options['path']);
+
+  if (!$renamed)
+  {
+    output("<error>Falló.</error>\n\t<error>No se pudo crear el directorio de destino {$options['path']}.</error>\n\nPor favor, verifique los permisos correspondientes y ejecute este instalador nuevamente.");
+    exit(8);
+  }
+
+  output('<success>Listo.</success>');
+}
+
+/**
+ * Move (as in rename) the configuration files that need to be renamed.
+ *
+ * @param array $options The set of options.
+ */
+function move_files($options)
+{
+  output(sprintf('%-70s', '<info>Renombrando archivos...</info>'), false);
+
+  $config_path = implode(DIRECTORY_SEPARATOR, array($options['path'], 'config')) . DIRECTORY_SEPARATOR;
+
+  foreach (array('app.yml', 'databases.yml', 'propel.ini') as $file)
+  {
+    $path    = $config_path . $file;
+    $renamed = rename("{$path}-default", $path);
+    if (!$renamed)
+    {
+      output("<error>Falló.</error>\n\t<error>No se pudo renombrar el archivo {$path}-default a {$path}.</error>\n\nPor favor, verifique los permisos correspondientes y ejecute este instalador nuevamente.");
+      exit(9);
+    }
+  }
+
+  $web_backend_path = implode(DIRECTORY_SEPARATOR, array($options['path'], 'web-backend')) . DIRECTORY_SEPARATOR;
+  $web_sf_path      = $web_backend_path . 'sf';
+  $data_sf_path     = implode(DIRECTORY_SEPARATOR, array($options['path'], 'lib', 'vendor', 'symfony', 'data', 'web', 'sf'));
+
+  if (file_exists($web_sf_path) && is_file($web_sf_path))
+  {
+    unlink($web_sf_path);
+    symlink($data_sf_path, $web_sf_path);
+  }
+
+  output('<success>Listo.</success>');
+}
+
+/**
+ * Apply any needed application settings.
+ *
+ * @param array $options The set of options.
+ */
+function configure_application(&$options)
+{
+  output(sprintf('%-70s', '<info>Configurando las aplicaciones...</info>'), false);
+
+  $shared_config_path   = implode(DIRECTORY_SEPARATOR, array($options['path'], 'config'));
+  $config_path_pattern  = implode(DIRECTORY_SEPARATOR, array($options['path'], 'apps', '%s', 'config'));
+  $backend_config_path  = sprintf($config_path_pattern, 'backend');
+  $frontend_config_path = sprintf($config_path_pattern, 'frontend');
+
+  // Change session name in apps/backend/config/factories.yml
+  $factories_path = $backend_config_path . DIRECTORY_SEPARATOR . 'factories.yml';
+  $factories = sed($factories_path, array('/session_name: (.*)/' => "session_name: \"{$options['session']}\""));
+  file_put_contents($factories_path, $factories);
+
+  // Change OpenSearch title using the provided application name
+  $frontend_app = $frontend_config_path . DIRECTORY_SEPARATOR . 'app.yml';
+  $replacements = array(
+    '/shortname:(\s+)(.*)/i' => "shortname:\\1\"Buscar en {$options['appname']}\"",
+    '/title:(\s+)(.*)/i'     => "title:\\1\"Buscar en {$options['appname']}\"",
+  );
+  $app = sed($frontend_app, $replacements);
+  file_put_contents($frontend_app, $app);
+
+  // Change the CSRF secret token in the backend application
+  $filters_path = $backend_config_path . DIRECTORY_SEPARATOR . 'filters.yml';
+  $random_secret = md5($options['session']);
+  $filters = sed($filters_path, array('/secret:(\s+)(.*)/i' => "secret:\\1\"{$random_secret}\""));
+  file_put_contents($filters_path, $filters);
+
+  // Update config/app.yml
+  $shared_app_path = $shared_config_path . DIRECTORY_SEPARATOR . 'app.yml';
+  $replacements = array(
+    '/instance_name:(\s+)(.*)/i' => "instance_name:\\1\"{$options['appname']}\"",
+    '/#choique_frontend_url#/i'  => "\"{$options['fronturl']}\"",
+    '/#choique_backend_url#/i'   => "\"{$options['backurl']}\"",
+  );
+  $app = sed($shared_app_path, $replacements);
+  file_put_contents($shared_app_path, $app);
+
+  // Flavors configuration (only if non-existent)
+  $flavors_path = $shared_config_path . DIRECTORY_SEPARATOR . 'choique.yml';
+  if (!file_exists($flavors_path))
+  {
+    $command = sf_command('choique-flavors-initialize', $options);
+    $output  = run_command($command);
+    if ($output[0] > 0)
+    {
+      $options['warnings'][] = "<warning>config/choique.yml:</warning> El archivo de configuración de los estilos visuales no pudo ser creado.\n\t<info>Ejecute `{$command}` para solucionar esto.</info>";
+    }
+  }
+
+  output('<success>Listo.</success>');
+}
+
+/**
+ * Fix the permissions of the application.
+ *
+ * @param array $options The set of options.
+ */
+function fix_permissions(&$options)
+{
+  output(sprintf('%-70s', '<info>Corrigiendo permisos de acceso...</info>'), false);
+
+  $command = sf_command('choique-fix-perms', $options);
+  $output = run_command($command);
+
+  if ($output[0] > 0)
+  {
+    var_dump($output);
+    $options['warnings'][] = "<warning>Permisos:</warning> No se pudieron especificar los permisos necesarios para el correcto funcionamiento de esta instancia.\n\t<info>Ejecute `{$command}` para solucionar esto.</info>";
+  }
+
+  output('<success>Listo.</success>');
+}
+
+/**
+ * Prepare the database configuration and create it, if the user told us to do so.
+ *
+ * @param array $options The set of options.
+ */
+function prepare_database(&$options)
+{
+  output(sprintf('%-70s', '<info>Preparando la base de datos...</info>'), false);
+
+  $db = $options['dbdata'];
+  $config_path  = $options['path'] . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR;
+
+  $replacements = array(
+    '/#db_type#/i' => $db['type'],
+    '/#db_name#/i' => $db['name'],
+    '/#db_user#/i' => $db['user'],
+    '/#db_host#/i' => $db['host'],
+    '/#db_pass#/i' => $db['pass'],
+    '/#db_port#/i' => $db['port'],
+  );
+
+  $ini = sed($config_path . 'propel.ini', $replacements);
+  $written_ini  = file_put_contents($config_path . 'propel.ini', $ini);
+
+  $yaml = sed($config_path . 'databases.yml', $replacements);
+  $written_yaml = file_put_contents($config_path . 'databases.yml', $yaml);
+
+  if (!($written_ini && $written_yaml))
+  {
+    output("<error>Falló.</error>\n\t<error>No se pudo escribir la configuración de la base de datos.</error>\n\nPor favor, verifique los permisos correspondientes y ejecute este instalador nuevamente.");
+    exit(10);
+  }
+
+  if ($db['build'])
+  {
+    $command = sf_command('propel-build-all-load backend', $options);
+    $output  = run_command($command);
+    if ($output[0] > 0)
+    {
+      $options['warnings'][] = "<warning>Reconstrucción de la base de datos:</warning> No se pudo reconstruir la estructura de la base de datos.\n\t<info>Chequee que la base de datos especificada exista y ejecute `{$command}` para solucionar esto.</info>";
+    }
+  }
+  else
+  {
+    $command = sf_command('propel-build-model', $options);
+    $output  = run_command($command);
+    if ($output[0] > 0)
+    {
+      $options['warnings'][] = "<warning>Creación del modelo de datos:</warning> No se pudo crear el modelo de datos.\n\t<info>Ejecute `{$command}` para solucionar esto.</info>";
+    }
+  }
+
+  output('<success>Listo.</success>');
+}
+
+/**
+ * Perform final tweaks on the application.
+ *
+ * @param array $options The set of options.
+ */
+function prepare_application(&$options)
+{
+  output(sprintf('%-70s', '<info>Preparando las aplicaciones...</info>'), false);
+
+  // Clear cache
+  $command = sf_command('clear-cache', $options);
+  $output  = run_command($command);
+  if ($output[0] > 0)
+  {
+    $options['warnings'][] = "<warning>Borrado de cache:</warning> No se pudo borrar el contenido de la cache.\n\t<info>Ejecute `{$command}` para solucionar esto.</info>";
+  }
+
+  // Re-index choique
+  $command = sf_command('choique-reindex', $options);
+  $output  = run_command($command);
+  if ($output[0] > 0)
+  {
+    $options['warnings'][] = "<warning>Indexado de Choique CMS:</warning> No se pudo indexar el contenido de la base de datos.\n\t<info>Ejecute `{$command}` para solucionar esto.</info>";
+  }
+
+  // Rebuild Lucene index
+  $command = sf_command('lucene-rebuild backend', $options);
+  $output  = run_command($command);
+  if ($output[0] > 0)
+  {
+    $options['warnings'][] = "<warning>Indexado de Lucene:</warning> No se pudo indexar el contenido de la base de datos.\n\t<info>Ejecute `{$command}` para solucionar esto.</info>";
+  }
+
+  output('<success>Listo.</success>');
+}
+
+/**
+ * Clean up any removable files.
+ *
+ * @param array $options The set of options.
+ */
+function cleanup($options)
+{
+  output(sprintf('%-70s', '<info>Borrando archivos temporales...</info>'), false);
+
+  foreach ($options['remove'] as $file)
+  {
+    is_dir($file) ? rmdir($file) : unlink($file);
+  }
+
+  output('<success>Listo.</success>');
+}
+
+/**
+ * Output any warnings reported by this installer.
+ *
+ * @param array $options The set of options.
+ */
+function output_warnings($options)
+{
+  if (0 < $count = count($options['warnings']))
+  {
+    output("\n<warning>Se encontraron {$count} advertencias:</warning>");
+    foreach ($options['warnings'] as $warning)
+    {
+      output("  - {$warning}");
+    }
+  }
+}
+
+/**
+ * Request some information to the user. Use $msg to indicate what's being
+ * requested, validate the response using $valid_options and use $default
+ * as the default value if no response is given.
+ *
+ * @param  string $msg           The message to use.
+ * @param  null   $default       The default value (returned if an empty response is received)
+ * @param  array  $valid_options An optional set of values to validate the user input with.
+ *
+ * @return mixed
+ */
+function request($msg, $default = null, $valid_options = array())
+{
+  $options = '';
+  if (!empty($valid_options))
+  {
+    $options = ' (' . implode('/', $valid_options) . ')';
+  }
+
+  $text = sprintf("<warning>%s%s</warning>\n[%s]<warning>:</warning> ", $msg, $options, $default);
+  output($text, false);
+  $input = readline();
+  $input = $input === '' ? $default : $input;
+
+  if (!empty($valid_options) && !in_array($input, $valid_options))
+  {
+    $input = request($msg, $default, $valid_options);
+  }
+
+  return $input;
+}
+
+/**
+ * Get some user input using a $format.
+ *
+ * @param  string $format The format to read.
+ *
+ * @return string
+ *
+ * @throws RuntimeException If unable to open 'stdin' I/O stream.
+ */
+function readline($format = '%s')
+{
+  $stdin = @fopen('php://stdin', 'r');
+
+  if (false === $stdin)
+  {
+    throw new RuntimeException('Este instalador no puede ser ejecutado desde stdin.');
+  }
+
+  fscanf($stdin, $format . PHP_EOL, $input);
+
+  return trim($input);
+}
+
+/**
+ * Output a message, optionally colorized by the following tags in an HTML-like
+ * manner:
+ *   - <info>message</info>
+ *   - <error>message</error>
+ *   - <warning>message</warning>
+ *   - <success>message</success>
+ *
+ * @param string $msg            The message to format and output.
+ * @param bool   $append_newline Whether a newline should be appended to $msg.
+ */
+function output($msg, $append_newline = true)
+{
+  $use_colors = DIRECTORY_SEPARATOR == '\\' ? false !== getenv('ANSICON') : true;
+  if ($use_colors)
+  {
+    $styles = array(
+      '<info>'     => "\033[37;37m",
+      '</info>'    => "\033[0m",
+      '<error>'    => "\033[31;31m",
+      '</error>'   => "\033[0m",
+      '<warning>'  => "\033[33;33m",
+      '</warning>' => "\033[0m",
+      '<success>'  => "\033[0;32m",
+      '</success>' => "\033[0m",
+    );
+  }
+  else
+  {
+    $styles = array(
+      '<info>'     => '',
+      '</info>'    => '',
+      '<error>'    => '',
+      '</error>'   => '',
+      '<warning>'  => '',
+      '</warning>' => '',
+      '<success>'  => '',
+      '</success>' => '',
+    );
+  }
+
+  $msg = str_replace(array_keys($styles), array_values($styles), $msg);
+
+  if ($append_newline)
+  {
+    $msg .= PHP_EOL;
+  }
+
+  print($msg);
+}
+
+/**
+ * Create a session name from the provided $appname.
+ *
+ * @param  string $appname The application name.
+ *
+ * @return string
+ */
+function create_session_name($appname)
+{
+  return 'Ch0!qU3-' . substr(md5($appname), 0, 12);
+}
+
+/**
+ * Replace strings in $source path in a sed-ish way.
+ *
+ * @param  string $source       The path to the source file.
+ * @param  array  $replacements The replacements to make (from => to).
+ *
+ * @return string
+ */
+function sed($source, $replacements)
+{
+  $origin = file_get_contents($source);
+
+  return preg_replace(array_keys($replacements), array_values($replacements), $origin);
+}
+
+/**
+ * Get the URL for the Zip file with the latest version of Choique CMS.
+ *
+ * @return string
+ */
+function latest_version_url()
+{
+  output(sprintf('%-70s', '<info>Obteniendo datos de versiones desde GitHub...</info>'), false);
+
+  $github_api_endpoint = 'https://api.github.com/repos/Desarrollo-CeSPI/choique/tags';
+
+  if (function_exists('curl_init'))
+  {
+    $curl_options = array(
+      CURLOPT_URL            => $github_api_endpoint,
+      CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_RETURNTRANSFER => true,
+      // Hack to show GitHub that we are not a robot :)
+      CURLOPT_USERAGENT      => 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.5) Gecko/20041107 Firefox/1.0',
+      CURLOPT_FAILONERROR    => true,
+      CURLOPT_SSL_VERIFYHOST => false,
+      CURLOPT_SSL_VERIFYPEER => false,
+    );
+
+    $curl_handler = curl_init();
+    curl_setopt_array($curl_handler, $curl_options);
+    $tags = curl_exec($curl_handler);
+    curl_close($curl_handler);
+  }
+  else
+  {
+    $tags = file_get_contents($github_api_endpoint);
+  }
+
+  $tags = json_decode($tags);
+  if (null === $tags || !is_array($tags) || count($tags) === 0)
+  {
+    // Default to the bleeding edge if we didn't find the info
+    $tag = 'https://github.com/Desarrollo-CeSPI/choique/archive/master.zip';
+  }
+  else
+  {
+    $tag = $tags[0]->zipball_url;
+  }
+
+  output("<success>Listo</success>\n");
+
+  return $tag;
+}
+
+/**
+ * Run a shell command gathering its output.
+ * Return an array with the following information:
+ *   - 0 => exit code
+ *   - 1 => output (if any)
+ *   - 2 => error output (if any)
+ *
+ * @param  string $cmd The command to run.
+ *
+ * @return array
+ */
+function run_command($cmd)
+{
+  $descriptors = array(
+    0 => array('pipe', 'r'),
+    1 => array('pipe', 'w'),
+    2 => array('pipe', 'w'),
+  );
+  $pipes = array();
+
+  $proc = proc_open($cmd, $descriptors, $pipes);
+
+  if (!is_resource($proc))
+  {
+    output("<error>Falló.</error>\n\n<error>Imposible ejecutar \"{$cmd}\".</error>\n");
+    exit(11);
+  }
+
+  $output = stream_get_contents($pipes[1]);
+  fclose($pipes[1]);
+
+  $error = stream_get_contents($pipes[2]);
+  fclose($pipes[2]);
+
+  $exit_code = proc_close($proc);
+
+  return array($exit_code, $output, $error);
+}
+
+/**
+ * Get the command string for a symfony command to be run on the target path.
+ *
+ * @param  string $cmd     The latter part of the symfony command to run. I.e., everything after "symfony".
+ * @param  array  $options The set of options.
+ *
+ * @return string
+ */
+function sf_command($cmd, $options)
+{
+  $path = $options['path'] . DIRECTORY_SEPARATOR . 'symfony';
+
+  return "php {$path} {$cmd}";
+}
+
+// Start the installer
+run();
