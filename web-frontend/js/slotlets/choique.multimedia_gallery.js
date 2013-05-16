@@ -1,5 +1,4 @@
-if(typeof( Choique) != undefined)
-//if (Choique == undefined)            //tira error en ciertos casos, 
+if (typeof(Choique) === 'undefined')
 {
   Choique = {};
 }
