@@ -1,19 +1,19 @@
-<?php 
+<?php
 /*
  * Choique CMS - A Content Management System.
  * Copyright (C) 2012 CeSPI - UNLP <desarrollo@cespi.unlp.edu.ar>
- * 
+ *
  * This file is part of Choique CMS.
- * 
+ *
  * Choique CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License v2.0 as published by
  * the Free Software Foundation.
- * 
+ *
  * Choique CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Choique CMS.  If not, see <http://www.gnu.org/licenses/gpl-2.0.html>.
  */ ?>
@@ -22,22 +22,22 @@
 /**
  * Subclass for representing a row from the 'section' table.
  *
- * 
+ *
  *
  * @package lib.model
- */ 
+ */
 class Section extends BaseSection implements SlotletInterface
 {
 	const HORIZONTAL = 'horizontal';
 	const VERTICAL 	 = 'vertical';
 	const ALL 		   = 'all';
 	const HOME		   = 'home';
-	
+
   public static $MAX_DEPTH = 5;
 
   function __toString()
   {
-    return $this->getPaddedToString(); 
+    return $this->getPaddedToString();
     //return $this->getTitle();
   }
 
@@ -45,7 +45,7 @@ class Section extends BaseSection implements SlotletInterface
   {
   	return str_repeat("&nbsp;&nbsp;",$this->getDepth()).$this->getTitle();
   }
-  
+
   public function getDepth()
   {
     if ($this->isRoot())
@@ -164,14 +164,14 @@ class Section extends BaseSection implements SlotletInterface
     $htmlOptions['title'] = $this->getDescription() ? $this->getDescription() : $this->getTitle();
 
     $use_color_block = true;
-    
+
     return link_to($extra_content.__($this->getTitle()), $route, $htmlOptions);
   }
-  
+
   public function getTemplateHTML()
-  {		
+  {
     $template = $this->getTemplate();
-    
+
     //si la seccion no tiene una portada asociada, se busca el articulo para mostrar
     if (!$template)
     {
@@ -200,7 +200,7 @@ class Section extends BaseSection implements SlotletInterface
       return $template->getHTML();
     }
   }
-  
+
   public function getArticleForTemplate()
   {
     if ($this->hasArticle())
@@ -217,7 +217,7 @@ class Section extends BaseSection implements SlotletInterface
       return ArticlePeer::doSelectOne($c);
     }
   }
-  
+
   public function getPublishedArticles()
   {
     $c = new Criteria();
@@ -249,7 +249,7 @@ class Section extends BaseSection implements SlotletInterface
         ($context= sfContext::getInstance()) &&
           ((
           $context->getUser()->hasCredential(array('designer','reporter'),false) &&
-          !$this->getIsPublished() 
+          !$this->getIsPublished()
           )
           ||
           $context->getUser()->hasCredential(array('designer_admin','reporter_admin'),false)
@@ -289,7 +289,7 @@ class Section extends BaseSection implements SlotletInterface
       return parent::delete($con);
     }
   }
-  
+
   /**
    *  Return the associated Multimedia for the section whose name is $name.
    *  If that section doesn't have an associated Multimedia element, try
@@ -361,7 +361,7 @@ class Section extends BaseSection implements SlotletInterface
   {
     return (!is_null($this->getArticleId()));
   }
-  
+
   /**
    *  Return a string holding the path to the section whose name is $name.
    *
@@ -372,7 +372,7 @@ class Section extends BaseSection implements SlotletInterface
    */
   public static function getPath($name, $force_home = true)
   {
-    $section = SectionPeer::retrieveByName($name);    	    	
+    $section = SectionPeer::retrieveByName($name);
     $txt = "<div>";
     $home_section = SectionPeer::retrieveHomeSection();
     if ($section)
@@ -452,7 +452,7 @@ class Section extends BaseSection implements SlotletInterface
   public function isAncestorOf($sectionName)
   {
     $section = SectionPeer::retrieveByName($sectionName);
-    
+
     if (!$section)
     {
       return false;
@@ -471,7 +471,7 @@ class Section extends BaseSection implements SlotletInterface
     {
       $c = clone $criteria;
     }
-    
+
     $c->addDescendingOrderByColumn(SectionPeer::PRIORITY);
 
     return $this->getSectionsRelatedBySectionId($c);
@@ -486,8 +486,8 @@ class Section extends BaseSection implements SlotletInterface
     else
     {
       $c = new Criteria();
-    } 
-    
+    }
+
     $c->add(SectionPeer::IS_PUBLISHED, true);
     $c->addDescendingOrderByColumn(SectionPeer::PRIORITY);
 
@@ -505,7 +505,7 @@ class Section extends BaseSection implements SlotletInterface
     $c = new Criteria();
     $c->add(SectionPeer::SECTION_ID, $this->getSectionId());
 
-    return $sectionsChildren = SectionPeer::doSelect($c);									
+    return $sectionsChildren = SectionPeer::doSelect($c);
   }
 
   /**
@@ -531,7 +531,7 @@ class Section extends BaseSection implements SlotletInterface
       $ancestors[] = $section;
     }
 
-    return $ancestors;   
+    return $ancestors;
   }
 
   /**
@@ -549,20 +549,20 @@ class Section extends BaseSection implements SlotletInterface
     {
       return null;
     }
-      
+
     while (!$section->isRoot())
     {
       $section = $section->getParentSection();
     }
-      
-    return $section;   
+
+    return $section;
   }
 
   public function hasChildren()
   {
     $c = new Criteria();
     $c->add(SectionPeer::SECTION_ID, $this->getId());
-    
+
     return (SectionPeer::doCount($c) > 0);
   }
 
@@ -656,7 +656,7 @@ class Section extends BaseSection implements SlotletInterface
   {
     return NULL;
   }
- 
+
   public function getLineage()
   {
   	$ret = array($this);
@@ -664,25 +664,25 @@ class Section extends BaseSection implements SlotletInterface
     {
       $ret = array_merge($ret, $child->getLineage());
     }
-      
+
     return $ret;
   }
-  
-  public function getAllSectionsTree($user=null) 
+
+  public function getAllSectionsTree($user=null)
   {
   	$ret = SectionPeer::getSectionsTree($user);
   	if (!$this->isNew())
     {
-  	 	$ret = array_diff($ret, $this->getLineage());	
+  	 	$ret = array_diff($ret, $this->getLineage());
   	}
-    
+
   	return $ret;
   }
 
   public function hasCredential($user)
   {
     $credentials = $this->getCredentials();
-    
+
     return (($user==null) ? true : (is_null($credentials) ? true : $user->hasCredential($credentials)));
   }
 
@@ -706,7 +706,7 @@ class Section extends BaseSection implements SlotletInterface
       }
     }
 	}
-  
+
 	public function getSectionTree(&$ids, $user=null)
 	{
 	  $ids[] = $this->getId();
@@ -718,7 +718,7 @@ class Section extends BaseSection implements SlotletInterface
       }
     }
 	}
-  
+
   public static function getSlotletName()
   {
     sfLoader::loadHelpers(array('I18N'));
@@ -895,7 +895,7 @@ class Section extends BaseSection implements SlotletInterface
       {
         $section_ids = array_merge($section_ids, array_map(create_function('$section', 'return $section->getId();'), $this->getChildren()));
       }
-      
+
       $c = ArticlePeer::getSortedNewsCriteriaBase($section_ids, $sort_by_priority, $include_institutional);
       $c->add(ArticlePeer::ID, array_map(create_function('$article', 'return $article->getId();'), $articles_array), Criteria::NOT_IN);
       $c->setLimit($max_count * $max_count);
@@ -909,37 +909,57 @@ class Section extends BaseSection implements SlotletInterface
     return $articles_array;
   }
 
-  public function addDefaultArticleSections()
+/*
+ * What's the point in doing this?
+ *
+  public function addDefaultArticleSections($con = null)
   {
-    foreach ($this->getArticles() as $article)
+    $related_ids = array_map(create_function('$a', 'return $a->getId();'), $this->getArticles($con));
+
+    $c = new Criteria();
+    $c->add(ArticleSectionPeer::SECTION_ID, $this->getId());
+    $c->add(ArticleSectionPeer::ARTICLE_ID, $related_ids, Criteria::IN);
+    $c->clearSelectColumns();
+    $c->addSelectColumn(ArticleSectionPeer::ARTICLE_ID);
+
+    $article_sections = ArticleSectionPeer::doSelectRS($c, $con);
+    $article_sections->setFetchmode(ResultSet::FETCHMODE_NUM);
+
+    $as_ids = array();
+    foreach ($article_sections as $as)
     {
-      $c= new Criteria();
-      $c->add(ArticleSectionPeer::ARTICLE_ID, $article->getId());
-      $c->add(ArticleSectionPeer::SECTION_ID, $this->getId());
-      if (ArticleSectionPeer::doCount($c) == 0) {
-        $as = new ArticleSection();
-        $as->setArticleId($article->getId());
-        $as->setSectionId($this->getId());
-        $as->save();
-      }
+      $as_ids[] = intval($as[0]);
+    }
+
+    $non_related = array_diff($related_ids, $as_ids);
+
+    foreach ($non_related as $article_id)
+    {
+      $as = new ArticleSection();
+      $as->setArticleId($article_id);
+      $as->setSectionId($this->getId());
+      $as->save($con);
     }
   }
+*/
 
-  public function getArticleSections($criteria = null, $con = null)
-  {
-    $this->addDefaultArticleSections();
-    return parent::getArticleSections($criteria, $con);
-  }
-  public function getArticleSectionsByPriority()
+  public function getArticleSectionsByPriority($only_news = false)
   {
     $c = new Criteria();
     $c->addDescendingOrderByColumn(ArticleSectionPeer::PRIORITY);
-    return $this->getArticleSections($c);
+    $c->add(ArticleSectionPeer::PRIORITY, 0, Criteria::GREATER_THAN);
+
+    if ($only_news)
+    {
+      $c->add(ArticlePeer::TYPE, Article::NEWS);
+    }
+
+    return $this->getArticleSectionsJoinArticle($c);
   }
 
   /**
    * Get the layout for this section.
-   * 
+   *
    * If this section has not been assigned a specific Layout, get it
    * recursively from this section's ancestors. If this is a root section,
    * return the default layout.
@@ -967,7 +987,7 @@ class Section extends BaseSection implements SlotletInterface
   /**
    * Return TRUE if this Section has a color defined for itself
    * (Not taking into account color inheritance).
-   * 
+   *
    * @return boolean
    */
   public function hasOwnColor()
@@ -989,7 +1009,7 @@ class Section extends BaseSection implements SlotletInterface
    * Get the color for this section.
    * This method will inherit the color from a parent section
    * if none has been defined for this one and it has a parent section.
-   * 
+   *
    * @return string The color
    */
   public function getColor()
