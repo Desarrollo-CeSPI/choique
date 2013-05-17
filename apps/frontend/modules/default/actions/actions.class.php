@@ -58,8 +58,10 @@ class defaultActions extends sfActions
 
   public function executeSetMobileMode()
   {
-    $this->getResponse()->setCookie('mobile_mode_set', true);
-    $this->getUser()->setAttribute('mobile_mode', true);
+    $can_be_mobile = LayoutPeer::mobileExists();
+      
+    $this->getResponse()->setCookie('mobile_mode_set', $can_be_mobile);
+    $this->getUser()->setAttribute('mobile_mode', $can_be_mobile);
     $this->redirect('@homepage');
   }
 

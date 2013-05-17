@@ -126,4 +126,10 @@ class LayoutPeer extends BaseLayoutPeer
     return $match.$suffix;
   }
 
+  static public function mobileExists() 
+  {
+    //No chequeo si tiene VS_MOBILE_CONTENT porque podría querer hacer solo la home mobile...
+    return LayoutPeer::retrieveByVirtualSectionId(VirtualSection::VS_MOBILE_HOME) != NULL;
+  }
+
 }

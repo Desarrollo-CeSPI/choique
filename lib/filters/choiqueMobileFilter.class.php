@@ -23,12 +23,18 @@ class choiqueMobileFilter extends sfFilter
 {
   public function execute($filterChain)
   {
-    $mobile_mode_set = $this->getContext()->getRequest()->getCookie('mobile_mode_set');
-    if ($this->isFirstCall() && is_null($mobile_mode_set))
+    if ($this->isFirstCall()) 
     {
-      $detect = new Mobile_Detect();
-      if ( $detect->isMobile()) $this->getContext()->getController()->forward('default','setMobileMode');
-
+      $mobile_mode_set = $this->getContext()->getRequest()->getCookie('mobile_mode_set');
+      if (is_null($mobile_mode_set))
+      {
+        $detect = new Mobile_Detect();
+        if ( $detect->isMobile()) $this->getContext()->getController()->forward('default','setMobileMode');
+      }
+      if ($this->getContext()->getUser()->getAttribute('mobile_mode') && !LayoutPeer::mobileExists())
+      {
+        $this->getContext()->getController()->forward('default','unsetMobileMode'); 
+      }
     }
     $filterChain->execute();
   }
