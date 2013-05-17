@@ -54,12 +54,6 @@ class Article extends BaseArticle implements SlotletInterface
     return sprintf('<span class="not-found">%s</span>', empty($description) ? __('Referencia a artículo inválida') : $description);
   }
 
-  public function getArticleSections($criteria = null, $con = null)
-  {
-    $this->getSection()->addDefaultArticleSections();
-    return parent::getArticleSections($criteria, $con);
-  }
-
   public function setName($name)
   {
     sfLoader::loadHelpers(array('CmsEscaping'));
