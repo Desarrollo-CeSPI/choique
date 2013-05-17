@@ -6,6 +6,14 @@ sitemap_xml:
   url:   /sitemap_index.xml
   param: { module: sitemap, action: xmlIndex }
 
+mobile:
+  url: /mobile
+  param: { module: default, action: setMobileMode }
+
+no_mobile:
+  url: /no_mobile
+  param: { module: default, action: unsetMobileMode }
+
 sitemap_xml_articles:
   url:   /sitemap_articles.xml
   param: { module: sitemap, action: xmlArticles }

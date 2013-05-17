@@ -69,6 +69,14 @@ class shortcutActions extends autoshortcutActions
           //None reference
           $this->shortcut->setReference(Shortcut::NONE_STRING);
           break;
+        case 5:
+          // Mobile version
+          $this->shortcut->setReference(Shortcut::REFERENCE_TYPE_MOBILE);
+          break;
+        case 6:
+          $this->shortcut->setReference(Shortcut::REFERENCE_TYPE_NO_MOBILE);
+          // Normal version
+          break;
       }
     }
   }
@@ -161,7 +169,7 @@ class shortcutActions extends autoshortcutActions
     $response = true;
     if ($this->getRequest()->getMethodName() == 'POST')
     {
-      $references = array('external_reference_value', 'article_reference_value', 'section_reference_value', 'none_reference_value', 'external_reference_value');
+      $references = array('external_reference_value', 'article_reference_value', 'section_reference_value', 'none_reference_value', 'none_reference_value', 'none_reference_value', 'none_reference_value');
       $shortcut = $this->getRequestParameter('shortcut');
       $reference_type = $shortcut['reference_type'];
       $reference_value = $shortcut[$references[$reference_type]];
