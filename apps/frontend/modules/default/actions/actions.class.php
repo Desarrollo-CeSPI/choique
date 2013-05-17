@@ -55,4 +55,20 @@ class defaultActions extends sfActions
   {
     $this->setLayout('clean_layout');
   }
+
+  public function executeSetMobileMode()
+  {
+    $can_be_mobile = LayoutPeer::mobileExists();
+      
+    $this->getResponse()->setCookie('mobile_mode_set', $can_be_mobile);
+    $this->getUser()->setAttribute('mobile_mode', $can_be_mobile);
+    $this->redirect('@homepage');
+  }
+
+  public function executeUnsetMobileMode()
+  {
+    $this->getResponse()->setCookie('mobile_mode_set', true);
+    $this->getUser()->setAttribute('mobile_mode', false);
+    $this->redirect('@homepage');
+  }
 }

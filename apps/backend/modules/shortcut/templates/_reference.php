@@ -72,6 +72,8 @@ function toggle_reference(option)
       $('none_reference').hide();
       break;
     case 3:
+    case 5:
+    case 6:
       $('external_reference').hide();
       $('article_reference').hide();
       $('section_reference').hide();

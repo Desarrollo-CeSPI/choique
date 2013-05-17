@@ -31,28 +31,32 @@
 class VirtualSection
 {
   const
-    VS_CONTACT    = 1,
-    VS_SITEMAP    = 2,
-    VS_SEARCH     = 3,
-    VS_RSS        = 4,
-    VS_WS         = 5,
-    VS_ALL_NEWS   = 6,
-    VS_ALL_EVENTS = 7,
-    VS_PREVIEW    = 8;
+    VS_CONTACT        = 1,
+    VS_SITEMAP        = 2,
+    VS_SEARCH         = 3,
+    VS_RSS            = 4,
+    VS_WS             = 5,
+    VS_ALL_NEWS       = 6,
+    VS_ALL_EVENTS     = 7,
+    VS_PREVIEW        = 8,
+    VS_MOBILE_HOME    = 9,
+    VS_MOBILE_CONTENT = 10;
 
   static protected $instance;
 
   static protected $current;
   
   protected $virtual_sections = array(
-    self::VS_CONTACT    => 'Contacto',
-    self::VS_SITEMAP    => 'Mapa del sitio',
-    self::VS_SEARCH     => 'Resultados de búsqueda',
-    self::VS_RSS        => 'Vista completa de canal RSS',
-    self::VS_ALL_NEWS   => 'Todas las noticias',
-    self::VS_WS         => 'Resultados de búsqueda sobre Web Services',
-    self::VS_ALL_EVENTS => 'Vista completa de eventos',
-    self::VS_PREVIEW    => 'Previsualización'
+    self::VS_CONTACT        => 'Contacto',
+    self::VS_SITEMAP        => 'Mapa del sitio',
+    self::VS_SEARCH         => 'Resultados de búsqueda',
+    self::VS_RSS            => 'Vista completa de canal RSS',
+    self::VS_ALL_NEWS       => 'Todas las noticias',
+    self::VS_WS             => 'Resultados de búsqueda sobre Web Services',
+    self::VS_ALL_EVENTS     => 'Vista completa de eventos',
+    self::VS_PREVIEW        => 'Previsualización',
+    self::VS_MOBILE_HOME    => 'Home version movil',
+    self::VS_MOBILE_CONTENT => 'Contenido version movil'
   );
 
   /**

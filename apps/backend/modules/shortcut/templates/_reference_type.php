@@ -55,9 +55,28 @@
 
 <div>
   <?php echo radiobutton_tag('shortcut[reference_type]',
+                             '5',
+                             $shortcut->getReferenceType() == 5,
+                             array("onclick" => 'toggle_reference(5);')) ?>
+
+  <?php echo __('Ir a versión movil') ?>
+</div>
+
+<div>
+  <?php echo radiobutton_tag('shortcut[reference_type]',
+                             '6',
+                             $shortcut->getReferenceType() == 6,
+                             array("onclick" => 'toggle_reference(6);')) ?>
+
+  <?php echo __('Ir a versión normal') ?>
+</div>
+
+<div>
+  <?php echo radiobutton_tag('shortcut[reference_type]',
                              '3',
                              $shortcut->getReferenceType() == 3,
                              array("onclick" => 'toggle_reference(3);')) ?>
 
   <?php echo __('Ninguno') ?>
 </div>
+

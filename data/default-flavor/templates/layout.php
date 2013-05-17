@@ -34,7 +34,7 @@
 
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo url_for('@section_css?name='.$sf_request->getParameter('section_name', '')) ?>" />
 </head>
-<body class="<?php echo $sf_request->getParameter('section_name') ?>">
+<body class="<?php echo $sf_user && $sf_user->hasAttribute('mobile_mode') && $sf_user->getAttribute('mobile_mode')? 'mobile' : $sf_request->getParameter('section_name') ?>">
   <div id="wrapper">
     <?php include_layout_for_section($sf_request->getParameter('section_name'), $sf_content) ?>
   </div>
