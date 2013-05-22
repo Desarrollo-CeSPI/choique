@@ -477,7 +477,7 @@ function request($msg, $default = null, $valid_options = array())
 
   $text = sprintf("<warning>%s%s</warning>\n[%s]<warning>:</warning> ", $msg, $options, $default);
   output($text, false);
-  $input = readline();
+  $input = read_line();
   $input = $input === '' ? $default : $input;
 
   if (!empty($valid_options) && !in_array($input, $valid_options))
@@ -497,7 +497,7 @@ function request($msg, $default = null, $valid_options = array())
  *
  * @throws RuntimeException If unable to open 'stdin' I/O stream.
  */
-function readline($format = '%s')
+function read_line($format = '%s')
 {
   $stdin = @fopen('php://stdin', 'r');
 
