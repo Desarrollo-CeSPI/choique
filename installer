@@ -111,6 +111,12 @@ function check_environment($options)
     exit(4);
   }
 
+  if (!is_writable($options['tmppath']))
+  {
+    output("<error>Falló.</error>\n\t<error>No se dispone de permisos para escribir en el directorio {$options['tmppath']}.</error>\n\nPor favor, asígnele los permisos correspondientes y ejecute este instalador nuevamente o indique un nuevo directorio temporal.");
+    exit(4);
+  }
+
   output('<success>Listo.</success>');
 }
 
