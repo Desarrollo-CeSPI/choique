@@ -909,45 +909,10 @@ class Section extends BaseSection implements SlotletInterface
     return $articles_array;
   }
 
-/*
- * What's the point in doing this?
- *
-  public function addDefaultArticleSections($con = null)
-  {
-    $related_ids = array_map(create_function('$a', 'return $a->getId();'), $this->getArticles($con));
-
-    $c = new Criteria();
-    $c->add(ArticleSectionPeer::SECTION_ID, $this->getId());
-    $c->add(ArticleSectionPeer::ARTICLE_ID, $related_ids, Criteria::IN);
-    $c->clearSelectColumns();
-    $c->addSelectColumn(ArticleSectionPeer::ARTICLE_ID);
-
-    $article_sections = ArticleSectionPeer::doSelectRS($c, $con);
-    $article_sections->setFetchmode(ResultSet::FETCHMODE_NUM);
-
-    $as_ids = array();
-    foreach ($article_sections as $as)
-    {
-      $as_ids[] = intval($as[0]);
-    }
-
-    $non_related = array_diff($related_ids, $as_ids);
-
-    foreach ($non_related as $article_id)
-    {
-      $as = new ArticleSection();
-      $as->setArticleId($article_id);
-      $as->setSectionId($this->getId());
-      $as->save($con);
-    }
-  }
-*/
-
   public function getArticleSectionsByPriority($only_news = false)
   {
     $c = new Criteria();
     $c->addDescendingOrderByColumn(ArticleSectionPeer::PRIORITY);
-    $c->add(ArticleSectionPeer::PRIORITY, 0, Criteria::GREATER_THAN);
 
     if ($only_news)
     {
