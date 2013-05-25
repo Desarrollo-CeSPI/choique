@@ -102,9 +102,6 @@ class articleActions extends autoarticleActions
         $ArticleSection->save();
       }
     }
-
-    $article->getSection()->addDefaultArticleSections();
-
   }
 
   public function handlePost()
