@@ -26,7 +26,7 @@ class choiqueMobileFilter extends sfFilter
     if ($this->isFirstCall()) 
     {
       $mobile_mode_set = $this->getContext()->getRequest()->getCookie('mobile_mode_set');
-      if (is_null($mobile_mode_set))
+      if (is_null($mobile_mode_set) && LayoutPeer::mobileExists())
       {
         $detect = new Mobile_Detect();
         if ( $detect->isMobile()) $this->getContext()->getController()->forward('default','setMobileMode');
