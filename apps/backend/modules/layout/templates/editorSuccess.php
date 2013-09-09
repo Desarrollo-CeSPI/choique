@@ -138,7 +138,7 @@ jQuery(function() {
 
   Layout.column.makeDroppable(Layout.root.find('.column'));
 
-  Layout.url = '<?php echo url_for('layout/sconfig', true) ?>';
+  Layout.url = '<?php echo choiqueUtil::generateUrl('backend','layout/sconfig') ?>';
 });
 //]]>
 </script>
