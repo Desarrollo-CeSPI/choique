@@ -59,11 +59,12 @@ class eventActions extends sfActions
 
   protected function getDefaultSearchParameters()
   {
+		$to = CmsConfiguration::get('check_use_default_search_to_tomorrow',true)? date('d/m/Y', strtotime('tomorrow')):'';
     return array_merge(array(
       'title'      => null,
       'event_type' => null,
       'organizer'  => null,
-      'date'       => array('from' => date('d/m/Y'), 'to' => date('d/m/Y', strtotime('tomorrow')))
+      'date'       => array('from' => date('d/m/Y'), 'to' => $to)
     ), $this->getUserSearchParameters());
   }
 
@@ -176,12 +177,11 @@ class eventActions extends sfActions
     }
     else if (null !== $this->date['from'])
     {
-      $criterion = $criteria->getNewCriterion(EventPeer::BEGINS_AT, $this->date['from'], Criteria::LESS_THAN);
-      
-      $criteria->addAnd($criteria->getNewCriterion(EventPeer::ENDS_AT, $this->date['from'], Criteria::GREATER_EQUAL));
-      $criterion->addOr($criteria->getNewCriterion(EventPeer::BEGINS_AT, $this->date['from'], Criteria::GREATER_EQUAL));
+      //$criterion = $criteria->getNewCriterion(EventPeer::ENDS_AT, $this->date['from'], Criteria::LESS_THAN);
+			//$criterion->addOr($criteria->getNewCriterion(EventPeer::ENDS_AT, $this->date['from'], Criteria::GREATER_EQUAL));
+      $criteria->addAnd($criteria->getNewCriterion(EventPeer::BEGINS_AT, $this->date['from'], Criteria::GREATER_EQUAL));
 
-      $criteria->add($criterion);
+//      $criteria->add($criterion);
     }
     else if (null !== $this->date['to'])
     {
