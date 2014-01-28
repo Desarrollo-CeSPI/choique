@@ -130,15 +130,11 @@ class ArticleGalleryGallerySlotlet implements ISlotlet
 <div class="slotlet article_group_gallery %class%" id="%id%">
   <div class="article_group_gallery_container">
     <h2 class="article_group_gallery_title">%title%</h2>
-    <div class="scrollable vertical">
       <div class="items">
-        <div>
           <div class="item">
             %content%
           </div>
-        </div>
       </div>
-    </div>
   </div>
 </div>
 SLOTLET;
@@ -154,7 +150,6 @@ SLOTLET;
 <div class="slotlet article_group_gallery %class%">
   <div class="article_group_gallery_container">
     <h2 class="article_group_gallery_title">%title%</h2>
-    <div class="scrollable vertical">
 
       <div class="galleries">
 					<div class="article_group_gallery_filters">
@@ -167,7 +162,7 @@ SLOTLET;
       		%articles%
       	</ul>
       </div>
-    </div>
+
   </div>
 </div>
 SLOTLET;
