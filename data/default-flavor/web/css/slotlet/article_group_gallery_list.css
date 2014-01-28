@@ -1,0 +1,64 @@
+.article_group_gallery .scrollable 
+{
+    position:relative;
+	overflow:hidden;
+    height: 150px;
+    width: 300px;
+}
+
+
+.article_group_gallery .scrollable .items 
+{
+    position: absolute;
+	/* this time we have very large space for the height */
+	height:20000em;
+}
+
+
+.article_group_gallery .article_group_gallery_container #actions a.disabled 
+{
+    display: none;
+}
+
+.article_group_gallery .scrollable .items .item {
+    margin: 5px;
+    padding:5px;
+    font-size: 10px !important;
+    font-family:Arial, sans-serif;
+    text-align: left;
+    display:block;
+    background:#ccc;
+}
+
+.article_group_gallery .scrollable .items .item a
+{
+    padding:10px;
+    text-align: left;
+    color:#555;
+    text-decoration:none;
+}
+
+.article_group_gallery .scrollable .items .item a .go
+{
+    float: right;
+}
+
+.article_group_gallery .scrollable .items .item a .section_name
+{
+
+}
+
+.article_group_gallery .article_group_gallery_container #actions 
+{
+    text-align: right;
+    width: 100px;
+    float:right;
+}
+
+.article_group_gallery .article_group_gallery_container .article_group_gallery_title 
+{
+    text-align: left;
+    width: 200px;
+    display:none;
+}
+
