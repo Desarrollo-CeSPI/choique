@@ -402,4 +402,42 @@
     }
   }
 
-  
+  pake_desc('Normalize Article and Section Names');
+  pake_task('choique-normalize-names');
+
+  /**
+   * Normalize Article and Section Names
+   *
+   *
+   * @param object $task
+   * @param array $args
+   */
+
+    function run_choique_normalize_names($task, $args)
+  {
+      define('SF_ROOT_DIR',    sfConfig::get('sf_root_dir'));
+      define('SF_APP',         'backend');
+      define('SF_ENVIRONMENT', 'prod');
+      define('SF_DEBUG',       true);
+     // get configuration
+      require_once SF_ROOT_DIR.DIRECTORY_SEPARATOR.'apps'.DIRECTORY_SEPARATOR.SF_APP.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.php';
+      $databaseManager = new sfDatabaseManager();
+      $databaseManager->initialize();
+      
+      sfLoader::loadHelpers(array('CmsEscaping'));
+
+      foreach (ArticlePeer::doSelect(new Criteria()) as $article)
+      {
+        $article->setName(escape_string($article->getName()));
+        $article->save();
+      }
+      echo "\n".pakeColor::colorize("Articles names successfully normalized \n", array('fg'=>'green', 'bold'=>true));
+
+      foreach (SectionPeer::doSelect(new Criteria()) as $section)
+      {
+        $section->setName(escape_string($section->getName()));
+        $section->save();
+      }
+
+      echo "\n".pakeColor::colorize("Sections names successfully normalized \n", array('fg'=>'green', 'bold'=>true));
+  }
