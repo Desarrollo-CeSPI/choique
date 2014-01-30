@@ -511,7 +511,7 @@
 
         $body = strip_tags($dom->saveHTML(), $tags_permitidos);
         $article->setBody($body);
-        // $article->save();
+        $article->save();
 
         // echo "Clear body " . $body . "\n";
 
