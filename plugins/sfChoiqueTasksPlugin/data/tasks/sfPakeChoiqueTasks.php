@@ -467,22 +467,26 @@
       
       sfLoader::loadHelpers(array('CmsEscaping'));
 
+      $tags_permitidos = "<p><a><table><td><tr><ul><li><img>";
       $salida_tag_a     = fopen(sfConfig::get('sf_root_dir').'/web-backend/salida_tag_a.csv', "w");
       $salida_tag_img   = fopen(sfConfig::get('sf_root_dir').'/web-backend/salida_tag_img.csv', "w");
+      $cant             = 0;
 
       foreach (ArticlePeer::doSelect(new Criteria()) as $article)
       {
-        echo $article->getBody();
+        // echo $article->getBody();
 
-        $body = strip_tags($article->getBody(), $tags_permitidos);
-        $dom = new DOMDocument;
+        $cant++;
+        $id     = $article->getId();
+        $body   = strip_tags($article->getBody(), $tags_permitidos);
+        $dom    = new DOMDocument;
         $dom->loadHTML('<?xml encoding="UTF-8">' . $body);
-        $xpath = new DOMXPath($dom);
-        $nodes = $xpath->query('//@*');
+        $xpath  = new DOMXPath($dom);
+        $nodes  = $xpath->query('//@*');
       // Primero que nada hay que identificar los tags A e IMG para hacer la salida en un archivo
       // proceso los tags A
 
-        $tags = $dom->getElementsByTagName('a');
+        $tags   = $dom->getElementsByTagName('a');
 
         foreach ($tags as $tag) {
                // echo $tag->getAttribute('href').' | '.$tag->nodeValue."\n";
@@ -507,16 +511,17 @@
 
         $body = strip_tags($dom->saveHTML(), $tags_permitidos);
         $article->setBody($body);
-        $article->save();
+        // $article->save();
 
-        echo "Clear body " . $body . "\n";
+        // echo "Clear body " . $body . "\n";
 
       }
 
       // fputcsv($salida, array($id, $body));
       fclose($salida_tag_a);
       fclose($salida_tag_img);
-      // $this->logSection("Se procesaron" , $cant_tag_a . " tags A");
-      // $this->logSection("Se procesaron" , $cant_tag_img . " tags IMG");
+      echo "Se procesaron " . $cant_tag_a . " tags A \n";
+      echo "Se procesaron " . $cant_tag_img . " tags IMG \n";
+      echo "Se procesaron " . $cant . " artículos \n";
       echo "\n".pakeColor::colorize("Articles body successfully clean \n", array('fg'=>'green', 'bold'=>true));
   }
