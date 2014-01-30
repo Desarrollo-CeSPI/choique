@@ -441,3 +441,82 @@
 
       echo "\n".pakeColor::colorize("Sections names successfully normalized \n", array('fg'=>'green', 'bold'=>true));
   }
+
+
+  pake_desc('Clean Articles');
+  pake_task('choique-clean-body-articles');
+
+  /**
+   * Clean Articles Body
+   *
+   *
+   * @param object $task
+   * @param array $args
+   */
+
+    function run_choique_clean_body_articles($task, $args)
+  {
+      define('SF_ROOT_DIR',    sfConfig::get('sf_root_dir'));
+      define('SF_APP',         'backend');
+      define('SF_ENVIRONMENT', 'prod');
+      define('SF_DEBUG',       true);
+     // get configuration
+      require_once SF_ROOT_DIR.DIRECTORY_SEPARATOR.'apps'.DIRECTORY_SEPARATOR.SF_APP.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.php';
+      $databaseManager = new sfDatabaseManager();
+      $databaseManager->initialize();
+      
+      sfLoader::loadHelpers(array('CmsEscaping'));
+
+      $salida_tag_a     = fopen(sfConfig::get('sf_root_dir').'/web-backend/salida_tag_a.csv', "w");
+      $salida_tag_img   = fopen(sfConfig::get('sf_root_dir').'/web-backend/salida_tag_img.csv', "w");
+
+      foreach (ArticlePeer::doSelect(new Criteria()) as $article)
+      {
+        echo $article->getBody();
+
+        $body = strip_tags($article->getBody(), $tags_permitidos);
+        $dom = new DOMDocument;
+        $dom->loadHTML('<?xml encoding="UTF-8">' . $body);
+        $xpath = new DOMXPath($dom);
+        $nodes = $xpath->query('//@*');
+      // Primero que nada hay que identificar los tags A e IMG para hacer la salida en un archivo
+      // proceso los tags A
+
+        $tags = $dom->getElementsByTagName('a');
+
+        foreach ($tags as $tag) {
+               // echo $tag->getAttribute('href').' | '.$tag->nodeValue."\n";
+
+               fputcsv($salida_tag_a, array($id, $tag->getAttribute('href').' | '.$tag->nodeValue));
+               $cant_tag_a++;
+        }
+
+        // proceso los tags IMG
+        $tags = $dom->getElementsByTagName('img');
+
+        foreach ($tags as $tag) {
+               // echo $tag->getAttribute('src')."\n";
+
+               fputcsv($salida_tag_img, array($id, $tag->getAttribute('src')));
+               $cant_tag_img++;
+        }
+
+        foreach ($nodes as $node) {
+            $node->parentNode->removeAttribute($node->nodeName);
+        }
+
+        $body = strip_tags($dom->saveHTML(), $tags_permitidos);
+        $article->setBody($body);
+        $article->save();
+
+        echo "Clear body " . $body . "\n";
+
+      }
+
+      // fputcsv($salida, array($id, $body));
+      fclose($salida_tag_a);
+      fclose($salida_tag_img);
+      // $this->logSection("Se procesaron" , $cant_tag_a . " tags A");
+      // $this->logSection("Se procesaron" , $cant_tag_img . " tags IMG");
+      echo "\n".pakeColor::colorize("Articles body successfully clean \n", array('fg'=>'green', 'bold'=>true));
+  }
