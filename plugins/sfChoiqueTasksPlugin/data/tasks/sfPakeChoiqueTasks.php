@@ -489,9 +489,9 @@
         $tags   = $dom->getElementsByTagName('a');
 
         foreach ($tags as $tag) {
-               // echo $tag->getAttribute('href').' | '.$tag->nodeValue."\n";
+               echo $tag->getAttribute('href').' | '.$tag->nodeValue."\n";
 
-               fputcsv($salida_tag_a, array($id, $tag->getAttribute('href').' | '.$tag->nodeValue));
+               fputcsv($salida_tag_a, array($id, $article->getName(), $tag->getAttribute('href').' | '.$tag->nodeValue));
                $cant_tag_a++;
         }
 
@@ -501,7 +501,7 @@
         foreach ($tags as $tag) {
                // echo $tag->getAttribute('src')."\n";
 
-               fputcsv($salida_tag_img, array($id, $tag->getAttribute('src')));
+               fputcsv($salida_tag_img, array($id, $article->getName(), $tag->getAttribute('src')));
                $cant_tag_img++;
         }
 
@@ -511,7 +511,7 @@
 
         $body = strip_tags($dom->saveHTML(), $tags_permitidos);
         $article->setBody($body);
-        $article->save();
+        // $article->save();
 
         // echo "Clear body " . $body . "\n";
 
