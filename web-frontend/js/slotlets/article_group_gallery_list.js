@@ -3,9 +3,6 @@ jQuery(function($){
     $('.article_group_gallery_filters a').click(function(e){
         var container = $(this).closest('.article_group_gallery_container');
 
-        console.log(container);
-        console.dir(container.find('li'));
-
         //prevent the default behaviour of the link
         e.preventDefault();
 
@@ -20,6 +17,4 @@ jQuery(function($){
         container.find('li:not(.' + filter + ')').hide();
 
     }).first().trigger('click');
-
-
 });
