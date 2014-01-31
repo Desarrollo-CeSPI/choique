@@ -467,7 +467,7 @@
       
       sfLoader::loadHelpers(array('CmsEscaping'));
 
-      $tags_permitidos = "<p><a><table><td><tr><ul><li><img>";
+      $tags_permitidos = "<p><a><table><td><tr><ul><li><img><h><strong><em><object><embed><iframe>";
       $salida_tag_a     = fopen(sfConfig::get('sf_root_dir').'/web-backend/salida_tag_a.csv', "w");
       $salida_tag_img   = fopen(sfConfig::get('sf_root_dir').'/web-backend/salida_tag_img.csv', "w");
       $cant             = 0;
@@ -489,7 +489,7 @@
         $tags   = $dom->getElementsByTagName('a');
 
         foreach ($tags as $tag) {
-               echo $tag->getAttribute('href').' | '.$tag->nodeValue."\n";
+               // echo $tag->getAttribute('href').' | '.$tag->nodeValue."\n";
 
                fputcsv($salida_tag_a, array($id, $article->getName(), $tag->getAttribute('href').' | '.$tag->nodeValue));
                $cant_tag_a++;
@@ -506,7 +506,14 @@
         }
 
         foreach ($nodes as $node) {
-            $node->parentNode->removeAttribute($node->nodeName);
+            
+            if ( ($node->parentNode->nodeType == 1) && in_array(strtolower($node->parentNode->nodeName), array("img", "a", "object", "embed", "iframe")) ) {
+              //no hago nada!!
+                // echo strtolower($node->parentNode->nodeName) ."\n";
+            } else {
+              // echo $node->parentNode->nodeName . "\n";
+              $node->parentNode->removeAttribute($node->nodeName);
+            }
         }
 
         $body = strip_tags($dom->saveHTML(), $tags_permitidos);
