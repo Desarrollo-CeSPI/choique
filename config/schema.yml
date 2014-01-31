@@ -76,6 +76,10 @@ propel:
     reference_type:
       type:             tinyint
       default:          0
+    open_reference_new_window:
+      type:             boolean
+      required:         false
+      default:          false
     #### Check
     times_read:
       type:             bigint

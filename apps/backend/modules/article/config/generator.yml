@@ -102,10 +102,13 @@ generator:
       references:
         name:                       Referenciado en
       open_as_popup:
-        name:                       Abrir como PopUp
-        help:                       Abre el Articulo como una ventana nueva al entrar al Home
+        name:                       Abrir como PopUp en HOME
+        help:                       Utilice está opción para hacer que el Articulo se abra en una nueva ventana al entrar al HOME
       author_updated:
         name:                       Actualizado por
+      open_reference_new_window:
+        name:                       Abrir en nueva ventana
+        help:                       Utilice está opción si desea que los enlaces al articulo se abran en nuevas ventanas
 
     filters:
       fields:
@@ -185,7 +188,7 @@ generator:
 <?php endif; ?>
         Secciones relacionadas:     [_section_id, _article_section]
         # @ncuesta: De 'Contenido' eliminé 'link_id', porque no encontré para qué se usaba.
-        Contenido:                  [upper_description, title, heading, _editor, contact, _multimedia_id, zoomable_multimedia, main_gallery_id, _reference_type, _reference]
+        Contenido:                  [upper_description, title, heading, _editor, contact, _multimedia_id, zoomable_multimedia, main_gallery_id, _reference_type, _reference, open_reference_new_window]
       actions:
         _list:
         _save:
@@ -201,7 +204,7 @@ generator:
 <?php endif; ?>
         Secciones relacionadas:     [_section_id, _article_section]
         # @ncuesta: De 'Contenido' eliminé 'link_id', porque no encontré para qué se usaba.
-        Contenido:                  [upper_description, title, heading, _editor, contact, _multimedia_id, zoomable_multimedia, main_gallery_id, _reference_type, _reference]
+        Contenido:                  [upper_description, title, heading, _editor, contact, _multimedia_id, zoomable_multimedia, main_gallery_id, _reference_type, _reference, open_reference_new_window]
       fields:
         heading:
           type:                     textarea_tag
