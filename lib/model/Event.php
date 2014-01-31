@@ -535,4 +535,9 @@ EOF;
 
     return ($author) ? $author->getName() : '';
   }
+
+	public function hasMultimedia()
+	{
+		return !is_null($this->getMultimedia());
+	}
 }

@@ -210,7 +210,7 @@ else { // NO SE SETEO QUE USE EL COLOR
     $article_tpl_i = <<<SLOTLET
 
         <div class="item %element_class%">
-          <a href="%url%" class="rm_article_gallery_view_more">
+          <a href="%url%" class="rm_article_gallery_view_more" target="%target%">
             <div class="section_name" style="color: %section_color%;">%section%</div>
             %title%
             <span class="go">&gt;</span>
@@ -236,6 +236,7 @@ SLOTLET;
           '%title%'         => $articles[$i]->__toString(),
           '%description%'   => $articles[$i]->getDescription(),
           '%url%'           => url_for($articles[$i]->getURLReference()),
+					'%target%'             =>  $articles[$i]->getTarget(),
           '%section%'       => ($articles[$i]->getSection()?$articles[$i]->getSection()->getTitle():''),
           '%section_color%' => ($articles[$i]->getSection()?$articles[$i]->getSection()->getColor():'')
         ));

@@ -132,7 +132,7 @@ class Article extends BaseArticle implements SlotletInterface
   {
     sfLoader::loadHelpers(array('Url','Tag'));
 
-    $options = ($this->getReferenceType() == self::REFERENCE_TYPE_EXTERNAL) ? 'target=_blank' : null;
+    $options = (($this->getReferenceType() == self::REFERENCE_TYPE_EXTERNAL) || $this->getOpenReferenceNewWindow())? 'target=_blank' : null;
 
     return link_to($this->getTitle(), $this->getURLReference(),$options);
   }
@@ -140,6 +140,9 @@ class Article extends BaseArticle implements SlotletInterface
   public function getHTMLReference($innerElement = null, $html_options = array())
   {
     sfLoader::loadHelpers(array('Url','Tag'));
+
+		if ($this->getOpenReferenceNewWindow())
+			$html_options['target'] = '_blank';
 
     $innerElement=trim($innerElement);
     if (!$innerElement || empty($innerElement))
@@ -1695,6 +1698,13 @@ EOF;
     return $clone;
   }
 
+  public function getTarget()
+	{
+
+		if ($this->getOpenReferenceNewWindow())
+			return '_blank';
+		return '_self';
+	}
 
 }
 sfLucenePropelBehavior::getInitializer()->setupModel('Article');

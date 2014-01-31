@@ -82,6 +82,11 @@
   <?php foreach ($pager->getResults() as $event): ?>
 <?php /* @var $event Event */ ?>
     <div class="events_search_item">
+			<?php if($event->hasMultimedia()):?>
+				<div class="multimedia">
+					<?php echo $event->getMultimedia()->getHTMLRepresentation('s');?>
+				</div>
+			<?php endif; ?>
       <h1 class="title">
         <?php echo $event->getEventType() ?>:
         <?php if ($event->hasArticle()): ?>

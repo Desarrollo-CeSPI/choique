@@ -76,6 +76,10 @@ propel:
     reference_type:
       type:             tinyint
       default:          0
+    open_reference_new_window:
+      type:             boolean
+      required:         false
+      default:          false
     #### Check
     times_read:
       type:             bigint
@@ -203,6 +207,12 @@ propel:
       foreignTable:     sf_guard_user
       foreignReference: id
     updated_at:
+    multimedia_id:
+      type:             integer
+      foreignTable:     multimedia
+      foreignReference: id
+      onDelete:         setnull
+      required: false
 
   event_type:
     id:

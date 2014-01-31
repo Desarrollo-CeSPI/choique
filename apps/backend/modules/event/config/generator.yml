@@ -108,8 +108,9 @@ generator:
           credentials:      [[ reporter_admin, designer_admin ]]
       title:            Crear un nuevo evento
       display:            
-        Datos:          [title, description, comment, location, begins_at, ends_at, is_published, contact, organizer, event_type_id]
+        Datos:          [title, _description, comment, location, begins_at, ends_at, is_published, contact, organizer, event_type_id]
         Articulo relacionado:   [_article_id]
+        Multimedia relacionada:   [_multimedia_id]
         Secciones relacionadas: [~event_sections]
       actions:
         _list:
@@ -123,8 +124,9 @@ generator:
           credentials:      [[ reporter_admin, designer_admin ]]
       title:                  Editar evento "%%title%%"
       display:                
-        Datos:                  [title, description, comment, location, begins_at, ends_at, contact, organizer, event_type_id, is_published]
+        Datos:                  [title, _description, comment, location, begins_at, ends_at, contact, organizer, event_type_id, is_published]
         Articulo relacionado:   [_article_id]
+        Multimedia relacionada:   [_multimedia_id]
         Secciones relacionadas: [~event_sections]
       actions:
         _list:
@@ -135,7 +137,7 @@ generator:
     show:
       title:              Previsualización del evento "%%title%%"
       display:            
-        Información General:         [title, description, comment, location, begins_at, ends_at, contact, organizer, event_type, _show_event_sections, article, is_published]
+        Información General:         [title, description, comment, location, begins_at, ends_at, contact, organizer, event_type, _show_event_sections, article, is_published, multimedia]
         Información de auditoria:    [created_at, author_name, updated_at, updated_by_user]
       actions:
         _list:
