@@ -127,7 +127,7 @@ class ArticleGalleryGallerySlotlet implements ISlotlet
       $url = '#';
 
       $template = <<<SLOTLET
-<div class="slotlet article_group_gallery %class%" id="%id%">
+<div class="slotlet article_group_gallery %class%" id="%id%" >
   <div class="article_group_gallery_container">
     <h2 class="article_group_gallery_title">%title%</h2>
       <div class="items">
@@ -137,6 +137,7 @@ class ArticleGalleryGallerySlotlet implements ISlotlet
       </div>
   </div>
 </div>
+
 SLOTLET;
 
       return strtr($template, array(
@@ -147,7 +148,7 @@ SLOTLET;
     }
 
     $template = <<<SLOTLET
-<div class="slotlet article_group_gallery %class%">
+<div class="nano slotlet article_group_gallery %class%" style="height: 50px;">
   <div class="article_group_gallery_container">
     <h2 class="article_group_gallery_title">%title%</h2>
 
@@ -165,6 +166,7 @@ SLOTLET;
 
   </div>
 </div>
+<script> jQuery(".nano").nanoScroller();</script>
 SLOTLET;
 
 
