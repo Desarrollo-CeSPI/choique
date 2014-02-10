@@ -10,11 +10,14 @@ jQuery(function($){
         var filter = $(this).attr('id');
 
         //show all the list items(this is needed to get the hidden ones shown)
-        container.find('li').show();
+        container.find('li').hide();
 
         /*using the :not attribute and the filter class in it we are selecting
          only the list items that don't have that class and hide them '*/
-        container.find('li:not(.' + filter + ')').hide();
+        container.find('li.' + filter).show();
+
+        container.find('.selected').removeClass('selected');
+        $(this).addClass('selected');
 
     }).first().trigger('click');
 });
