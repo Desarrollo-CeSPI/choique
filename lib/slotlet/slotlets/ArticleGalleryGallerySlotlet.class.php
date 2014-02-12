@@ -148,7 +148,7 @@ SLOTLET;
     }
 
     $template = <<<SLOTLET
-<div class="nano slotlet article_group_gallery %class%" style="height: 50px;">
+<div class="slotlet article_group_gallery %class%">
   <div class="article_group_gallery_container">
     <h2 class="article_group_gallery_title">%title%</h2>
 
@@ -166,7 +166,6 @@ SLOTLET;
 
   </div>
 </div>
-<script> jQuery(".nano").nanoScroller();</script>
 SLOTLET;
 
 
