@@ -174,7 +174,16 @@ SLOTLET;
 SLOTLET;
 
 
-		$article_gallery_article = <<<SLOTLET
+		if($options['use_background_section_color'])
+		{
+
+			$article_gallery_article = <<<SLOTLET
+
+     <style type="text/css">
+        .%element_class%:hover { background-color: %section_color% !important; }
+        .%element_class%:hover .section_name { color: #fff !important; }
+      </style>
+
 			<li class='%article_gallery_id%'>
         <div class="item %element_class%">
           <a href="%url%" class="rm_article_gallery_view_more" target="%target%">
@@ -185,6 +194,25 @@ SLOTLET;
         </div>
 			</li>
 SLOTLET;
+
+		}
+		else { // NO SE SETEO QUE USE EL COLOR
+			$article_gallery_article = <<<SLOTLET
+
+			<li class='%article_gallery_id%'>
+        <div class="item %element_class%">
+          <a href="%url%" class="rm_article_gallery_view_more" target="%target%">
+            <div class="section_name" style="color: %section_color%;">%section%</div>
+            %title%
+            <span class="go">&gt;</span>
+          </a>
+        </div>
+			</li>
+
+SLOTLET;
+
+		}
+
 
 
 
