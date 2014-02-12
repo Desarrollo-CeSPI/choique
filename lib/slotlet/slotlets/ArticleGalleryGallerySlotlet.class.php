@@ -138,6 +138,7 @@ class ArticleGalleryGallerySlotlet implements ISlotlet
   </div>
 </div>
 
+
 SLOTLET;
 
       return strtr($template, array(
@@ -148,7 +149,7 @@ SLOTLET;
     }
 
     $template = <<<SLOTLET
-<div class="slotlet article_group_gallery %class%">
+<div class="slotlet article_group_gallery %class%" style="height:40px">
   <div class="article_group_gallery_container">
     <h2 class="article_group_gallery_title">%title%</h2>
 
