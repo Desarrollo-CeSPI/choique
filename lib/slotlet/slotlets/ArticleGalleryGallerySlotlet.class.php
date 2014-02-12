@@ -144,27 +144,29 @@ SLOTLET;
       return strtr($template, array(
         '%content%' => __('Sin contenidos para mostrar'),
         '%class%'   => $options['class'],
-
       ));
     }
 
     $template = <<<SLOTLET
-<div class="slotlet article_group_gallery %class%" style="height:40px">
+<div class="slotlet article_group_gallery %class%">
   <div class="article_group_gallery_container">
     <h2 class="article_group_gallery_title">%title%</h2>
 
-      <div class="galleries">
-					<div class="article_group_gallery_filters">
-						%galleries_labels%
-					</div>
-      </div>
+    <div class="galleries">
+			<div class="article_group_gallery_filters">
+				%galleries_labels%
+			</div>
+    </div>
 
-      <div class="content">
-      	<ul>
-      		%articles%
-      	</ul>
+		<div class="inner-articles">
+      <div class="nano">
+        <div class="nano-content content">
+      	  <ul>
+      		  %articles%
+      	  </ul>
+        </div>
       </div>
-
+    </div>
   </div>
 </div>
 SLOTLET;
