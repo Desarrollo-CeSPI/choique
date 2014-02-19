@@ -245,7 +245,7 @@ SLOTLET;
 			{
         $compose_article_groups_articles .= strtr($article_gallery_article, array(
           '%article_gallery_id%' => $id_elemento,
-          '%element_class%'      => "article_gallery_element_$i_$j",
+          '%element_class%'      => "article_gallery_element_".$i."_".$j ,
           '%title%'              => $articles[$j]->__toString(),
           '%description%'        => $articles[$j]->getDescription(),
           '%url%'                => url_for($articles[$j]->getURLReference()),
