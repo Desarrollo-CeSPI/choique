@@ -177,11 +177,9 @@ class eventActions extends sfActions
     }
     else if (null !== $this->date['from'])
     {
-      //$criterion = $criteria->getNewCriterion(EventPeer::ENDS_AT, $this->date['from'], Criteria::LESS_THAN);
-			//$criterion->addOr($criteria->getNewCriterion(EventPeer::ENDS_AT, $this->date['from'], Criteria::GREATER_EQUAL));
-      $criteria->addAnd($criteria->getNewCriterion(EventPeer::BEGINS_AT, $this->date['from'], Criteria::GREATER_EQUAL));
-
-//      $criteria->add($criterion);
+      $criterion = $criteria->getNewCriterion(EventPeer::ENDS_AT, $this->date['from'], Criteria::GREATER_EQUAL);
+      $criterion->addOr($criteria->getNewCriterion(EventPeer::BEGINS_AT, $this->date['from'], Criteria::GREATER_EQUAL));
+      $criteria->add($criterion);
     }
     else if (null !== $this->date['to'])
     {

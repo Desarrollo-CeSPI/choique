@@ -223,11 +223,11 @@ SLOTLET;
 
 		$compose_article_groups_articles = '';
 
-
+    $id = 0;
 		foreach($article_groups as $text => $article_group)
 		{
 
-			$id = $article_group->getId();
+ 			$id = $article_group->getId();
 
 			$id_elemento = $id_general.'_'.$id;
 
@@ -241,27 +241,20 @@ SLOTLET;
 	  	$articles = $article_group->getArticlesByPriority($criteria);
 			$count = count($articles);
 
-			for ($i = 0; $i <  $count; $i++)
+			for ($j=0; ($j < $visibles) && ($j < $count) ; $j++)
 			{
-				for($j = 0; ($j < $visibles) && ($i < $count); $j++)
-				{
-					$compose_article_groups_articles .= strtr($article_gallery_article, array(
-						'%article_gallery_id%' => $id_elemento,
-						'%element_class%'      => 'article_gallery_element_'.$i,
-						'%title%'              => $articles[$i]->__toString(),
-						'%description%'        => $articles[$i]->getDescription(),
-						'%url%'                => url_for($articles[$i]->getURLReference()),
-						'%target%'             =>  $articles[$i]->getTarget(),
-						'%section%'            => ($articles[$i]->getSection()?$articles[$i]->getSection()->getTitle():''),
-						'%section_color%'      => ($articles[$i]->getSection()?$articles[$i]->getSection()->getColor():'')
-					));
-
-					if(($j + 1) != $visibles)
-					{
-						$i++;
-					}
-				}
+        $compose_article_groups_articles .= strtr($article_gallery_article, array(
+          '%article_gallery_id%' => $id_elemento,
+          '%element_class%'      => "article_gallery_element_$i_$j",
+          '%title%'              => $articles[$i]->__toString(),
+          '%description%'        => $articles[$i]->getDescription(),
+          '%url%'                => url_for($articles[$i]->getURLReference()),
+          '%target%'             =>  $articles[$i]->getTarget(),
+          '%section%'            => ($articles[$i]->getSection()?$articles[$i]->getSection()->getTitle():''),
+          '%section_color%'      => ($articles[$i]->getSection()?$articles[$i]->getSection()->getColor():'')
+        ));
 			}
+      $i++;
 		}
 
 	return strtr($template, array(

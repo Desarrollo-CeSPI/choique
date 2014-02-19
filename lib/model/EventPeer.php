@@ -139,8 +139,10 @@ class EventPeer extends BaseEventPeer
   {
 		$criterion0 = $criteria->getNewCriterion(self::BEGINS_AT, $month_start, Criteria::GREATER_EQUAL);
 		$criterion1 = $criteria->getNewCriterion(self::BEGINS_AT, $month_end, Criteria::LESS_EQUAL);
+
 		$criterion2 = $criteria->getNewCriterion(self::ENDS_AT, $month_start, Criteria::GREATER_EQUAL);
 		$criterion3 = $criteria->getNewCriterion(self::ENDS_AT, $month_end, Criteria::LESS_EQUAL);
+
     $criterion4 = $criteria->getNewCriterion(self::BEGINS_AT, $month_start, Criteria::LESS_EQUAL);
     $criterion5 = $criteria->getNewCriterion(self::ENDS_AT, $month_end, Criteria::GREATER_EQUAL);
 
