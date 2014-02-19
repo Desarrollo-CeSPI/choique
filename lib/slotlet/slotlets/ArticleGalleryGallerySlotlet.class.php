@@ -223,7 +223,7 @@ SLOTLET;
 
 		$compose_article_groups_articles = '';
 
-    $id = 0;
+    $i = 0;
 		foreach($article_groups as $text => $article_group)
 		{
 
@@ -246,12 +246,12 @@ SLOTLET;
         $compose_article_groups_articles .= strtr($article_gallery_article, array(
           '%article_gallery_id%' => $id_elemento,
           '%element_class%'      => "article_gallery_element_$i_$j",
-          '%title%'              => $articles[$i]->__toString(),
-          '%description%'        => $articles[$i]->getDescription(),
-          '%url%'                => url_for($articles[$i]->getURLReference()),
-          '%target%'             =>  $articles[$i]->getTarget(),
-          '%section%'            => ($articles[$i]->getSection()?$articles[$i]->getSection()->getTitle():''),
-          '%section_color%'      => ($articles[$i]->getSection()?$articles[$i]->getSection()->getColor():'')
+          '%title%'              => $articles[$j]->__toString(),
+          '%description%'        => $articles[$j]->getDescription(),
+          '%url%'                => url_for($articles[$j]->getURLReference()),
+          '%target%'             =>  $articles[$j]->getTarget(),
+          '%section%'            => ($articles[$j]->getSection()?$articles[$j]->getSection()->getTitle():''),
+          '%section_color%'      => ($articles[$j]->getSection()?$articles[$j]->getSection()->getColor():'')
         ));
 			}
       $i++;
