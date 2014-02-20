@@ -48,4 +48,13 @@ class MultimediaPeer extends BaseMultimediaPeer
 
     return self::doSelect($criteria, $con);
   }
+
+  static public function getBySmallURI($s_uri, $con = null)
+  {
+  $c = new Criteria();
+  $c->add(self::SMALL_URI, $s_uri);
+
+  return self::doSelectOne($c);
+  }
+
 }

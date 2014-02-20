@@ -35,4 +35,11 @@ class DocumentPeer extends BaseDocumentPeer
     return parent::doSelect($criteria, $con);
   }
 
+  static public function getByURI($uri, $con = null)
+  {
+	$c = new Criteria();
+	$c->add(self::URI, $uri);
+
+	return self::doSelectOne($c);
+  }
 }

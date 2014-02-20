@@ -467,10 +467,17 @@
       
       sfLoader::loadHelpers(array('CmsEscaping'));
 
-      $tags_permitidos = "<p><a><table><td><tr><ul><li><img><h><strong><em><object><embed><iframe>";
-      $salida_tag_a     = fopen(sfConfig::get('sf_root_dir').'/web-backend/salida_tag_a.csv', "w");
-      $salida_tag_img   = fopen(sfConfig::get('sf_root_dir').'/web-backend/salida_tag_img.csv', "w");
-      $cant             = 0;
+      $tags_permitidos        = "<p><a><table><td><tr><ul><li><img><h><strong><em><object><embed><iframe><b>";
+      $salida_tag_a           = fopen(sfConfig::get('sf_root_dir').'/web-backend/salida_tag_a.csv', "w");
+      $salida_tag_img         = fopen(sfConfig::get('sf_root_dir').'/web-backend/salida_tag_img.csv', "w");
+      $cant                   = 0;
+      $cant_tag_a             = 0;
+      $cant_tag_a_migrados    = 0;
+      $cant_tag_a_internos    = 0;
+      $cant_tag_img           = 0;
+
+      //genero el encabezado de la salida del csv para los documets
+      fputcsv($salida_tag_a, array("ID", "NOMBRE_ARTICULO", "LINK", "TEXTO", "RESULTADO_MIGRACION", "TIPO_LINK"));
 
       foreach (ArticlePeer::doSelect(new Criteria()) as $article)
       {
@@ -483,23 +490,80 @@
         $dom->loadHTML('<?xml encoding="UTF-8">' . $body);
         $xpath  = new DOMXPath($dom);
         $nodes  = $xpath->query('//@*');
+        $result = "REVISAR";
       // Primero que nada hay que identificar los tags A e IMG para hacer la salida en un archivo
       // proceso los tags A
 
         $tags   = $dom->getElementsByTagName('a');
 
         foreach ($tags as $tag) {
-               // echo $tag->getAttribute('href').' | '.$tag->nodeValue."\n";
+              // echo $tag->getAttribute('href').' | '.$tag->nodeValue."\n";
 
-               fputcsv($salida_tag_a, array($id, $article->getName(), $tag->getAttribute('href').' | '.$tag->nodeValue));
-               $cant_tag_a++;
+              // Migración de documentos
+              // Buscamos en document por URI, usanndo el nombre del archivo
+              // Obtenemos el document
+              // Creamos la relación article_document con el ID del article que estamos procesando y el ID del document
+              // que recuperamos
+              // y en el artículo hay que dejar el TAG para choique {{documento:ID_DOCUMENT|}}
+
+              $url_array = parse_url($tag->getAttribute('href'));
+              $link_type = "INTERNO";
+              // echo $url_array['host'] . "\n";
+
+              if (('www.calp.org.ar' ==  $url_array['host'])||('calp.neurosystem.com.ar' ==  $url_array['host'])){
+                  $link_type = "EXTERNO";
+                  $cant_tag_a_internos++;
+              }
+
+              $document = DocumentPeer::getByURI(basename($tag->getAttribute('href')));
+
+              if($document){
+                $ad = new ArticleDocument();
+                $ad->setArticleId($article->getId());
+                $ad->setDocumentId($document->getId());
+                // $ad->save();
+                $result = "MIGRADO";
+                $cant_tag_a_migrados++;
+                echo "PARENTNODE!!! " . $tag->parentNode->nodeName . "\n";
+                echo "CANT HIJOS " . count($tag->parentNode->childNodes). "\n";
+                // echo "TIENE HIJOS!!! " . $tag->parentNode->nodeValue . "\n";
+
+                $tag->parentNode->replaceChild($dom->createTextNode('{{documento:'.$document->getId().'|'.$tag->nodeValue.'}}'), $tag);
+
+                echo "RESULT " . $tag->parentNode->nodeValue . "\n";
+              }
+
+              fputcsv($salida_tag_a, array($id, $article->getName(), $tag->getAttribute('href'), $tag->nodeValue, $result, $link_type));
+              $cant_tag_a++;
+              $result = "REVISAR";
         }
 
         // proceso los tags IMG
         $tags = $dom->getElementsByTagName('img');
 
         foreach ($tags as $tag) {
-               // echo $tag->getAttribute('src')."\n";
+              // echo $tag->getAttribute('src')."\n";
+
+              // Migración de imágenes
+              // Buscamos en multimedia por small_uri, usando el nombre del archivo
+              // Obtenemos el multimedia
+              // Creamos la relación article_multimedia con el ID del article que estamos procesando y el ID del 
+              // multimedia que recuperamos
+              // y en el artículo hay que dejar el TAG para choique {{multimedia:ID_MULTIMEDIA|}}
+
+              // NO SE VA HACER!!!!!
+              // $multimedia = MultimediaPeer::getBySmallURI(basename($tag->getAttribute('src')));
+
+              // if($multimedia){
+              //   $am = new ArticleMultimedia();
+              //   $am->setArticleId($article->getId());
+              //   $am->setMultimediaId($multimedia->getId());
+              //   // $am->save();
+              //   $result = "MIGRADO";
+              //   $cant_tag_img_migrados++;
+
+              //   // $tag->parentNode->replaceChild($dom->createTextNode('{{multimedia:'.$multimedia->getId().'|'.$tag->nodeName.'}}'), $tag);
+              // }
 
                fputcsv($salida_tag_img, array($id, $article->getName(), $tag->getAttribute('src')));
                $cant_tag_img++;
@@ -517,8 +581,9 @@
         }
 
         $body = strip_tags($dom->saveHTML(), $tags_permitidos);
-        $article->setBody($body);
-        $article->save();
+        // $article->setBody($body);
+        // echo $body . "\n";
+        // $article->save();
 
         // echo "Clear body " . $body . "\n";
 
@@ -527,8 +592,15 @@
       // fputcsv($salida, array($id, $body));
       fclose($salida_tag_a);
       fclose($salida_tag_img);
-      echo "Se procesaron " . $cant_tag_a . " tags A \n";
-      echo "Se procesaron " . $cant_tag_img . " tags IMG \n";
+      echo "\n";
       echo "Se procesaron " . $cant . " artículos \n";
+      echo "===========================================\n";
+      echo "Se procesaron " . $cant_tag_a . " tags A \n";
+      echo "Se procesaron " . $cant_tag_a_migrados . " tags A MIGRADOS \n";
+      echo "Se procesaron " . $cant_tag_a_internos . " tags A INTERNOS (para los dominios www.calp.org.ar y calp.neurosystem.com.ar)\n";
+      echo "Se procesaron " . ($cant_tag_a - $cant_tag_a_internos) . " tags A EXTERNOS \n";
+      echo "===========================================\n";
+      echo "Se procesaron " . $cant_tag_img . " tags IMG \n";
       echo "\n".pakeColor::colorize("Articles body successfully clean \n", array('fg'=>'green', 'bold'=>true));
   }
+
