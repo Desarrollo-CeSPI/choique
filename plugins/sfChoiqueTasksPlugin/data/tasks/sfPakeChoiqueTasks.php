@@ -489,7 +489,7 @@
         $dom    = new DOMDocument;
         $dom->loadHTML('<?xml encoding="UTF-8">' . $body);
         $xpath  = new DOMXPath($dom);
-        $nodes  = $xpath->query('//@*');
+        // $nodes  = $xpath->query('//@*');
         $result = "REVISAR";
       // Primero que nada hay que identificar los tags A e IMG para hacer la salida en un archivo
       // proceso los tags A
@@ -524,13 +524,14 @@
                 // $ad->save();
                 $result = "MIGRADO";
                 $cant_tag_a_migrados++;
-                echo "PARENTNODE!!! " . $tag->parentNode->nodeName . "\n";
-                echo "CANT HIJOS " . count($tag->parentNode->childNodes). "\n";
-                // echo "TIENE HIJOS!!! " . $tag->parentNode->nodeValue . "\n";
+                echo "ARTICLE ====================================================================================================\n";
+                // echo "TAG->parentNode->nodeName " . $tag->parentNode->nodeName . "\n"; 
+                // echo "TAG->nodeName " . $tag->nodeName . "\n"; 
+                $n = $dom->createTextNode('{{documento:'.$document->getId().'|'.$tag->nodeValue.'}}');
+                
+                $tag->parentNode->appendChild($n);    
+                $tag->parentNode->removeChild($tag);
 
-                $tag->parentNode->replaceChild($dom->createTextNode('{{documento:'.$document->getId().'|'.$tag->nodeValue.'}}'), $tag);
-
-                echo "RESULT " . $tag->parentNode->nodeValue . "\n";
               }
 
               fputcsv($salida_tag_a, array($id, $article->getName(), $tag->getAttribute('href'), $tag->nodeValue, $result, $link_type));
@@ -569,9 +570,11 @@
                $cant_tag_img++;
         }
 
+        $nodes  = $xpath->query('//@*');
         foreach ($nodes as $node) {
             
-            if ( ($node->parentNode->nodeType == 1) && in_array(strtolower($node->parentNode->nodeName), array("img", "a", "object", "embed", "iframe")) ) {
+            // if ( ($node->parentNode->nodeType == 1) && in_array(strtolower($node->parentNode->nodeName), array("img", "a", "object", "embed", "iframe")) ) {
+          if ( ($node->parentNode->nodeType == 1) && in_array(strtolower($node->parentNode->nodeName), array("img", "object", "embed", "iframe")) ) {
               //no hago nada!!
                 // echo strtolower($node->parentNode->nodeName) ."\n";
             } else {
@@ -582,7 +585,7 @@
 
         $body = strip_tags($dom->saveHTML(), $tags_permitidos);
         // $article->setBody($body);
-        // echo $body . "\n";
+        echo $body . "\n";
         // $article->save();
 
         // echo "Clear body " . $body . "\n";
