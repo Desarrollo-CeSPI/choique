@@ -521,7 +521,7 @@
                 $ad = new ArticleDocument();
                 $ad->setArticleId($article->getId());
                 $ad->setDocumentId($document->getId());
-                // $ad->save();
+                $ad->save();
                 $result = "MIGRADO";
                 $cant_tag_a_migrados++;
                 echo "ARTICLE ====================================================================================================\n";
@@ -584,9 +584,9 @@
         }
 
         $body = strip_tags($dom->saveHTML(), $tags_permitidos);
-        // $article->setBody($body);
+        $article->setBody($body);
         echo $body . "\n";
-        // $article->save();
+        $article->save();
 
         // echo "Clear body " . $body . "\n";
 
