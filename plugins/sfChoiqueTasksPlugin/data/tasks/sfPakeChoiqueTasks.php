@@ -507,11 +507,11 @@
               // y en el artículo hay que dejar el TAG para choique {{documento:ID_DOCUMENT|}}
 
               $url_array = parse_url($tag->getAttribute('href'));
-              $link_type = "INTERNO";
+              $link_type = "EXTERNO";
               // echo $url_array['host'] . "\n";
 
               if (('www.calp.org.ar' ==  $url_array['host'])||('calp.neurosystem.com.ar' ==  $url_array['host'])){
-                  $link_type = "EXTERNO";
+                  $link_type = "INTERNO";
                   $cant_tag_a_internos++;
               }
 
