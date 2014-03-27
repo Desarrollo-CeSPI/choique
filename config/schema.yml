@@ -925,8 +925,8 @@ propel:
       onDelete:         cascade
       required:         true
     target_blank:
-      type: boolean
-      default: true
+      type: tinyint
+      default: 1
     _uniques:
       unique_section_link: [section_id, link_id]
 
