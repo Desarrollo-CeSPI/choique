@@ -48,7 +48,11 @@
       <?php for ($i = 1; $i <= $rows; $i++): ?>
         <tr>
           <?php foreach ($form->getFields() as $field): ?>
-            <td><?php echo esc_entities(DataPeer::getDataByRowAndFieldId($i, $field->getId())->getData()) ?></td>
+            <td>
+              <?php if ($data = DataPeer::getDataByRowAndFieldId($i, $field->getId())): ?>
+                <?php echo esc_entities($data->getData()) ?>
+              <?php endif ?>
+            </td>
           <?php endforeach ?>
         </tr>
       <?php endfor ?>
