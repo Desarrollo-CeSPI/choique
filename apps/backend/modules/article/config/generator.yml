@@ -109,6 +109,14 @@ generator:
       open_reference_new_window:
         name:                       Abrir en nueva ventana
         help:                       Utilice está opción si desea que los enlaces al articulo se abran en nuevas ventanas
+      auto_publish_at:
+        name:                       Publicar articulo automáticamente el
+        params:                     date_format="dd/MM/yyyy H:mm"
+        help:                       Si desea que el articulo se publique automáticamente seleccione la fecha y la hora
+      auto_unpublish_at:
+        name:                       Despublicar articulo automáticamente el
+        params:                     date_format="dd/MM/yyyy H:mm"
+        help:                       Si desea que el articulo se despublique automáticamente seleccione la fecha y la hora
 
     filters:
       fields:
@@ -205,6 +213,8 @@ generator:
         Secciones relacionadas:     [_section_id, _article_section]
         # @ncuesta: De 'Contenido' eliminé 'link_id', porque no encontré para qué se usaba.
         Contenido:                  [upper_description, title, heading, _editor, contact, _multimedia_id, zoomable_multimedia, main_gallery_id, _reference_type, _reference, open_reference_new_window]
+        Tareas Automáticas:         [auto_publish_at, auto_unpublish_at]
+
       fields:
         heading:
           type:                     textarea_tag

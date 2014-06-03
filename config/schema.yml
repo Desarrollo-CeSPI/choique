@@ -88,6 +88,14 @@ propel:
     open_as_popup:
       type:             boolean
       default:          false
+    auto_publish_at:
+      type: timestamp
+      required: false
+    auto_unpublish_at:
+      type: timestamp
+      required: false
+
+
     _indexes:
       name_publmished_at_index:       [name, published_at]
 

@@ -57,7 +57,11 @@ class ContextualMenuSlotlet implements ISlotlet
   {
     sfLoader::loadHelpers(array('Javascript', 'I18N'));
 
-    $section = SectionPeer::retrieveByName($options['section_name']);
+    $section_name = $options['section_name'];
+
+    $section = SectionPeer::retrieveByName($section_name);
+
+
 
     if (null === $section || !$section->getIsPublished() || ($section->getDepth() < $options['start_depth']))
     {
@@ -224,6 +228,18 @@ BRANCH;
       '%id%'    => 'start_depth',
       '%label%' => __('Nivel de anidamiento inicial'),
       '%field%' => select_tag('start_depth', options_for_select($depths, $values['start_depth']), array('class' => 'slotlet_option'))
+    ));
+
+    $form .= strtr($row, array(
+      '%id%'    => 'use_home_for_contact',
+      '%label%' => __('Utilizar contexto de Home para Contacto'),
+      '%field%' => checkbox_tag('use_home_for_contact', true, $values['use_home_for_contact'] != false, array('class' => 'slotlet_option'))
+    ));
+
+    $form .= strtr($row, array(
+      '%id%'    => 'use_home_for_event',
+      '%label%' => __('Utilizar contexto de  Home para Eventos'),
+      '%field%' => checkbox_tag('use_home_for_event', true, $values['use_home_for_event'] != false, array('class' => 'slotlet_option'))
     ));
 
     return $form;

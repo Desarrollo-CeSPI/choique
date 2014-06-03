@@ -402,4 +402,77 @@
     }
   }
 
-  
+
+  pake_desc('Publish unpublished Articles with auto_publish date prior to now');
+  pake_task('choique-autopublish-articles');
+
+  /**
+   * Select flavor
+   *
+   *
+   * @param object $task
+   * @param array $args
+   */
+  function run_choique_autopublish_articles($task, $args)
+  {
+      define('SF_ROOT_DIR',    sfConfig::get('sf_root_dir'));
+      define('SF_APP',         'backend');
+      define('SF_ENVIRONMENT', 'prod');
+      define('SF_DEBUG',       true);
+      // get configuration
+      require_once SF_ROOT_DIR.DIRECTORY_SEPARATOR.'apps'.DIRECTORY_SEPARATOR.SF_APP.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.php';
+      $databaseManager = new sfDatabaseManager();
+      $databaseManager->initialize();
+
+      $c = new Criteria();
+      $c->add(ArticlePeer::IS_PUBLISHED, false);
+      $c->add(ArticlePeer::AUTO_PUBLISH_AT, time(), Criteria::LESS_EQUAL);
+      $c->add(ArticlePeer::AUTO_PUBLISH_AT,null,Criteria::ISNOTNULL);
+      $c->setLimit(10);
+      $cont = 0;
+      foreach (ArticlePeer::doSelect($c) as $article)
+      {
+        $article->setIsPublished(true);
+        $article->save();
+        $cont ++;
+      }
+      echo "\n".pakeColor::colorize("$cont published articles\n", array('fg'=>'green', 'bold'=>true));
+
+  }
+
+  pake_desc('Unpublish published Articles with auto_unpublish date prior to now');
+  pake_task('choique-autounpublish-articles');
+
+  /**
+   * Select flavor
+   *
+   *
+   * @param object $task
+   * @param array $args
+   */
+  function run_choique_autounpublish_articles($task, $args)
+  {
+    define('SF_ROOT_DIR',    sfConfig::get('sf_root_dir'));
+    define('SF_APP',         'backend');
+    define('SF_ENVIRONMENT', 'prod');
+    define('SF_DEBUG',       true);
+    // get configuration
+    require_once SF_ROOT_DIR.DIRECTORY_SEPARATOR.'apps'.DIRECTORY_SEPARATOR.SF_APP.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'config.php';
+    $databaseManager = new sfDatabaseManager();
+    $databaseManager->initialize();
+
+    $c = new Criteria();
+    $c->add(ArticlePeer::IS_PUBLISHED, true);
+    $c->add(ArticlePeer::AUTO_UNPUBLISH_AT, time(), Criteria::LESS_EQUAL);
+    $c->add(ArticlePeer::AUTO_UNPUBLISH_AT,null,Criteria::ISNOTNULL);
+    $c->setLimit(10);
+    $cont = 0;
+    foreach (ArticlePeer::doSelect($c) as $article)
+    {
+      $article->setIsPublished(false);
+      $article->save();
+      $cont ++;
+    }
+    echo "\n".pakeColor::colorize("$cont unpublished articles\n", array('fg'=>'green', 'bold'=>true));
+
+  }
