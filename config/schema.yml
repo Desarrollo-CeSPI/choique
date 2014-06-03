@@ -494,6 +494,7 @@ propel:
     large_uri:
       type:             varchar(256)
       required:         true
+      default:          ""
     author:
       type:             varchar(256)
     uploaded_by:
