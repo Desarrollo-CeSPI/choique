@@ -197,6 +197,7 @@ generator:
         Secciones relacionadas:     [_section_id, _article_section]
         # @ncuesta: De 'Contenido' eliminé 'link_id', porque no encontré para qué se usaba.
         Contenido:                  [upper_description, title, heading, _editor, contact, _multimedia_id, zoomable_multimedia, main_gallery_id, _reference_type, _reference, open_reference_new_window]
+        Tareas Automáticas:         [auto_publish_at, auto_unpublish_at]
       actions:
         _list:
         _save:
@@ -241,5 +242,6 @@ generator:
         Información y estado:       [<?php (CmsConfiguration::get('check_use_sources', true)) and print 'source, ' ?>type_text, comment, current_status, section, _references<?php (CmsConfiguration::get('check_allow_article_popup', true)) and print ', open_as_popup' ?>]
         Información de Auditoria:   [ author, created_at, author_updated, updated_at ]
         Contenido:                  [full_HTML_representation]
+        Tareas Automáticas:         [auto_publish_at, auto_unpublish_at]
       actions:
         _list:
