@@ -72,7 +72,7 @@ names:
     check_open_calendar_today:                     Mostrar calendario desplegado en el día actual
     max_events:                                    Número de eventos a mostrar inicialmente en el Slotlet Calendario
     check_show_events_calendar_in_slotlet:         Mostrar calendario en los slotlet de Eventos
-    check_use_default_search_to_tomorrow:          Utilizar la fecha de mañana por defecto para el Hasta en la busqueda de eventos
+    days_to_use_in_default_search:                 Cantidad de días a partir de hoy que se va a utilizar como fecha por defecto para el Hasta en la búsqueda de eventos
 
   Formularios:
     check_send_form_by_mail:                      Enviar formularios por mail

@@ -59,7 +59,7 @@ class eventActions extends sfActions
 
   protected function getDefaultSearchParameters()
   {
-		$to = CmsConfiguration::get('check_use_default_search_to_tomorrow',true)? date('d/m/Y', strtotime('tomorrow')):'';
+		$to = CmsConfiguration::get('days_to_use_in_default_search',true)? date('d/m/Y', strtotime('+'.CmsConfiguration::get('days_to_use_in_default_search',true).' days')):'';
     return array_merge(array(
       'title'      => null,
       'event_type' => null,
