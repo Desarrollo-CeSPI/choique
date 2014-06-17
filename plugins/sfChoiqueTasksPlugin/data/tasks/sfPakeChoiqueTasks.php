@@ -427,7 +427,7 @@
       $c = new Criteria();
       $c->add(ArticlePeer::IS_PUBLISHED, false);
       $crit = $c->getNewCriterion(ArticlePeer::AUTO_PUBLISH_AT, time(), Criteria::LESS_EQUAL);
-      $crit->add($c->getNewCriterion(ArticlePeer::AUTO_PUBLISH_AT,null,Criteria::ISNOTNULL));
+      $crit->addAnd($c->getNewCriterion(ArticlePeer::AUTO_PUBLISH_AT,null,Criteria::ISNOTNULL));
       $c->add($crit);
       $c->setLimit(10);
       $cont = 0;
@@ -465,7 +465,7 @@
     $c = new Criteria();
     $c->add(ArticlePeer::IS_PUBLISHED, true);
     $crit = $c->getNewCriterion(ArticlePeer::AUTO_UNPUBLISH_AT, time(), Criteria::LESS_EQUAL);
-    $crit->add($c->getNewCriterion(ArticlePeer::AUTO_UNPUBLISH_AT,null,Criteria::ISNOTNULL));
+    $crit->addAnd($c->getNewCriterion(ArticlePeer::AUTO_UNPUBLISH_AT,null,Criteria::ISNOTNULL));
     $c->add($crit);
     $c->setLimit(10);
     $cont = 0;
