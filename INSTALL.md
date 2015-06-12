@@ -1,6 +1,6 @@
 # Requerimientos
 
-* PHP >= 5.2
+* PHP >= 5.2 y <= 5.3
 * pecl Imagick
 * pecl fileinfo (Ya está instalada en versiones actuales de PHP)
 
