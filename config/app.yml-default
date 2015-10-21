@@ -52,9 +52,10 @@ all:
     document:
       doc: [application/msword, application/vnd.ms-office]
       docx: application/zip 
-      xls: application/vnd.ms-excel
-      ppt: application/vnd.ms-office
-      pps: application/vnd.ms-office
+      xls: [application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel]
+      xlsx: [application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel]
+      ppt: [application/vnd.ms-powerpoint, application/vnd.ms-office]
+      pps: [application/vnd.ms-powerpoint, application/vnd.ms-office]
       pdf: application/pdf
       rar: application/x-rar
       zip: application/zip
