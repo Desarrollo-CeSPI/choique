@@ -134,23 +134,27 @@ class ImageResizer
 
   public function createSmallImage($width, $height = null)
   {
-    $im = new Imagick();
-    $im->readImage(sfConfig::get('cms_images_dir').'/'.$this->multimedia->getLargeUri());
-    // thumbnailImage($width, $height); // null = preserve dimensions
-    $im->thumbnailImage($width, $height);
-    $this->multimedia->setSmallUri(str_replace('_large', '_small', $this->multimedia->getLargeUri()));
-    $im->writeImage(sfConfig::get('cms_images_dir').'/'.$this->multimedia->getSmallUri());
-    $im->destroy();
+    try{
+      $im = new Imagick();
+      $im->readImage(sfConfig::get('cms_images_dir').'/'.$this->multimedia->getLargeUri());
+      // thumbnailImage($width, $height); // null = preserve dimensions
+      $im->thumbnailImage($width, $height);
+      $this->multimedia->setSmallUri(str_replace('_large', '_small', $this->multimedia->getLargeUri()));
+      $im->writeImage(sfConfig::get('cms_images_dir').'/'.$this->multimedia->getSmallUri());
+      $im->destroy();
+    }catch(Exception $e){};
   }
 
   public function createMediumImage($width, $height = null)
   {
-    $im = new Imagick();
-    $im->readImage(sfConfig::get('cms_images_dir').'/'.$this->multimedia->getLargeUri ());
-    // thumbnailImage($width, $height); // null = preserve dimensions
-    $im->thumbnailImage($width, $height);
-    $this->multimedia->setMediumUri(str_replace('_large', '_medium', $this->multimedia->getLargeUri()));
-    $im->writeImage(sfConfig::get('cms_images_dir').'/'.$this->multimedia->getMediumUri());
-    $im->destroy();
+    try{
+      $im = new Imagick();
+      $im->readImage(sfConfig::get('cms_images_dir').'/'.$this->multimedia->getLargeUri ());
+      // thumbnailImage($width, $height); // null = preserve dimensions
+      $im->thumbnailImage($width, $height);
+      $this->multimedia->setMediumUri(str_replace('_large', '_medium', $this->multimedia->getLargeUri()));
+      $im->writeImage(sfConfig::get('cms_images_dir').'/'.$this->multimedia->getMediumUri());
+      $im->destroy();
+    }catch(Exception $e){};
   }
 }

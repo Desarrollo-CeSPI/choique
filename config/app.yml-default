@@ -43,12 +43,14 @@ all:
         png:  image/png 
         gif:  image/gif 
         ico:  [image/png, image/gif, image/x-ico]
+        svg: [text/plain, image/svg+xml]
     link:
       swf:  application/x-shockwave-flash
       jpg:  image/jpeg
       jpeg: image/jpeg
       png:  image/png
       gif:  image/gif
+      svg: [text/plain, image/svg+xml]
     document:
       doc: [application/msword, application/vnd.ms-office]
       docx: application/zip 
@@ -66,6 +68,7 @@ all:
         jpeg: [image/jpeg ]
         png:  [image/png ]
         gif:  [image/gif ]
+        svg: [text/plain, image/svg+xml]
       videos:
         mpg:  [video/mpeg ]
         mpeg: [video/mpeg ]
