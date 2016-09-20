@@ -210,7 +210,7 @@ Y de manera similar con el directorio `web-backend`.
 
 ## Algunos consejos de seguridad
 
-* Asegurar la configuracion provista por `/etc/apache2/con.d/security`.
+* Asegurar la configuracion provista por `/etc/apache2/conf.d/security`.
 * Utilizar SSL para el Backend.
 * Utilizar un VirtualHost separado para `web-backend`.
 * No permitir el uso de `.htaccess` ni en el Frontend ni en Backend.
