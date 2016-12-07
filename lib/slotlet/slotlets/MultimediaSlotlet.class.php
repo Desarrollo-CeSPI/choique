@@ -28,6 +28,7 @@ class MultimediaSlotlet implements ISlotlet
 {
   public function getConfigurationForm($values = array())
   {
+    sfLoader::loadHelpers(array('Javascript', 'Url'));
     $ts = str_replace('.', '_', (string) microtime(true));
     $row    = '<div><label for="%id%">%label%</label> %field%</div><div style="clear:both;"></div>';
     $labels = array(
