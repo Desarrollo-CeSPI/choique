@@ -28,6 +28,7 @@ class MultimediaSlotlet implements ISlotlet
 {
   public function getConfigurationForm($values = array())
   {
+    $ts = str_replace('.', '_', (string) microtime(true));
     $row    = '<div><label for="%id%">%label%</label> %field%</div><div style="clear:both;"></div>';
     $labels = array(
       'class'         => __('Clase CSS'),
@@ -41,10 +42,19 @@ class MultimediaSlotlet implements ISlotlet
       'n' => 'Grande'
     );
 
-    $form = strtr($row, array(
-      '%id%'    => 'multimedia_id',
+    $form = input_hidden_tag("multimedia_id_${ts}", $values['multimedia_id'], array('class' => 'slotlet_option', 'name' => 'multimedia_id'));
+
+    $multimedia = MultimediaPeer::retrieveByPk($values['multimedia_id']);
+
+    $form .= strtr($row, array(
+      '%id%'    => "multimedia_id_${ts}",
       '%label%' => $labels['multimedia_id'],
-      '%field%' => select_tag('multimedia_id', objects_for_select(MultimediaPeer::retrieveAll(), 'getId', '__toString', $values['multimedia_id']), array('class' => 'slotlet_option'))
+      '%field%' => input_auto_complete_tag("multimedia_id_${ts}_search",
+                                   $multimedia ? $multimedia->__toString() : '',
+                                   'article/autocompleteMultimedia?limit=20&_csrf_token='.csrf_token(),
+                                   array('class' => 'slotlet_option', 'size' => '80', 'name' => 'multimedia_id_search'),
+                                   array('use_style' => true,
+                                         'after_update_element' => "function(inputField, selectedItem) {  console.log(selectedItem); $('multimedia_id_${ts}').value = selectedItem.id; }"))
     ));
 
     $form .= strtr($row, array(

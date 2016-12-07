@@ -217,10 +217,12 @@ class articleActions extends autoarticleActions
     $crit->addOr($c->getNewCriterion(MultimediaPeer::DESCRIPTION, $query, Criteria::LIKE));
     $crit->addOr($c->getNewCriterion(MultimediaPeer::COMMENT, $query, Criteria::LIKE));
     $c->add($crit);
+    if ($this->getRequestParameter('limit')) {
+      $c->setLimit(20);
+    }
 
     $this->multimedias = MultimediaPeer::doSelect($c);
   }
-
 
   public function executeDelete()
   {
